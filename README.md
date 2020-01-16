@@ -4,15 +4,6 @@ This is Huobi C# SDK, This is a lightweight .NET library, you can use import to 
 
 The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market and order data from the Websocket connection.
 
-## Huobi C# SDK (change log)
-
-[C# SDK Change Log](https://github.com/HuobiRDCenter/huobi_CSharp/blob/master/CHANGE_LOG.md)
-
-
-## Huobi C# SDK Download
-
-- [Huobi Global API CSharp SDK version 1.0.1](https://github.com/HuobiRDCenter/huobi_CSharp/releases/tag/1.0.1)
-
 ## Table of Contents
 
 - [Quick Start](#Quick-Start)
