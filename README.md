@@ -15,19 +15,19 @@ The SDK supports both synchronous and asynchronous RESTful API invoking, and sub
   - [Client](#Client)
   - [Response](#Response)
 
-- [Request example](#Request-example)
+- [Request examples](#Request-examples)
 
-  - [Reference data](#Reference-data)
+  - [Common data](#Common-data)
   - [Market data](#Market-data)
   - [Account](#account)
   - [Wallet](#wallet)
   - [Trading](#trading)
   - [Margin Loan](#margin-loan)
 
-- [Subscription example](#Subscription-example)
+- [Subscription examples](#Subscription-examples)
 
   - [Subscribe trade update](#Subscribe-trade-update)
-  - [Subscribe candlestick/KLine update](#Subscribe-candlestick/KLine-update)
+  - [Subscribe candlestick update](#Subscribe-candlestick-update)
   - [Subscribe order update](#subscribe-order-update)
   - [Subscribe account change](#subscribe-account-change)
 - [Unsubscribe](#unsubscribe)
@@ -453,7 +453,7 @@ void Client_OnDataReceived(SubscribeTradeClearResponse response)
 client.Connect();
 ```
 
-###Subscribe candlestick/KLine update
+### Subscribe candlestick update
 
 ```csharp
 // Initialize a new instance
