@@ -9,9 +9,9 @@ namespace Huobi.SDK.Example
         public static void RunAll()
         {
             ReqAndSubscribeCandlestick();
-
+            
             ReqAndSubscribeDepth();
-
+            
             ReqAndSubscribeMBP();
             
             SubscribeBBO();
@@ -26,17 +26,27 @@ namespace Huobi.SDK.Example
             // Initialize a new instance
             var client = new CandlestickWebSocketClient();
 
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt", "1min");
+
+                Console.WriteLine("Subscribed");
+            }
+
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
             void Client_OnResponseReceived(SubscribeCandlestickResponse response)
             {
                 if (response != null)
                 {
-                    if (response.tick != null)
+                    if (response.tick != null) // Parse subscription data
                     {
                         Console.WriteLine($"id: {response.tick.id}, count: {response.tick.count}, vol: {response.tick.vol}");
                     }
-                    else if (response.data != null)
+                    else if (response.data != null) // Parse request data
                     {
                         foreach (var t in response.data)
                         {
@@ -53,12 +63,6 @@ namespace Huobi.SDK.Example
             // Request full data
             client.Req("btcusdt", "1min", 1569361140, 1569366420);
 
-            Console.WriteLine("Press ENTER to subscribe...\n");
-            Console.ReadLine();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt", "1min");
-
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -66,12 +70,23 @@ namespace Huobi.SDK.Example
             client.UnSubscribe("btcusdt", "1min");
 
             // Delete handler
-            client.OnResponseReceived -= Client_OnResponseReceived;
+            //client.OnResponseReceived -= Client_OnResponseReceived;
+            client.Disconnect();
         }
 
         private static void ReqAndSubscribeDepth()
         {
             var client = new DepthWebSocketClient();
+
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt", "step4");
+
+                Console.WriteLine("Subscribed");
+            }
 
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
@@ -79,7 +94,7 @@ namespace Huobi.SDK.Example
             {
                 if (response != null)
                 {
-                    if (response.tick != null)
+                    if (response.tick != null) // Parse subscription data
                     {
                         if (response.tick.asks != null)
                         {
@@ -100,7 +115,7 @@ namespace Huobi.SDK.Example
                         }
                         Console.WriteLine();
                     }
-                    else if (response.data != null)
+                    else if (response.data != null) // Parse request data
                     {
                         if (response.data.asks != null)
                         {
@@ -130,12 +145,6 @@ namespace Huobi.SDK.Example
             // Request full data
             client.Req("btcusdt", "step4");
 
-            Console.WriteLine("Press ENTER to subscribe...\n");
-            Console.ReadLine();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt", "step4");
-
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -150,13 +159,23 @@ namespace Huobi.SDK.Example
         {
             var client = new MarketByPriceWebSocketClient();
 
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt");
+
+                Console.WriteLine("Subscribed");
+            }
+
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
             void Client_OnResponseReceived(SubscribeMarketByPriceResponse response)
             {
                 if (response != null)
                 {
-                    if (response.tick != null)
+                    if (response.tick != null) // Parse subscription data
                     {
                         if (response.tick.asks != null)
                         {
@@ -177,7 +196,7 @@ namespace Huobi.SDK.Example
                         }
                         Console.WriteLine();
                     }
-                    else if (response.data != null)
+                    else if (response.data != null) // Parse request data
                     {
                         if (response.data.asks != null)
                         {
@@ -207,12 +226,6 @@ namespace Huobi.SDK.Example
             // Request full data
             client.Req("btcusdt");
 
-            Console.WriteLine("Press ENTER to subscribe...\n");
-            Console.ReadLine();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt");
-
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -228,13 +241,23 @@ namespace Huobi.SDK.Example
             // Initialize a new instance
             var client = new BestBidOfferWebSocketClient();
 
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt");
+
+                Console.WriteLine("Subscribed");
+            }
+
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
             void Client_OnResponseReceived(SubscribeBestBidOfferResponse response)
             {
                 if (response != null)
                 {
-                    if (response.tick != null)
+                    if (response.tick != null) // Parse subscription data
                     {
                         var t = response.tick;
                         Console.WriteLine($"id: {t.symbol}, ask: [{t.ask}, {t.askSize}], bid: [{t.bid}, {t.bidSize}]");
@@ -244,9 +267,6 @@ namespace Huobi.SDK.Example
 
             // Then connect to server and wait for the handler to handle the response
             client.Connect();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt");
 
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
@@ -263,20 +283,30 @@ namespace Huobi.SDK.Example
             // Initialize a new instance
             var client = new TradeWebSocketClient();
 
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt");
+
+                Console.WriteLine("Subscribed");
+            }
+
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
             void Client_OnResponseReceived(SubscribeTradeResponse response)
             {
                 if (response != null)
                 {
-                    if (response.tick != null && response.tick.data != null)
+                    if (response.tick != null && response.tick.data != null) // Parse subscription data
                     {
                         foreach (var t in response.tick.data)
                         {
                             Console.WriteLine($"tradeid: {t.tradeid}, direction: {t.direction}, [{t.price}, {t.amount}]");
                         }
                     }
-                    else if (response.data != null)
+                    else if (response.data != null) // Parse request data
                     {
                         foreach (var t in response.data)
                         {
@@ -292,13 +322,7 @@ namespace Huobi.SDK.Example
 
             // Request full data
             client.Req("btcusdt");
-
-            Console.WriteLine("Press ENTER to subscribe...\n");
-            Console.ReadLine();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt");
-
+            
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -314,17 +338,27 @@ namespace Huobi.SDK.Example
             // Initialize a new instance
             var client = new Last24hCandlestickWebSocketClient();
 
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt");
+
+                Console.WriteLine("Subscribed");
+            }
+
             // Add the response receive handler
             client.OnResponseReceived += Client_OnResponseReceived;
             void Client_OnResponseReceived(SubscribeLast24hCandlestickResponse response)
             {
                 if (response != null)
                 {
-                    if (response.tick != null)
+                    if (response.tick != null) // Parse subscription data
                     {
                         Console.WriteLine($"id: {response.tick.id}, count: {response.tick.count}, vol: {response.tick.vol}");
                     }
-                    else if (response.data != null)
+                    else if (response.data != null) // Parse request data
                     {
                         Console.WriteLine($"id: {response.data.id}, count: {response.data.count}, vol: {response.data.vol}");
                     }
@@ -336,12 +370,6 @@ namespace Huobi.SDK.Example
 
             // Request full data
             client.Req("btcusdt");
-
-            Console.WriteLine("Press ENTER to subscribe...\n");
-            Console.ReadLine();
-
-            // Subscribe the specific topic
-            client.Subscribe("btcusdt");
 
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();

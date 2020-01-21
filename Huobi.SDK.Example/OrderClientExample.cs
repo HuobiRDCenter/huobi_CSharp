@@ -12,9 +12,9 @@ namespace Huobi.SDK.Example
             APIKey.LoadAPIKey();
 
             PlaceOrder();
-            
-            PlaceOrders();
 
+            PlaceOrders();
+            
             CancelOrderById();
 
             CancelOrderByClient();
@@ -51,6 +51,7 @@ namespace Huobi.SDK.Example
                 AccountId = APIKey.AccountId,
                 type = "buy-limit",
                 symbol = "btcusdt",
+                source = "spot-api",
                 amount = "1",
                 price = "1.1"
             };
@@ -60,7 +61,7 @@ namespace Huobi.SDK.Example
             {
                 case "ok":
                     {
-                        Console.WriteLine($"Place order successfully, trade id: {response.data}");
+                        Console.WriteLine($"Place order successfully, order id: {response.data}");
                         break;
                     }
                 case "error":
@@ -77,8 +78,12 @@ namespace Huobi.SDK.Example
 
             var request = new PlaceOrderRequest
             {
-                AccountId = "1",
-                type = "buy-limit"
+                AccountId = APIKey.AccountId,
+                type = "buy-limit",
+                symbol = "btcusdt",
+                source = "spot-api",
+                amount = "1",
+                price = "1.1"
             };
             PlaceOrderRequest[] requests = { request, request };
             var response = tradeClient.PlaceOrdersAsync(requests).Result;
@@ -92,7 +97,7 @@ namespace Huobi.SDK.Example
                             {
                                 if (r.orderId != 0)
                                 {
-                                    Console.WriteLine($"order id: {r.orderId}");
+                                    Console.WriteLine($"Place order successfully, order id: {r.orderId}");
                                 }
                                 else
                                 {

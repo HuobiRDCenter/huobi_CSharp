@@ -58,7 +58,7 @@ namespace Huobi.SDK.Example
             }
 
             // Then connect to server and wait for the handler to handle the response
-            client.Connect();
+            client.Connect(false);
 
             Console.WriteLine("Press ENTER to quit...\n");
             Console.ReadLine();
@@ -95,7 +95,7 @@ namespace Huobi.SDK.Example
             }
 
             // Then connect to server and wait for the handler to handle the response
-            client.Connect();
+            client.Connect(false);
 
             Console.WriteLine("Press ENTER to quit...\n");
             Console.ReadLine();

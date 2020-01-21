@@ -21,7 +21,7 @@ namespace Huobi.SDK.Example
         private static void RequestAccount()
         {
             // Initialize a new instance
-            var client = new RequestAccountWebSocketClient(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new RequestAccountWebSocketV1ClientV(APIKey.AccessKey, APIKey.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -55,11 +55,11 @@ namespace Huobi.SDK.Example
             }
 
             // Then connect to server and wait for the handler to handle the response
-            client.Connect();
+            client.Connect(false);
 
             Console.WriteLine("Press ENTER to quit...\n");
             Console.ReadLine();
-            
+
             // Delete handler
             client.OnDataReceived -= Client_OnDataReceived;
         }
@@ -99,7 +99,7 @@ namespace Huobi.SDK.Example
 
             // Then connect to server and wait for the handler to handle the response
             client.Connect();
-            
+
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -133,7 +133,7 @@ namespace Huobi.SDK.Example
                 if (response != null && response.data != null)
                 {
                     var b = response.data;
-                    Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");                    
+                    Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
                 }
             }
 

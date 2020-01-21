@@ -7,7 +7,7 @@ namespace Huobi.SDK.Core.Client
     /// Responsible to handle account asset from WebSocket
     /// This need authentication version 1
     /// </summary>
-    public class RequestAccountWebSocketClient : WebSocketV1ClientBase<RequestAccountResponse>
+    public class RequestAccountWebSocketV1ClientV : WebSocketV1ClientBase<RequestAccountResponse>
     {
         /// <summary>
         /// Constructor
@@ -15,7 +15,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">API Access Key</param>
         /// <param name="secretKey">API Secret Key</param>
         /// <param name="host">API Host</param>
-        public RequestAccountWebSocketClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public RequestAccountWebSocketV1ClientV(string accessKey, string secretKey, string host = DEFAULT_HOST)
             :base(accessKey, secretKey, host)
         {
         }

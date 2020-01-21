@@ -26,12 +26,13 @@ namespace Huobi.SDK.Model.Response.Order
             /// <summary>
             /// The order id
             /// </summary>
+            [JsonProperty("order-id")]
             public long orderId;
 
             /// <summary>
             /// The client order id (if any)
             /// </summary>
-            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty("client-order-id", NullValueHandling = NullValueHandling.Ignore)]
             public string clientOrderId;
 
             /// <summary>
