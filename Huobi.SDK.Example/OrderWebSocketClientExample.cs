@@ -10,7 +10,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             RequestOrder();
 
@@ -24,7 +24,7 @@ namespace Huobi.SDK.Example
         private static void RequestOrders()
         {
             // Initialize a new instance
-            var client = new RequestOrdersWebSocketV1Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new RequestOrdersWebSocketV1Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -35,7 +35,7 @@ namespace Huobi.SDK.Example
                     // Request full data if authentication passed
                     var req = new RequestOrdersRequest
                     {
-                        AccountId = Int32.Parse(APIKey.AccountId),
+                        AccountId = Int32.Parse(Config.AccountId),
                         symbol = "btcusdt",
                         states = "submitted,created"
                     };
@@ -70,7 +70,7 @@ namespace Huobi.SDK.Example
         private static void RequestOrder()
         {
             // Initialize a new instance
-            var client = new RequestOrderWebSocketV1Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new RequestOrderWebSocketV1Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -107,7 +107,7 @@ namespace Huobi.SDK.Example
         private static void SubscribeOrder()
         {
             // Initialize a new instance
-            var client = new SubscribeOrderWebSocketV1Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new SubscribeOrderWebSocketV1Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -147,7 +147,7 @@ namespace Huobi.SDK.Example
         private static void SubscribeTradeClear()
         {
             // Initialize a new instance
-            var client = new SubscribeTradeClearWebSocketV2Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new SubscribeTradeClearWebSocketV2Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;

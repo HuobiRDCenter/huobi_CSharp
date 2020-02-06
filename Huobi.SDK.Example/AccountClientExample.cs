@@ -8,7 +8,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             GetAccountInfo();
 
@@ -29,7 +29,7 @@ namespace Huobi.SDK.Example
 
         private static void GetAccountInfo()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var getAIResult = accountClient.GetAccountInfoAsync().Result;
             if (getAIResult != null && getAIResult.data != null)
@@ -43,9 +43,9 @@ namespace Huobi.SDK.Example
 
         private static void GetAccountBalance()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var getABResult = accountClient.GetAccountBalanceAsync(APIKey.AccountId).Result;
+            var getABResult = accountClient.GetAccountBalanceAsync(Config.AccountId).Result;
             if (getABResult != null)
             {
                 switch (getABResult.status)
@@ -78,10 +78,10 @@ namespace Huobi.SDK.Example
 
         private static void GetAccountHistory()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
-                .AddParam("account-id", APIKey.AccountId);
+                .AddParam("account-id", Config.AccountId);
             var getAHResult = accountClient.GetAccountHistoryAsync(reqParams).Result;
             if (getAHResult != null)
             {
@@ -107,7 +107,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferFromSpotToFuture()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var transferS2FResult = accountClient.TransferFromSpotToFutureAsync("ht", 1).Result; // need further test
             if (transferS2FResult != null)
@@ -130,7 +130,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferFromFutureToSpot()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var transferF2SResult = accountClient.TransferFromFutureToSpotAsync("ht", 1).Result; // need further test
             if (transferF2SResult != null)
@@ -153,7 +153,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferCurrencyFromMasterToSub()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var transferCP2SResult = accountClient.TransferCurrencyFromMasterToSubAsync(1, "ht", 1).Result;
             if (transferCP2SResult != null)
@@ -176,7 +176,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubuserAccountBalances()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var getSUABsResult = accountClient.GetSubUserAccountBalancesAsync().Result;
             if (getSUABsResult != null && getSUABsResult.data != null)
@@ -196,7 +196,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubuserAccountBalance()
         {
-            var accountClient = new AccountClient(APIKey.AccessKey, APIKey.SecretKey);
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             var getSUABResult = accountClient.GetSubUserAccountBalanceAsync(128654510).Result;
             if (getSUABResult != null && getSUABResult.data != null)

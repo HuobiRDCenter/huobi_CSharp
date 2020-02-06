@@ -7,7 +7,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             GetStableCoin();
 
@@ -16,7 +16,7 @@ namespace Huobi.SDK.Example
 
         private static void GetStableCoin()
         {
-            var stableCoinClient = new StableCointClient(APIKey.AccessKey, APIKey.SecretKey);
+            var stableCoinClient = new StableCointClient(Config.AccessKey, Config.SecretKey);
 
             var response = stableCoinClient.GetStableCoinAsync("usdt", "10", "sell").Result;
             if (response != null)
@@ -39,7 +39,7 @@ namespace Huobi.SDK.Example
 
         private static void ExchangeStableCoin()
         {
-            var stableCoinClient = new StableCointClient(APIKey.AccessKey, APIKey.SecretKey);
+            var stableCoinClient = new StableCointClient(Config.AccessKey, Config.SecretKey);
 
             var response = stableCoinClient.ExchangeStableCoinAsync("123").Result;
             if (response != null)

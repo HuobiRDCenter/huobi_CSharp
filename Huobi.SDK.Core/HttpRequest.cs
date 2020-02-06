@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -7,10 +6,14 @@ using Newtonsoft.Json;
 namespace Huobi.SDK.Core
 {
     /// <summary>
-    /// Wrap the GET and POST Http request
+    /// The staic class that wrap the GET and POST Http request
     /// </summary>
     public class HttpRequest
     {
+        //public static bool LogPerformanceEnabled = false;
+
+        public static PerformanceLogger logger = new PerformanceLogger();
+
         /// <summary>
         /// Send Http GET request
         /// </summary>
@@ -19,11 +22,17 @@ namespace Huobi.SDK.Core
         /// <returns>The generic response type</returns>
         public static async Task<T> GetAsync<T>(string url)
         {
+            logger.Start();
+            
             var httpClient = new HttpClient();
 
             string response = await httpClient.GetStringAsync(url);
 
-            return JsonConvert.DeserializeObject<T>(response);
+            T t = JsonConvert.DeserializeObject<T>(response);
+
+            logger.StopAndLog<T>("GET", url);
+
+            return t;
         }
 
         /// <summary>
@@ -36,6 +45,8 @@ namespace Huobi.SDK.Core
         /// <returns>The response type</returns>
         public static async Task<T> PostAsync<T>(string url, string body = null, string mediaTyp = "application/json")
         {
+            logger.Start();
+
             StringContent httpContent;
 
             if (string.IsNullOrEmpty(body))
@@ -53,7 +64,11 @@ namespace Huobi.SDK.Core
 
             string result = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(result);
+            T t = JsonConvert.DeserializeObject<T>(result);
+
+            logger.StopAndLog<T>("POST", url);
+
+            return t;
         }
     }
 }

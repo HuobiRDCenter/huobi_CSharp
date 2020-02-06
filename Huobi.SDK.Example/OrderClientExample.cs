@@ -9,7 +9,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             PlaceOrder();
 
@@ -44,11 +44,11 @@ namespace Huobi.SDK.Example
 
         private static void PlaceOrder()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var request = new PlaceOrderRequest
             {
-                AccountId = APIKey.AccountId,
+                AccountId = Config.AccountId,
                 type = "buy-limit",
                 symbol = "btcusdt",
                 source = "spot-api",
@@ -74,11 +74,11 @@ namespace Huobi.SDK.Example
 
         private static void PlaceOrders()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var request = new PlaceOrderRequest
             {
-                AccountId = APIKey.AccountId,
+                AccountId = Config.AccountId,
                 type = "buy-limit",
                 symbol = "btcusdt",
                 source = "spot-api",
@@ -117,7 +117,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrderById()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var response = tradeClient.CancelOrderByIdAsync("1").Result;
             switch (response.status)
@@ -137,7 +137,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrderByClient()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var response = tradeClient.CancelOrderByClientOrderIdAsync("").Result;
             switch (response.status)
@@ -157,10 +157,10 @@ namespace Huobi.SDK.Example
 
         private static void GetOpenOrders()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
-                .AddParam("account-id", APIKey.AccountId);
+                .AddParam("account-id", Config.AccountId);
             var response = tradeClient.GetOpenOrdersAsync(reqParams).Result;
             switch (response.status)
             {
@@ -186,11 +186,11 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrdersByCriteria()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var bclbaRequest = new BatchCancelOrdersByAccountIdRequest
             {
-                AccountId = APIKey.AccountId
+                AccountId = Config.AccountId
             };
             var response = tradeClient.CancelOrdersByCriteriaAsync(bclbaRequest).Result;
             switch (response.status)
@@ -214,7 +214,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrdersByIds()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             string[] orderIds = { "1", "2" };
             var request = new BatchCancelOrdersByOrderIdRequest
@@ -257,7 +257,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOrderById()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var response = tradeClient.GetOrderByIdAsync("1").Result;
             switch (response.status)
@@ -281,7 +281,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOrderByClient()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
             var reqParams = new RequestParammeters()
                 .AddParam("clientOrderId", "cid1234");
 
@@ -307,7 +307,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMatchResultsById()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var response = tradeClient.GetMatchResultsByIdAsync("63403286375").Result;
             switch (response.status)
@@ -334,7 +334,7 @@ namespace Huobi.SDK.Example
 
         private static void GetHistoryOrders()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
                 .AddParam("symbol", "btcusdt")
@@ -364,7 +364,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLast48hOrders()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
                 .AddParam("symbol", "btcusdt");
@@ -393,7 +393,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMatchResults()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
                 .AddParam("symbol", "btcusdt");
@@ -422,7 +422,7 @@ namespace Huobi.SDK.Example
 
         private static void GetFee()
         {
-            var tradeClient = new OrderClient(APIKey.AccessKey, APIKey.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var reqParams = new RequestParammeters()
                 .AddParam("symbols", "btcusdt, eosht");

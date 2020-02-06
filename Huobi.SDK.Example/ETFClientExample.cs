@@ -7,7 +7,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             GetETFInfo();
 
@@ -20,7 +20,7 @@ namespace Huobi.SDK.Example
 
         private static void GetETFInfo()
         {
-            var etfClient = new ETFClient(APIKey.AccessKey, APIKey.SecretKey);
+            var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
             var response = etfClient.GetETFInfoAsync().Result;
             if (response != null && response.data != null)
@@ -38,7 +38,7 @@ namespace Huobi.SDK.Example
 
         private static void SwapETFIn()
         {
-            var etfClient = new ETFClient(APIKey.AccessKey, APIKey.SecretKey);
+            var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
             var response = etfClient.SwapETFInAsync(100).Result;
             if (response != null)
@@ -58,7 +58,7 @@ namespace Huobi.SDK.Example
 
         private static void SwapETFOut()
         {
-            var etfClient = new ETFClient(APIKey.AccessKey, APIKey.SecretKey);
+            var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
             var response = etfClient.SwapETFOutAsync(100).Result;
             if (response != null)
@@ -78,7 +78,7 @@ namespace Huobi.SDK.Example
 
         private static void GetETFSwapHistory()
         {
-            var etfClient = new ETFClient(APIKey.AccessKey, APIKey.SecretKey);
+            var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
             var response = etfClient.GetETFSwapHistory(0, 1).Result;
             if (response != null)

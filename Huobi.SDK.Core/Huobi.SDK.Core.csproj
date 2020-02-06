@@ -20,5 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Huobi.SDK.Model\Huobi.SDK.Model.csproj" />
+    <ProjectReference Include="..\Huobi.SDK.Log\Huobi.SDK.Log.csproj" />
   </ItemGroup>
 </Project>

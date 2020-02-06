@@ -2,9 +2,10 @@
 
 namespace Huobi.SDK.Example
 {
-    public class APIKey
+    public class Config
     {
         // The shared keys and ids that used for all the examples
+        public static string Host { get; private set; }
         public static string AccessKey { get; private set; }
         public static string SecretKey { get; private set; }
         public static string AccountId { get; private set; }
@@ -22,10 +23,11 @@ namespace Huobi.SDK.Example
         /// }
         ///
         /// </summary>
-        public static void LoadAPIKey()
+        public static void LoadConfig()
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
+            Host = config["Host"];
             AccessKey = config["AccessKey"];
             AccountId = config["AccountId"];
 

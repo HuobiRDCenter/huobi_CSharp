@@ -9,7 +9,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             RequestAccount();
 
@@ -21,7 +21,7 @@ namespace Huobi.SDK.Example
         private static void RequestAccount()
         {
             // Initialize a new instance
-            var client = new RequestAccountWebSocketV1ClientV(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new RequestAccountWebSocketV1ClientV(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -67,7 +67,7 @@ namespace Huobi.SDK.Example
         private static void SubscribeAccountV1()
         {
             // Initialize a new instance
-            var client = new SubscribeAccountWebSocketV1Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new SubscribeAccountWebSocketV1Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -113,7 +113,7 @@ namespace Huobi.SDK.Example
         private static void SubscribeAccountV2()
         {
             // Initialize a new instance
-            var client = new SubscribeAccountWebSocketV2Client(APIKey.AccessKey, APIKey.SecretKey);
+            var client = new SubscribeAccountWebSocketV2Client(Config.AccessKey, Config.SecretKey);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;

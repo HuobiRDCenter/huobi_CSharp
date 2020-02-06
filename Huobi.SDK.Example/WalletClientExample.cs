@@ -9,7 +9,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             GetDepoistAddress();
 
@@ -24,7 +24,7 @@ namespace Huobi.SDK.Example
 
         private static void GetDepoistAddress()
         {
-            var walletClient = new WalletClient(APIKey.AccessKey, APIKey.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
             var currencyReqParams = new RequestParammeters()
                 .AddParam("currency", "btc");
@@ -42,7 +42,7 @@ namespace Huobi.SDK.Example
 
         private static void GetWithdrawQuota()
         {
-            var walletClient = new WalletClient(APIKey.AccessKey, APIKey.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
             var currencyReqParams = new RequestParammeters()
                 .AddParam("currency", "btc");
@@ -59,7 +59,7 @@ namespace Huobi.SDK.Example
 
         private static void WithdrawCurrency()
         {
-            var walletClient = new WalletClient(APIKey.AccessKey, APIKey.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
             var request = new WithdrawRequest
             {
@@ -86,7 +86,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelWithdrawCurrency()
         {
-            var walletClient = new WalletClient(APIKey.AccessKey, APIKey.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
             var cancelWCResult = walletClient.CancelWithdrawCurrencyAsync(1).Result;
             if (cancelWCResult != null)
@@ -109,7 +109,7 @@ namespace Huobi.SDK.Example
 
         private static void GetDepositWithdrawHistory()
         {
-            var walletClient = new WalletClient(APIKey.AccessKey, APIKey.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
             var depReqParams = new RequestParammeters()
                     .AddParam("type", "deposit");

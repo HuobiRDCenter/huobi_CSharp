@@ -7,7 +7,7 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            APIKey.LoadAPIKey();
+            Config.LoadConfig();
 
             TransferIn();
 
@@ -26,7 +26,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferIn()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.TransferIn("eos", "0.000001").Result;
             if (response != null)
@@ -46,10 +46,10 @@ namespace Huobi.SDK.Example
                 }
             }
         }
-        
+
         private static void TransferOut()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.TransferOut("eos", "0.000001").Result;
             if (response != null)
@@ -71,7 +71,7 @@ namespace Huobi.SDK.Example
         }
         private static void GetLoanInfo()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.GetLoanInfo().Result;
             if (response != null)
@@ -108,7 +108,7 @@ namespace Huobi.SDK.Example
 
         private static void ApplyLoan()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.ApplyLoan("eos", "0.001").Result;
             if (response != null)
@@ -131,7 +131,7 @@ namespace Huobi.SDK.Example
 
         private static void RepayLoan()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.Repay("123", "0.001").Result;
             if (response != null)
@@ -154,7 +154,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLoanOrders()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.GetLoanOrders().Result;
             if (response != null)
@@ -184,7 +184,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMarginAccount()
         {
-            var marginClient = new CrossMarginClient(APIKey.AccessKey, APIKey.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
             var response = marginClient.GetMarginAccount().Result;
             if (response != null)
@@ -218,6 +218,6 @@ namespace Huobi.SDK.Example
                 }
             }
         }
-        
+
     }
 }

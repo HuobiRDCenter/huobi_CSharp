@@ -177,6 +177,7 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
+                        Console.WriteLine($"Subscription prevSeqNum:{response.tick.prevSeqNum}, seqNum: {response.tick.seqNum}");
                         if (response.tick.asks != null)
                         {
                             var asks = response.tick.asks;
@@ -198,6 +199,7 @@ namespace Huobi.SDK.Example
                     }
                     else if (response.data != null) // Parse request data
                     {
+                        Console.WriteLine($"Request prevSeqNum:{response.data.prevSeqNum}, seqNum: {response.data.seqNum}");
                         if (response.data.asks != null)
                         {
                             var asks = response.data.asks;
