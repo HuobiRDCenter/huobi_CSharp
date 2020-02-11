@@ -78,25 +78,25 @@ namespace Huobi.SDK.Model.Response.Common
             /// Minimum order amount (order amount is the ‘amount’ defined in ‘v1/order/orders/place’ when it’s a limit order or sell-market order)
             /// </summary>
             [JsonProperty(PropertyName = "min-order-amt")]
-            public long minOrderAmt;
+            public float minOrderAmt;
 
             /// <summary>
             /// Max order amount
             /// </summary>
             [JsonProperty(PropertyName = "max-order-amt")]
-            public long maxOrderAmt;
+            public float maxOrderAmt;
 
             /// <summary>
             /// Minimum order value (order value refers to ‘amount’ * ‘price’ defined in ‘v1/order/orders/place’ when it’s a limit order or ‘amount’ when it’s a buy-market order)
             /// </summary>
             [JsonProperty(PropertyName = "min-order-value")]
-            public long minOrderValue;
+            public float minOrderValue;
 
             /// <summary>
             /// The applicable leverage ratio
             /// </summary>
             [JsonProperty(PropertyName = "leverage-ratio")]
-            public long leverageRatio;
+            public float leverageRatio;
         }
     }
 }
