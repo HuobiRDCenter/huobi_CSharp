@@ -54,11 +54,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns the amount changes of specified user's account
         /// </summary>
-        /// <param name="requestParammeters"></param>
+        /// <param name="request"></param>
         /// <returns>GetAccountHistoryResponse</returns>
-        public async Task<GetAccountHistoryResponse> GetAccountHistoryAsync(RequestParammeters requestParammeters)
+        public async Task<GetAccountHistoryResponse> GetAccountHistoryAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/account/history", requestParammeters);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/account/history", request);
 
             return await HttpRequest.GetAsync<GetAccountHistoryResponse>(url);
         }

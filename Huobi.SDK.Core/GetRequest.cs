@@ -8,19 +8,19 @@ namespace Huobi.SDK.Core
     /// <summary>
     /// Manage the HTTP GET request parameters
     /// </summary>
-    public class RequestParammeters
+    public class GetRequest
     {
         private Dictionary<string, string> _params;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="requestParammeters">The initial object</param>
-        public RequestParammeters(RequestParammeters requestParammeters = null)
+        /// <param name="request">The initial object</param>
+        public GetRequest(GetRequest request = null)
         {
-            if (requestParammeters != null)
+            if (request != null)
             {
-                _params = new Dictionary<string, string>(requestParammeters._params);
+                _params = new Dictionary<string, string>(request._params);
             }
             else
             {
@@ -34,7 +34,7 @@ namespace Huobi.SDK.Core
         /// <param name="property">property</param>
         /// <param name="value">value</param>
         /// <returns>Current object</returns>
-        public RequestParammeters AddParam(string property, string value)
+        public GetRequest AddParam(string property, string value)
         {
             if ((property != null) && (value != null))
             {
@@ -47,11 +47,11 @@ namespace Huobi.SDK.Core
         /// <summary>
         /// Add and merge another object
         /// </summary>
-        /// <param name="requestParammeters">The object that want to add</param>
+        /// <param name="request">The object that want to add</param>
         /// <returns>Current object</returns>
-        public RequestParammeters AddParam(RequestParammeters requestParammeters)
+        public GetRequest AddParam(GetRequest request)
         {
-            _params.Concat(requestParammeters._params);
+            _params.Concat(request._params);
 
             return this;
         }

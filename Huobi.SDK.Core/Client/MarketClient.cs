@@ -26,11 +26,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Retrieves all klines in a specific range.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetCandlestickResponse</returns>
-        public async Task<GetCandlestickResponse> GetCandlestickAsync(RequestParammeters reqParams)
+        public async Task<GetCandlestickResponse> GetCandlestickAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build("/market/history/kline", reqParams);
+            string url = _urlBuilder.Build("/market/history/kline", request);
 
             return await HttpRequest.GetAsync<GetCandlestickResponse>(url);
         }
@@ -61,11 +61,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Retrieves the current order book of a specific pair
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetDepthResponse</returns>
-        public async Task<GetDepthResponse> GetDepthAsync(RequestParammeters reqParams)
+        public async Task<GetDepthResponse> GetDepthAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build("/market/depth", reqParams);
+            string url = _urlBuilder.Build("/market/depth", request);
 
             return await HttpRequest.GetAsync<GetDepthResponse>(url);
         }

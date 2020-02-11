@@ -82,11 +82,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns all open orders which have not been filled completely.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetOpenOrdersResponse</returns>
-        public async Task<GetOpenOrdersResponse> GetOpenOrdersAsync(RequestParammeters reqParams)
+        public async Task<GetOpenOrdersResponse> GetOpenOrdersAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/order/openOrders", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/order/openOrders", request);
 
             return await HttpRequest.GetAsync<GetOpenOrdersResponse>(url);
         }
@@ -96,7 +96,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="request"></param>
         /// <returns>CancelOrdersByCriteriaResponse</returns>
-        public async Task<CancelOrdersByCriteriaResponse> CancelOrdersByCriteriaAsync(BatchCancelOrdersByAccountIdRequest request)
+        public async Task<CancelOrdersByCriteriaResponse> CancelOrdersByCriteriaAsync(CancelOrdersByCriteriaRequest request)
         {
             string url = _urlBuilder.Build(POST_METHOD, $"/v1/order/orders/batchCancelOpenOrders");
 
@@ -108,7 +108,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="request"></param>
         /// <returns>CancelOrdersByIdsResponse</returns>
-        public async Task<CancelOrdersByIdsResponse> CancelOrdersByIdsAsync(BatchCancelOrdersByOrderIdRequest request)
+        public async Task<CancelOrdersByIdsResponse> CancelOrdersByIdsAsync(CancelOrdersByIdsRequest request)
         {
             string url = _urlBuilder.Build(POST_METHOD, $"/v1/order/orders/batchcancel");
 
@@ -130,11 +130,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns the detail of one order by client order id
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetOrderByIdResponse</returns>
-        public async Task<GetOrderResponse> GetOrderByClientAsync(RequestParammeters reqParams)
+        public async Task<GetOrderResponse> GetOrderByClientAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/orders/getClientOrder", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/orders/getClientOrder", request);
 
             return await HttpRequest.GetAsync<GetOrderResponse>(url);
         }
@@ -154,11 +154,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns orders based on a specific searching criteria.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetHistoryOrdersResponse</returns>
-        public async Task<GetHistoryOrdersResponse> GetHistoryOrdersAsync(RequestParammeters reqParams)
+        public async Task<GetHistoryOrdersResponse> GetHistoryOrdersAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/orders", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/orders", request);
 
             return await HttpRequest.GetAsync<GetHistoryOrdersResponse>(url);
         }
@@ -167,11 +167,11 @@ namespace Huobi.SDK.Core.Client
         /// Returns orders based on a specific searching criteria.
         /// Note: queriable range should be within past 1 day for cancelled order (state = "canceled")
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetHistoryOrdersResponse</returns>
-        public async Task<GetHistoryOrdersResponse> GetLast48hOrdersAsync(RequestParammeters reqParams)
+        public async Task<GetHistoryOrdersResponse> GetLast48hOrdersAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/history", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/history", request);
 
             return await HttpRequest.GetAsync<GetHistoryOrdersResponse>(url);
         }
@@ -179,11 +179,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns the match results of past and open orders based on specific search criteria.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetMatchResultsResponse</returns>
-        public async Task<GetMatchResultsResponse> GetMatchResultsAsync(RequestParammeters reqParams)
+        public async Task<GetMatchResultsResponse> GetMatchResultsAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/matchresults", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/order/matchresults", request);
 
             return await HttpRequest.GetAsync<GetMatchResultsResponse>(url);
         }
@@ -191,11 +191,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns the current transaction fee rate applied to the user.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetFeeResponse</returns>
-        public async Task<GetFeeResponse> GetFeeAsync(RequestParammeters reqParams)
+        public async Task<GetFeeResponse> GetFeeAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, $"/v1/fee/fee-rate/get", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/fee/fee-rate/get", request);
 
             return await HttpRequest.GetAsync<GetFeeResponse>(url);
         }

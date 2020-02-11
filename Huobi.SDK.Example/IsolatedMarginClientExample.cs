@@ -157,10 +157,10 @@ namespace Huobi.SDK.Example
         private static void GetLoanOrders()
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbols", "btcusdt");
 
-            var response = marginClient.GetLoanOrdersAsync(reqParams).Result;
+            var response = marginClient.GetLoanOrdersAsync(request).Result;
             if (response != null)
             {
                 switch (response.status)

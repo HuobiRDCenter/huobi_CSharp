@@ -31,11 +31,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Get deposit address of corresponding chain, for a specific crypto currency (except IOTA)
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetDepositAddressResponse</returns>
-        public async Task<GetDepositAddressResponse> GetDepositAddressAsync(RequestParammeters reqParams)
+        public async Task<GetDepositAddressResponse> GetDepositAddressAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/deposit/address", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/deposit/address", request);
 
             return await HttpRequest.GetAsync<GetDepositAddressResponse>(url);
         }
@@ -43,11 +43,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// GetWithdrawQuota response
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetWithdrawQuotaResponse</returns>
-        public async Task<GetWithdrawQuotaResponse> GetWithdrawQuotaAsync(RequestParammeters reqParams)
+        public async Task<GetWithdrawQuotaResponse> GetWithdrawQuotaAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/withdraw/quota", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/withdraw/quota", request);
 
             return await HttpRequest.GetAsync<GetWithdrawQuotaResponse>(url);
         }
@@ -79,11 +79,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns all existed withdraws and deposits and return their latest status.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetDepositWithdrawHistoryResponse</returns>
-        public async Task<GetDepositWithdrawHistoryResponse> GetDepositWithdrawHistoryAsync(RequestParammeters reqParams)
+        public async Task<GetDepositWithdrawHistoryResponse> GetDepositWithdrawHistoryAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/query/deposit-withdraw", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/query/deposit-withdraw", request);
 
             return await HttpRequest.GetAsync<GetDepositWithdrawHistoryResponse>(url);
         }

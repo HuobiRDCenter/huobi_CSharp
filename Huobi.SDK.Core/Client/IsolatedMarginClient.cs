@@ -67,14 +67,14 @@ namespace Huobi.SDK.Core.Client
         /// <returns>GetLoanInfoResponse</returns>
         public async Task<GetLoanInfoResponse> GetLoanInfoAsync(string symbols)
         {
-            var reqParams = new RequestParammeters();
+            var request = new GetRequest();
 
             if (!string.IsNullOrEmpty(symbols))
             {
-                reqParams.AddParam("symbols", symbols);
+                request.AddParam("symbols", symbols);
             }
 
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-info", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-info", request);
 
             return await HttpRequest.GetAsync<GetLoanInfoResponse>(url);
         }
@@ -113,11 +113,11 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns margin orders based on a specific searching criteria.
         /// </summary>
-        /// <param name="reqParams"></param>
+        /// <param name="request"></param>
         /// <returns>GetLoanOrdersResponse</returns>
-        public async Task<GetLoanOrdersResponse> GetLoanOrdersAsync(RequestParammeters reqParams)
+        public async Task<GetLoanOrdersResponse> GetLoanOrdersAsync(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-orders", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-orders", request);
 
             return await HttpRequest.GetAsync<GetLoanOrdersResponse>(url);
         }
@@ -130,19 +130,19 @@ namespace Huobi.SDK.Core.Client
         /// <returns>GetMarginAccountResponse</returns>
         public async Task<GetMarginAccountResponse> GetMarginAccountAsync(string symbol, int? subUid)
         {
-            var reqParams = new RequestParammeters();
+            var request = new GetRequest();
 
             if (!string.IsNullOrEmpty(symbol))
             {
-                reqParams.AddParam("symbol", symbol);
+                request.AddParam("symbol", symbol);
             }
 
             if (subUid.HasValue)
             {
-                reqParams.AddParam("sub-uid", subUid.Value.ToString());
+                request.AddParam("sub-uid", subUid.Value.ToString());
             }
 
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/accounts/balance", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/accounts/balance", request);
 
             return await HttpRequest.GetAsync<GetMarginAccountResponse>(url);
         }

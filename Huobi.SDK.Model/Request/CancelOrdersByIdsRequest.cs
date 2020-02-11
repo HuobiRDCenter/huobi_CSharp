@@ -2,7 +2,7 @@
 
 namespace Huobi.SDK.Model.Request
 {
-    public class BatchCancelOrdersByOrderIdRequest
+    public class CancelOrdersByIdsRequest
     {
         [JsonProperty(PropertyName = "order-ids")]
         public string[] OrderIds;

@@ -27,11 +27,11 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("period", "1min")
                 .AddParam("size", "10");
-            var getCResponse = marketClient.GetCandlestickAsync(reqParams).Result;
+            var getCResponse = marketClient.GetCandlestickAsync(request).Result;
             if (getCResponse != null && getCResponse.data != null)
             {
                 foreach (var c in getCResponse.data)
@@ -77,11 +77,11 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var depthReqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("depth", "5")
                 .AddParam("type", "step0");
-            var getDepthResponse = marketClient.GetDepthAsync(depthReqParams).Result;
+            var getDepthResponse = marketClient.GetDepthAsync(request).Result;
             if (getDepthResponse != null && getDepthResponse.tick != null)
             {
                 var asks = getDepthResponse.tick.asks;

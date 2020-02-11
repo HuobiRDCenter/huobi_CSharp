@@ -27,12 +27,12 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         {
             var builder = new PrivateUrlBuilder("access", "secret", "api.huobi.pro");
             DateTime dateTime = new DateTime(2019, 11, 21, 10, 0, 0);
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("account-id", "123")
                 .AddParam("currency", "btc");
 
 
-            string result = builder.Build("GET", "/v1/account/history", dateTime, reqParams);
+            string result = builder.Build("GET", "/v1/account/history", dateTime, request);
 
 
             string escapedTime = Uri.EscapeDataString(dateTime.ToString("s"));

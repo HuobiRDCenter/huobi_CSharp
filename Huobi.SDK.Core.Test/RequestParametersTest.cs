@@ -8,7 +8,7 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void Constructor_NoParam_Success()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
             Assert.True(true);
         }
@@ -16,7 +16,7 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void Constructor_NullParam_Success()
         {
-            var parameters = new RequestParammeters(null);
+            var request = new GetRequest(null);
 
             Assert.True(true);
         }
@@ -24,8 +24,8 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void Constructor_WithParam_Success()
         {
-            var parameters1 = new RequestParammeters();
-            var parameters2 = new RequestParammeters(parameters1);
+            var request1 = new GetRequest();
+            var request2 = new GetRequest(request1);
 
             Assert.True(true);
         }
@@ -33,40 +33,40 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void AddParam_TwoNullParam_Success()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            var newParams = parameters.AddParam(null, null);
+            var newParams = request.AddParam(null, null);
 
-            Assert.Equal(parameters, newParams);
+            Assert.Equal(request, newParams);
         }
 
         [Fact]
         public void AddParam_FirstNullParam_Success()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            var newParams = parameters.AddParam(null, "value");
+            var newParams = request.AddParam(null, "value");
 
-            Assert.Equal(parameters, newParams);
+            Assert.Equal(request, newParams);
         }
 
         [Fact]
         public void AddParam_SecondNullParam_Success()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            var newParams = parameters.AddParam("key", null);
+            var newParams = request.AddParam("key", null);
 
-            Assert.Equal(parameters, newParams);
+            Assert.Equal(request, newParams);
         }
 
 
         [Fact]
         public void BuildParams_NullParam_ReturnEmpty()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            string result = parameters.BuildParams();
+            string result = request.BuildParams();
 
             Assert.Equal("", result);
         }
@@ -75,10 +75,10 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_ClonedParam_ReturnClonedPair()
         {
-            var params1 = new RequestParammeters().AddParam("key1", "value1");
-            var params2 = new RequestParammeters(params1);
+            var request1 = new GetRequest().AddParam("key1", "value1");
+            var request2 = new GetRequest(request1);
 
-            string result = params2.BuildParams();
+            string result = request2.BuildParams();
 
             Assert.Equal("key1=value1", result);
         }
@@ -86,10 +86,10 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_ConcatedParam_ReturnConcatedPair()
         {
-            var params1 = new RequestParammeters().AddParam("key1", "value1");
-            var params2 = new RequestParammeters(params1).AddParam("key2", "value2");
+            var request1 = new GetRequest().AddParam("key1", "value1");
+            var request2 = new GetRequest(request1).AddParam("key2", "value2");
 
-            string result = params2.BuildParams();
+            string result = request2.BuildParams();
 
             Assert.Equal("key1=value1&key2=value2", result);
         }
@@ -97,9 +97,9 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_OneParam_ReturnOnePair()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            string result = parameters
+            string result = request
                 .AddParam("key", "value")
                 .BuildParams();
 
@@ -109,9 +109,9 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_UnEscapedParam_ReturnEscapedParam()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            string result = parameters
+            string result = request
                 .AddParam("key", "valueA:valueB/valueC=")
                 .BuildParams();
 
@@ -121,9 +121,9 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_TwoParam_ReturnOrderedTwoPairs()
         {
-            var parameters = new RequestParammeters();
+            var request = new GetRequest();
 
-            string result = parameters
+            string result = request
                 .AddParam("id", "123")
                 .AddParam("Year", "2019")
                 .BuildParams();
@@ -134,12 +134,12 @@ namespace Huobi.SDK.Core.Test
         [Fact]
         public void BuildParams_ThreeParam_ReturnOrderedThreePairs()
         {
-            var parameters = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("AccessKey", "value1")
                 .AddParam("SignatureMethod", "value2")
                 .AddParam("account-id", "value3");
 
-            string result = parameters.BuildParams();
+            string result = request.BuildParams();
 
             Assert.Equal("AccessKey=value1&SignatureMethod=value2&account-id=value3", result);
         }

@@ -34,24 +34,24 @@ namespace Huobi.SDK.Core.RequestBuilder
             return Build(method, path, utcDateTime, null);
         }
         
-        public string Build(string method, string path, RequestParammeters reqParams)
+        public string Build(string method, string path, GetRequest request)
         {
-            return Build(method, path, DateTime.UtcNow, reqParams);
+            return Build(method, path, DateTime.UtcNow, request);
         }
 
-        public string Build(string method, string path, DateTime utcDateTime, RequestParammeters reqParams)
+        public string Build(string method, string path, DateTime utcDateTime, GetRequest request)
         {
             string strDateTime = utcDateTime.ToString("s");
 
-            var requestParameters = new RequestParammeters(reqParams)
+            var req = new GetRequest(request)
                 .AddParam(_aKKey, _aKValue)
                 .AddParam(_sMKey, _sMVaue)
                 .AddParam(_sVKey, _sVValue)
                 .AddParam(_tKey, strDateTime);
 
-            string signature = _signer.Sign(method, _host, path, requestParameters.BuildParams());
+            string signature = _signer.Sign(method, _host, path, req.BuildParams());
 
-            string url = $"https://{_host}{path}?{requestParameters.BuildParams()}&Signature={Uri.EscapeDataString(signature)}";
+            string url = $"https://{_host}{path}?{req.BuildParams()}&Signature={Uri.EscapeDataString(signature)}";
 
             return url;
         }

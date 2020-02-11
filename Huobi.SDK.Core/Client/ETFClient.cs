@@ -35,9 +35,9 @@ namespace Huobi.SDK.Core.Client
         /// <returns>GetETFInfoResponse</returns>
         public async Task<GetETFInfoResponse> GetETFInfoAsync()
         {
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("etf_name", ETF_NAME);
-            string url = _urlBuilder.Build(GET_METHOD, "/etf/swap/config", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/etf/swap/config", request);
 
             return await HttpRequest.GetAsync<GetETFInfoResponse>(url);
         }
@@ -78,11 +78,11 @@ namespace Huobi.SDK.Core.Client
         /// <returns>GetETFSwapHistoryResponse</returns>
         public async Task<GetETFSwapHistoryResponse> GetETFSwapHistory(int offset, int limit)
         {
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("etf_name", ETF_NAME)
                 .AddParam("offset", offset.ToString())
                 .AddParam("limit", limit.ToString());
-            string url = _urlBuilder.Build(GET_METHOD, "/etf/swap/list", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/etf/swap/list", request);
 
             return await HttpRequest.GetAsync<GetETFSwapHistoryResponse>(url);
         }

@@ -159,9 +159,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("account-id", Config.AccountId);
-            var response = tradeClient.GetOpenOrdersAsync(reqParams).Result;
+            var response = tradeClient.GetOpenOrdersAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -188,11 +188,11 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var bclbaRequest = new BatchCancelOrdersByAccountIdRequest
+            var request = new CancelOrdersByCriteriaRequest
             {
                 AccountId = Config.AccountId
             };
-            var response = tradeClient.CancelOrdersByCriteriaAsync(bclbaRequest).Result;
+            var response = tradeClient.CancelOrdersByCriteriaAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -217,7 +217,7 @@ namespace Huobi.SDK.Example
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             string[] orderIds = { "1", "2" };
-            var request = new BatchCancelOrdersByOrderIdRequest
+            var request = new CancelOrdersByIdsRequest
             {
                 OrderIds = orderIds
             };
@@ -282,10 +282,10 @@ namespace Huobi.SDK.Example
         private static void GetOrderByClient()
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("clientOrderId", "cid1234");
 
-            var response = tradeClient.GetOrderByClientAsync(reqParams).Result;
+            var response = tradeClient.GetOrderByClientAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -336,10 +336,10 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("states", "canceled");
-            var response = tradeClient.GetHistoryOrdersAsync(reqParams).Result;
+            var response = tradeClient.GetHistoryOrdersAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -366,9 +366,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbol", "btcusdt");
-            var response = tradeClient.GetLast48hOrdersAsync(reqParams).Result;
+            var response = tradeClient.GetLast48hOrdersAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -395,9 +395,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbol", "btcusdt");
-            var response = tradeClient.GetMatchResultsAsync(reqParams).Result;
+            var response = tradeClient.GetMatchResultsAsync(request).Result;
             switch (response.status)
             {
                 case "ok":
@@ -424,9 +424,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("symbols", "btcusdt, eosht");
-            var response = tradeClient.GetFeeAsync(reqParams).Result;
+            var response = tradeClient.GetFeeAsync(request).Result;
             switch (response.status)
             {
                 case "ok":

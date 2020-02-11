@@ -36,15 +36,13 @@ namespace Huobi.SDK.Core.RequestBuilder
         {
             string strDateTime = utcDateTime.ToString("s");
 
-            var requestParammeters = new RequestParammeters();
-
-            requestParammeters
+            var request = new GetRequest()
                 .AddParam(_aKKey, _aKValue)
                 .AddParam(_sMKey, _sMVaue)
                 .AddParam(_sVKey, _sVValue)
                 .AddParam(_tKey, strDateTime);
 
-            string signature = _signer.Sign("GET", _host, _path, requestParammeters.BuildParams());
+            string signature = _signer.Sign("GET", _host, _path, request.BuildParams());
 
             var auth = new WebSocketAuthenticationRequest
             {

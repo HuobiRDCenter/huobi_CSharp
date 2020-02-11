@@ -26,10 +26,10 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            var currencyReqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("currency", "btc");
 
-            var getDAResult = walletClient.GetDepositAddressAsync(currencyReqParams).Result;
+            var getDAResult = walletClient.GetDepositAddressAsync(request).Result;
             if (getDAResult != null && getDAResult.data != null)
             {
                 foreach (var a in getDAResult.data)
@@ -44,10 +44,10 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            var currencyReqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("currency", "btc");
 
-            var getWQResult = walletClient.GetWithdrawQuotaAsync(currencyReqParams).Result;
+            var getWQResult = walletClient.GetWithdrawQuotaAsync(request).Result;
             if (getWQResult != null && getWQResult.data != null && getWQResult.data.chains != null)
             {
                 foreach (var c in getWQResult.data.chains)
@@ -111,9 +111,9 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            var depReqParams = new RequestParammeters()
+            var request = new GetRequest()
                     .AddParam("type", "deposit");
-            var getDWHResult = walletClient.GetDepositWithdrawHistoryAsync(depReqParams).Result;
+            var getDWHResult = walletClient.GetDepositWithdrawHistoryAsync(request).Result;
             if (getDWHResult != null && getDWHResult.data != null)
             {
                 foreach (var h in getDWHResult.data)

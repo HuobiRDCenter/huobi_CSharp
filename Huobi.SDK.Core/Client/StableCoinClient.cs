@@ -36,11 +36,11 @@ namespace Huobi.SDK.Core.Client
         /// <returns>GetStableCoinResponse</returns>
         public async Task<GetStableCoinResponse> GetStableCoinAsync(string currency, string amount, string type)
         {
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("currency", currency)
                 .AddParam("amount", amount)
                 .AddParam("type", type);
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/stable-coin/quote", reqParams);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/stable-coin/quote", request);
 
             return await HttpRequest.GetAsync<GetStableCoinResponse>(url);
         }

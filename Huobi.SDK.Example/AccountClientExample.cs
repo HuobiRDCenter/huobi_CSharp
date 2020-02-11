@@ -80,9 +80,9 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var reqParams = new RequestParammeters()
+            var request = new GetRequest()
                 .AddParam("account-id", Config.AccountId);
-            var getAHResult = accountClient.GetAccountHistoryAsync(reqParams).Result;
+            var getAHResult = accountClient.GetAccountHistoryAsync(request).Result;
             if (getAHResult != null)
             {
                 switch (getAHResult.status)
