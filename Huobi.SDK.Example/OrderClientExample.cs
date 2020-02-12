@@ -20,7 +20,7 @@ namespace Huobi.SDK.Example
             CancelOrderByClient();
             
             GetOpenOrders();
-            
+
             CancelOrdersByCriteria();
             
             CancelOrdersByIds();
@@ -239,9 +239,9 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var f in response.data.failed)
                                 {
-                                    string id = (f.orderId != 0) ? f.orderId.ToString() : f.clientOrderId;
+                                    string id = !string.IsNullOrWhiteSpace(f.orderId) ? f.orderId : f.clientOrderId;
 
-                                    Console.WriteLine($"Cancel fail, id: {f.clientOrderId}, error: {f.errorMessage}");
+                                    Console.WriteLine($"Cancel fail, id: {id}, error: {f.errorMessage}");
                                 }
                             }
                         }
