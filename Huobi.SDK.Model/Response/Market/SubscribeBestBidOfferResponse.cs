@@ -17,7 +17,7 @@ namespace Huobi.SDK.Model.Response.Market
             /// <summary>
             /// Quote timestamp in millionsecond
             /// </summary>
-            public long quteTime;
+            public long quoteTime;
 
             /// <summary>
             /// Trading symbol
