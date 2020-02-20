@@ -262,7 +262,7 @@ namespace Huobi.SDK.Example
                     if (response.tick != null) // Parse subscription data
                     {
                         var t = response.tick;
-                        Console.WriteLine($"id: {t.symbol}, ask: [{t.ask}, {t.askSize}], bid: [{t.bid}, {t.bidSize}]");
+                        Console.WriteLine($"symbol: {t.symbol}, ask: [{t.ask}, {t.askSize}], bid: [{t.bid}, {t.bidSize}]");
                     }
                 }
             }

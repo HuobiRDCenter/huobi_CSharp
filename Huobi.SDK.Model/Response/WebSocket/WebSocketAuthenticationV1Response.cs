@@ -34,7 +34,7 @@ namespace Huobi.SDK.Model.Response.WebSocket
             /// User id
             /// </summary>
             [JsonProperty("user-id")]
-            public string userId;
+            public int userId;
         }
     }
 }
