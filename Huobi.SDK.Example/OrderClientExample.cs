@@ -267,7 +267,8 @@ namespace Huobi.SDK.Example
                         if (response.data != null)
                         {
                             var o = response.data;
-                            Console.WriteLine($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}");
+                            Console.WriteLine($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}," +
+                                $" filled amount: {o.filledAmount}, filled cash amount: {o.filledCashAmount}, filled fees: {o.filledFees}");
                         }
                         break;
                     }
@@ -326,7 +327,7 @@ namespace Huobi.SDK.Example
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get mattch result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        Console.WriteLine($"Get match result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }

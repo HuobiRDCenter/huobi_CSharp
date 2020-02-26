@@ -25,6 +25,10 @@ namespace Huobi.SDK.Example
             GetSubuserAccountBalances();
 
             GetSubuserAccountBalance();
+
+            LockSubUser();
+
+            UnLockSubUser();
         }
 
         private static void GetAccountInfo()
@@ -216,6 +220,42 @@ namespace Huobi.SDK.Example
                     Console.WriteLine($"There are total {a.list.Length} accounts and available {availableCount} currencys in this account");
                 }
                 Console.WriteLine($"There are total {getSUABResult.data.Length} accounts");
+            }
+        }
+
+        private static void LockSubUser()
+        {
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            var result = accountClient.LockSubUserAsync(128654510).Result;
+            if (result != null)
+            {
+                if (result.code == 200 && result.data != null)
+                {
+                    Console.WriteLine($"Lock sub user ${result.data.subUid} result: {result.data.userState}");
+                }
+                else
+                {
+                    Console.WriteLine($"Lock sub user error: {result.code}");
+                }
+            }
+        }
+
+        private static void UnLockSubUser()
+        {
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            var result = accountClient.UnlockSubUserAsync(128654510).Result;
+            if (result != null)
+            {
+                if (result.code == 200 && result.data != null)
+                {
+                    Console.WriteLine($"Unlock sub user ${result.data.subUid} result: {result.data.userState}");
+                }
+                else
+                {
+                    Console.WriteLine($"Unlock sub user error: {result.code}");
+                }
             }
         }
     }

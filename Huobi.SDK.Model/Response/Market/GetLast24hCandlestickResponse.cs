@@ -69,6 +69,8 @@
             /// The trading volume in base currency of last 24h
             /// </summary>
             public float vol;
+
+            public long version;
         }
     }
 }

@@ -127,6 +127,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
             string authRequest = _wsV1ReqBuilder.Build();
             _WebSocket.Send(authRequest);
+            Console.WriteLine("Authentication sent");
         }
 
         private void _WebSocket_OnMessage(object sender, MessageEventArgs e)
@@ -138,7 +139,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                 string data = GZipDecompresser.Decompress(e.RawData);
 
                 var pingMessage = JsonConvert.DeserializeObject<PingMessageV1>(data);
-                if (pingMessage != null && pingMessage.ts != 0)
+                if (pingMessage.IsPing())
                 {
                     Console.WriteLine($"Received ping:{pingMessage.ts}");
                     string pongData = $"{{\"op\":\"pong\", \"ts\":{pingMessage.ts}}}";

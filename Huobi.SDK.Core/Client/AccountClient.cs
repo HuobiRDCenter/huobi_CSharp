@@ -188,5 +188,40 @@ namespace Huobi.SDK.Core.Client
 
             return await HttpRequest.GetAsync<GetSubUserAccountBalanceResponse>(url);
         }
+
+        /// <summary>
+        /// Lock a specific user
+        /// </summary>
+        /// <param name="subUserId">sub user id</param>
+        /// <returns>LockUnLockSubUserResponse</returns>
+        public async Task<LockUnLockSubUserResponse> LockSubUserAsync(long subUserId)
+        {
+            return await LockUnlockSubUserAsync(subUserId, "lock");
+        }
+
+        /// <summary>
+        /// Unlock a specific user
+        /// </summary>
+        /// <param name="subUserId">sub user id</param>
+        /// <returns>LockUnLockSubUserResponse</returns>
+        public async Task<LockUnLockSubUserResponse> UnlockSubUserAsync(long subUserId)
+        {
+            return await LockUnlockSubUserAsync(subUserId, "unlock");
+        }
+
+        /// <summary>
+        /// Lock or unlock a specific user
+        /// </summary>
+        /// <param name="subUserId">sub user id</param>
+        /// <param name="action">lock or unlock action</param>
+        /// <returns>LockUnLockSubUserResponse</returns>
+        private async Task<LockUnLockSubUserResponse> LockUnlockSubUserAsync(long subUserId, string action)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v2/sub-user/management");
+
+            string content = $"{{ \"subUid\": \"{subUserId}\", \"action\":\"{action}\" }}";
+
+            return await HttpRequest.PostAsync<LockUnLockSubUserResponse>(url, content);
+        }
     }
 }

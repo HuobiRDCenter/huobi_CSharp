@@ -8,6 +8,21 @@ namespace Huobi.SDK.Model.Response.Account
     public class SubscribeAccountV1Response
     {
         /// <summary>
+        /// Operation
+        /// </summary>
+        public string op;
+
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        public long ts;
+
+        /// <summary>
+        /// Subscription topic
+        /// </summary>
+        public string topic;
+
+        /// <summary>
         /// Response body from sub
         /// </summary>
         public AccountUpdate data;

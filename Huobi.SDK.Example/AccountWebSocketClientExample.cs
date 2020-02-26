@@ -31,6 +31,7 @@ namespace Huobi.SDK.Example
                 {
                     // Request full data if authentication passed
                     client.Request();
+                    Console.WriteLine("Request sent");
                 }
             }
 
@@ -77,6 +78,7 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe the specific topic
                     client.Subscribe("1");
+                    Console.WriteLine("Subscription sent");
                 }
             }
 
@@ -123,6 +125,7 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe the specific topic
                     client.Subscribe("1");
+                    Console.WriteLine("Subscription sent");
                 }
             }
 

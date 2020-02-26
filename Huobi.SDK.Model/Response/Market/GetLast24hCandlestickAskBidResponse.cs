@@ -73,7 +73,7 @@
             /// <summary>
             /// The internal data
             /// </summary>
-            public float version;
+            public long version;
 
             /// <summary>
             /// The current best ask in format [price, quote volume]

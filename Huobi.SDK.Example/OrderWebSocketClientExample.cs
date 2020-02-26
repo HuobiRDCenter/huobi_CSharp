@@ -40,6 +40,7 @@ namespace Huobi.SDK.Example
                         states = "submitted,created"
                     };
                     client.Request(req);
+                    Console.WriteLine("Request sent");
                 }
             }
 
@@ -80,6 +81,7 @@ namespace Huobi.SDK.Example
                 {
                     // Request full data if authentication passed
                     client.Request("64318170222");
+                    Console.WriteLine("Request sent");
                 }
             }
 
@@ -117,6 +119,7 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");
+                    Console.WriteLine("Subscription sent");
                 }
             }
 
@@ -157,6 +160,7 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");
+                    Console.WriteLine("Subscription sent");
                 }
             }
 
