@@ -38,4 +38,7 @@ Global
 		{F0292069-B195-47C1-8671-A3695FDC59EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0292069-B195-47C1-8671-A3695FDC59EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		version = 1.0
+	EndGlobalSection
 EndGlobal

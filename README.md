@@ -1,8 +1,8 @@
-# Huobi C# SDK (beta version)
+# Huobi C# SDK
 
 This is Huobi C# SDK, This is a lightweight .NET library, you can use import to your C# project and use this SDK to query all market data, trading and manage your account.
 
-The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market and order data from the Websocket connection.
+The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market, account and order update from the websocket connection.
 
 ## Table of Contents
 
@@ -66,10 +66,6 @@ if (getAIResult != null && getAIResult.data != null)
 }
 ```
 
-Please NOTE:
-
-All timestamp which is got from SDK is the Unix timestamp based on UTC.
-
 ## Usage
 
 ### Configuration
@@ -100,7 +96,7 @@ This is the folder and namespace structure of SDK source code and the descriptio
   - **Request**: The request data model
   - **Response**: The response data model
 - **Huobi.SDK.Core.Test**: The unit test of core
-- **Huobi.SDK.Example**: The example code how to use **Core** and **Model** to access and API and receive data.
+- **Huobi.SDK.Example**: The examples how to use **Core** and **Model** to access  API and read response.
 
 As the example indicates, there are two important namespaces: **Huobi.SDK.Core.Client** and **Huobi.SDK.Model.Response**,  this section will introduce both of them below.
 
@@ -165,7 +161,7 @@ The API key is used for authentication. If the authentication cannot pass, the i
 
 **Rest Client**: It invokes Rest API and get once-off response.
 
-The method for all Rest Client is **asynchronism**, it invoke Huobi asynchronous and returns a Task immediately without blocking further statements. If you would like to get the result **synchronous**, just simply access its *Result* property, it will be blocked until the data is returned.
+The method for all Rest Client is **asynchronism**, it invoke Huobi API asynchronous and returns a Task immediately without blocking further statements. If you would like to get the result **synchronous**, just simply access its *Result* property, it will be blocked until the data is returned.
 
 ```csharp
 // You can call the method asynchronously
@@ -280,7 +276,7 @@ var marketClient = new MarketClient();
 var getl24CABResponse = marketClient.GetLast24hCandlestickAskBidAsync("btcusdt").Result;
 ```
 
-#### Historical
+#### Historical trade
 
 ```csharp
 var marketClient = new MarketClient();
@@ -484,7 +480,7 @@ client.Subscribe("btcusdt");
 
 *Authentication is required.*
 
-```java
+```csharp
 // Initialize a new instance
 var client = new SubscribeOrderWebSocketV1Client(APIKey.AccessKey, APIKey.SecretKey);
 
