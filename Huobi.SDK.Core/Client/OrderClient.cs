@@ -3,6 +3,7 @@ using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
 using Newtonsoft.Json;
+using System;
 
 namespace Huobi.SDK.Core.Client
 {
@@ -189,15 +190,29 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// To be obsoleted
         /// Returns the current transaction fee rate applied to the user.
         /// </summary>
         /// <param name="request"></param>
         /// <returns>GetFeeResponse</returns>
+        [Obsolete]
         public async Task<GetFeeResponse> GetFeeAsync(GetRequest request)
         {
             string url = _urlBuilder.Build(GET_METHOD, $"/v1/fee/fee-rate/get", request);
 
             return await HttpRequest.GetAsync<GetFeeResponse>(url);
+        }
+
+        /// <summary>
+        /// Returns the current transaction fee rate applied to the user.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>GetTransactFeeRateResponse</returns>
+        public async Task<GetTransactFeeRateResponse> GetTransactFeeRateAsync(GetRequest request)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, $"/v2/reference/transact-fee-rate", request);
+
+            return await HttpRequest.GetAsync<GetTransactFeeRateResponse>(url);
         }
     }
 }

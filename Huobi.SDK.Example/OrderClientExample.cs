@@ -39,7 +39,7 @@ namespace Huobi.SDK.Example
 
             GetMatchResults();
 
-            GetFee();
+            GetTransactFeeRate();
         }
 
         private static void PlaceOrder()
@@ -421,31 +421,26 @@ namespace Huobi.SDK.Example
             }
         }
 
-        private static void GetFee()
+        private static void GetTransactFeeRate()
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             var request = new GetRequest()
-                .AddParam("symbols", "btcusdt, eosht");
-            var response = tradeClient.GetFeeAsync(request).Result;
-            switch (response.status)
+                .AddParam("symbols", "btcusdt,eosht");
+            var response = tradeClient.GetTransactFeeRateAsync(request).Result;
+            if (response.code == 200)
             {
-                case "ok":
+                if (response.data != null)
+                {
+                    foreach (var f in response.data)
                     {
-                        if (response.data != null)
-                        {
-                            foreach (var f in response.data)
-                            {
-                                Console.WriteLine($"Symbol: {f.symbol}, maker fee: {f.makerFee}, taker fee: {f.takerFee}");
-                            }
-                        }
-                        break;
+                        Console.WriteLine($"Symbol: {f.symbol}, maker-taker fee: {f.makerFeeRate}-{f.takerFeeRate}");
                     }
-                case "error":
-                    {
-                        Console.WriteLine($"Get fee fail, error code: {response.errorCode}, error message: {response.errorMessage}");
-                        break;
-                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Get transact fee rate error: {response.message}");
             }
         }
     }

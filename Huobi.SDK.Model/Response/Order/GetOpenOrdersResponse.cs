@@ -41,6 +41,12 @@ namespace Huobi.SDK.Model.Response.Order
             public long id;
 
             /// <summary>
+            /// Client order id (if specified)
+            /// </summary>
+            [JsonProperty("client-order-id")]
+            public string ClientOrderId;
+
+            /// <summary>
             /// The account id
             /// </summary>
             [JsonProperty("account-id")]

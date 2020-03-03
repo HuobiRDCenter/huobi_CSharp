@@ -51,6 +51,21 @@
                 public string chain;
 
                 /// <summary>
+                /// Base chain name
+                /// </summary>
+                public string baseChain;
+
+                /// <summary>
+                /// Base chain protocol
+                /// </summary>
+                public string baseChainProtocol;
+
+                /// <summary>
+                /// Is dynamic fee type or not (only applicable to withdrawFeeType = fixed)
+                /// </summary>
+                public bool isDynamic;
+
+                /// <summary>
                 /// Number of confirmations required for deposit success (trading and withdrawal allowed once reached)
                 /// </summary>
                 public int numOfConfirmations;

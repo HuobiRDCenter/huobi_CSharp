@@ -57,10 +57,10 @@ namespace Huobi.SDK.Example
                 {
                     foreach (var d in currencyResponse.data)
                     {
-                        Console.WriteLine(d.currency);
+                        Console.WriteLine($"Currency: {d.currency}");
                         foreach (var c in d.chains)
                         {
-                            Console.WriteLine($"{c.chain} {c.withdrawFeeType}");
+                            Console.WriteLine($"Chain name: {c.chain}, base chain: {c.baseChain}, base chain protocol: {c.baseChainProtocol}");
                         }
                     }
                 }

@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Huobi.SDK.Model.Response.Order
 {
     /// <summary>
     /// GetFee response
     /// </summary>
+    [Obsolete]
     public class GetFeeResponse
     {
         /// <summary>

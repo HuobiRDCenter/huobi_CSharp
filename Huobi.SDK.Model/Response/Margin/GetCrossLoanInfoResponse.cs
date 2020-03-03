@@ -65,6 +65,10 @@ namespace Huobi.SDK.Model.Response.Margin
             [JsonProperty("loanable-amt")]
             public string loanableAmt;
 
+            /// <summary>
+            /// Actual interest trate post deduction
+            /// </summary>
+            [JsonProperty("actual-rate")]
             public string ActualRate;
         }
 
