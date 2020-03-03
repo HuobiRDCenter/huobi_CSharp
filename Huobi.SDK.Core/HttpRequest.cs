@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Huobi.SDK.Log;
 using Newtonsoft.Json;
 
 namespace Huobi.SDK.Core
@@ -12,7 +13,7 @@ namespace Huobi.SDK.Core
     {
         //public static bool LogPerformanceEnabled = false;
 
-        public static PerformanceLogger logger = new PerformanceLogger();
+        public static PerformanceLogger logger = PerformanceLogger.GetInstance();
 
         /// <summary>
         /// Send Http GET request

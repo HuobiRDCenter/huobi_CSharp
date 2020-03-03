@@ -171,7 +171,7 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var o in response.data)
                                 {
-                                    Console.WriteLine($"Loan order id: {o.id}, symbol: {o.symbol}, currency: {o.currency}, state: {o.state}");
+                                    Console.WriteLine($"Loan order id: {o.id}, symbol: {o.symbol}, currency: {o.currency}, amount: {o.loanAmount}, state: {o.state}");
                                 }
                                 Console.WriteLine($"There are total {response.data.Length} loan orders");
                             }
@@ -201,7 +201,7 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var a in response.data)
                                 {
-                                    Console.WriteLine($"Symbol: {a.symbol}");
+                                    Console.WriteLine($"Account Id: {a.id}, Symbol: {a.symbol}");
                                     if (a.list != null)
                                     {
                                         foreach (var c in a.list)

@@ -3,9 +3,9 @@
 namespace Huobi.SDK.Model.Response.Margin
 {
     /// <summary>
-    /// GetLoanInfo response
+    /// GetCrossMarginAccount response
     /// </summary>
-    public class GetLoanInfoResponse
+    public class GetCrossMarginAccountResponse
     {
         /// <summary>
         /// Response status
@@ -28,58 +28,68 @@ namespace Huobi.SDK.Model.Response.Margin
         /// Response body
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public LoanInfo[] data;
+        public Account data;
 
         /// <summary>
         /// Loan info
         /// </summary>
-        public class LoanInfo
+        public class Account
         {
             /// <summary>
-            /// Trading symbol
+            /// Account id
             /// </summary>
-            public string symbol;
+            public int id;
 
             /// <summary>
-            /// Currency list
+            /// Account type: cross-margin
             /// </summary>
-            public Currency[] currencies;
+            public string type;
+
+            /// <summary>
+            /// Loan state
+            /// Possible values: [created, accrual, cleared, invalid]
+            /// </summary>
+            public string state;
+            
+            /// <summary>
+            /// Sum of all account balance
+            /// </summary>
+            [JsonProperty("acct-balance-sum")]
+            public string AcctBalanceSum;
+
+            /// <summary>
+            /// Sum of all debt balance
+            /// </summary>
+            [JsonProperty("debt-balance-sum")]
+            public string DebtBalanceSum;
+
+            /// <summary>
+            /// The list of margin accounts and their details
+            /// </summary>
+            public AccountDetail[] list;
 
             /// <summary>
             /// Currency detail
             /// </summary>
-            public class Currency
+            public class AccountDetail
             {
                 /// <summary>
-                /// Currency name
+                /// The currency of this balance
                 /// </summary>
                 public string currency;
 
                 /// <summary>
-                /// Interest rate
+                /// The balance type
                 /// </summary>
-                [JsonProperty("interest-rate")]
-                public string interestRate;
+                public string type;
 
                 /// <summary>
-                /// Minimal loanable amount
+                /// The balance in the main currency unit
                 /// </summary>
-                [JsonProperty("min-loan-amt")]
-                public string minLoadAmt;
-
-                /// <summary>
-                /// Maximum loanable amount
-                /// </summary>
-                [JsonProperty("max-loan-amt")]
-                public string maxLoanAmt;
-
-                /// <summary>
-                /// Remaining loanable amount
-                /// </summary>
-                [JsonProperty("loanable-amt")]
-                public string loanableAmt;
+                public string balance;
             }
 
         }
     }
+
 }

@@ -65,7 +65,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="symbols">Trading symbol (multiple selections acceptable, separated by comma)</param>
         /// <returns>GetLoanInfoResponse</returns>
-        public async Task<GetLoanInfoResponse> GetLoanInfoAsync(string symbols)
+        public async Task<GetIsolatedLoanInfoResponse> GetLoanInfoAsync(string symbols)
         {
             var request = new GetRequest();
 
@@ -76,7 +76,7 @@ namespace Huobi.SDK.Core.Client
 
             string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-info", request);
 
-            return await HttpRequest.GetAsync<GetLoanInfoResponse>(url);
+            return await HttpRequest.GetAsync<GetIsolatedLoanInfoResponse>(url);
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="request"></param>
         /// <returns>GetLoanOrdersResponse</returns>
-        public async Task<GetLoanOrdersResponse> GetLoanOrdersAsync(GetRequest request)
+        public async Task<GetIsolatedLoanOrdersResponse> GetLoanOrdersAsync(GetRequest request)
         {
             string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/loan-orders", request);
 
-            return await HttpRequest.GetAsync<GetLoanOrdersResponse>(url);
+            return await HttpRequest.GetAsync<GetIsolatedLoanOrdersResponse>(url);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="symbol">Trading symbol</param>
         /// <param name="subUid">Sub user ID (mandatory field while parent user querying sub user’s margin account details)</param>
         /// <returns>GetMarginAccountResponse</returns>
-        public async Task<GetMarginAccountResponse> GetMarginAccountAsync(string symbol, int? subUid)
+        public async Task<GetIsolatedMarginAccountResponse> GetMarginAccountAsync(string symbol, int? subUid)
         {
             var request = new GetRequest();
 
@@ -144,7 +144,7 @@ namespace Huobi.SDK.Core.Client
 
             string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/accounts/balance", request);
 
-            return await HttpRequest.GetAsync<GetMarginAccountResponse>(url);
+            return await HttpRequest.GetAsync<GetIsolatedMarginAccountResponse>(url);
         }
     }
 }

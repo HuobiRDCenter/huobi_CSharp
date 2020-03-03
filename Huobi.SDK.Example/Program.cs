@@ -1,4 +1,6 @@
-﻿namespace Huobi.SDK.Example
+﻿using Huobi.SDK.Log;
+
+namespace Huobi.SDK.Example
 {
     class Program
     {
@@ -36,6 +38,8 @@
 
         static void RestPerfTest()
         {
+            PerformanceLogger.GetInstance().Enable(true);
+
             CommonClientExample.RunAll();
 
             MarketClientExample.RunAll();

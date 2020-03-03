@@ -3,9 +3,9 @@
 namespace Huobi.SDK.Model.Response.Margin
 {
     /// <summary>
-    /// GetMarginAccount response
+    /// GetIsolatedMarginAccount response
     /// </summary>
-    public class GetMarginAccountResponse
+    public class GetIsolatedMarginAccountResponse
     {
         /// <summary>
         /// Response status
@@ -35,6 +35,16 @@ namespace Huobi.SDK.Model.Response.Margin
         /// </summary>
         public class Account
         {
+            /// <summary>
+            /// Account id
+            /// </summary>
+            public int id;
+
+            /// <summary>
+            /// Account type: cross-margin
+            /// </summary>
+            public string type;
+
             /// <summary>
             /// The margin loan pair
             /// </summary>

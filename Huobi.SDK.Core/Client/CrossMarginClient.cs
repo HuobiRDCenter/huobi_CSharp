@@ -61,12 +61,12 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns loan interest rates and quota applied on the user
         /// </summary>
-        /// <returns>GetLoanInfoResponse</returns>
-        public async Task<GetLoanInfoResponse> GetLoanInfo()
+        /// <returns>GetCrossLoanInfoResponse</returns>
+        public async Task<GetCrossLoanInfoResponse> GetLoanInfo()
         {
             string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/loan-info");
 
-            return await HttpRequest.GetAsync<GetLoanInfoResponse>(url);
+            return await HttpRequest.GetAsync<GetCrossLoanInfoResponse>(url);
         }
 
         /// <summary>
@@ -102,23 +102,23 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Returns margin orders based on a specific searching criteria.
         /// </summary>
-        /// <returns>GetLoanOrdersResponse</returns>
-        public async Task<GetLoanOrdersResponse> GetLoanOrders()
+        /// <returns>GetCrossLoanOrdersResponse</returns>
+        public async Task<GetCrossLoanOrdersResponse> GetLoanOrders()
         {
             string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/loan-orders");
 
-            return await HttpRequest.GetAsync<GetLoanOrdersResponse>(url);
+            return await HttpRequest.GetAsync<GetCrossLoanOrdersResponse>(url);
         }
 
         /// <summary>
         /// Returns the balance of the margin loan account.
         /// </summary>
-        /// <returns>GetMarginAccountResponse</returns>
-        public async Task<GetMarginAccountResponse> GetMarginAccount()
+        /// <returns>GetCrossMarginAccountResponse</returns>
+        public async Task<GetCrossMarginAccountResponse> GetMarginAccount()
         {
             string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/accounts/balance");
 
-            return await HttpRequest.GetAsync<GetMarginAccountResponse>(url);
+            return await HttpRequest.GetAsync<GetCrossMarginAccountResponse>(url);
         }
     }
 }

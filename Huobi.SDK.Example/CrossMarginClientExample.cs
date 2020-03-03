@@ -8,7 +8,7 @@ namespace Huobi.SDK.Example
         public static void RunAll()
         {
             Config.LoadConfig();
-
+            
             TransferIn();
 
             TransferOut();
@@ -82,17 +82,10 @@ namespace Huobi.SDK.Example
                         {
                             if (response.data != null)
                             {
-                                foreach (var d in response.data)
+                                foreach (var c in response.data)
                                 {
-                                    if (d.currencies != null)
-                                    {
-                                        Console.WriteLine($"Loan info for symbol: {d.symbol}");
-                                        foreach (var c in d.currencies)
-                                        {
-                                            Console.WriteLine($"Currency: {c.currency}, interest: {c.interestRate}," +
-                                                $" min: {c.maxLoanAmt}, max: {c.maxLoanAmt}, loanable: {c.loanableAmt}");
-                                        }
-                                    }
+                                    Console.WriteLine($"Currency: {c.currency}, interest: {c.interestRate}," +
+                                        $" min: {c.maxLoanAmt}, max: {c.maxLoanAmt}, loanable: {c.loanableAmt}");
                                 }
                             }
                             break;
@@ -167,7 +160,7 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var o in response.data)
                                 {
-                                    Console.WriteLine($"Loan order id: {o.id}, symbol: {o.symbol}, currency: {o.currency}, state: {o.state}");
+                                    Console.WriteLine($"Loan order id: {o.id}, currency: {o.currency}, amount: {o.loanAmount}, state: {o.state}");
                                 }
                                 Console.WriteLine($"There are total {response.data.Length} loan orders");
                             }
@@ -195,18 +188,15 @@ namespace Huobi.SDK.Example
                         {
                             if (response.data != null)
                             {
-                                foreach (var a in response.data)
+                                var a = response.data;
+                                Console.WriteLine($"Account Id: {a.id}");
+                                if (a.list != null)
                                 {
-                                    Console.WriteLine($"Symbol: {a.symbol}");
-                                    if (a.list != null)
+                                    foreach (var c in a.list)
                                     {
-                                        foreach (var c in a.list)
-                                        {
-                                            Console.WriteLine($"Currency: {c.currency}, balance: {c.balance}");
-                                        }
+                                        Console.WriteLine($"Currency: {c.currency}, balance: {c.balance}");
                                     }
                                 }
-                                Console.WriteLine($"There are total {response.data.Length} margin accounts");
                             }
                             break;
                         }
