@@ -86,7 +86,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// transfer fund between spot account and futrue contract account
+        /// transfer fund between spot account and future contract account
         /// </summary>
         /// <param name="currency">Currency name</param>
         /// <param name="amount">Amount of fund to transfer</param>
@@ -167,9 +167,9 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// GetSubUserAccountBalance response
+        /// Returns the aggregated balance from all the sub-users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>GetSubUserAccountBalance response</returns>
         public async Task<GetSubUserAccountBalancesResponse> GetSubUserAccountBalancesAsync()
         {
             string url = _urlBuilder.Build(GET_METHOD, "/v1/subuser/aggregate-balance");

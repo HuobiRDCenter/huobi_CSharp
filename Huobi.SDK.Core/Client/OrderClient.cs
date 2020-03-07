@@ -8,7 +8,7 @@ using System;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
-    /// Responsible to operate on trade
+    /// Responsible to operate on order
     /// </summary>
     public class OrderClient
     {

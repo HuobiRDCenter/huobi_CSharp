@@ -57,7 +57,7 @@ namespace Huobi.SDK.Core
         }
 
         /// <summary>
-        /// Concat the propery and value pair
+        /// Concat the property and value pair
         /// </summary>
         /// <returns>string</returns>
         public string BuildParams()

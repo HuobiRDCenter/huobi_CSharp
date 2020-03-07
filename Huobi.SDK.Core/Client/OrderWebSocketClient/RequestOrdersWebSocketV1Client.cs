@@ -5,7 +5,7 @@ using Huobi.SDK.Model.Request;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
-    /// Responsible to handle order from WebSocket
+    /// Responsible to handle orders request from WebSocket
     /// This need authentication version 1
     /// </summary>
     public class RequestOrdersWebSocketV1Client : WebSocketV1ClientBase<RequestOrdersResponse>

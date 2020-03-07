@@ -4,7 +4,7 @@ using Huobi.SDK.Model.Response.Account;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
-    /// Responsible to handle account asset from WebSocket
+    /// Responsible to handle account asset subscription from WebSocket
     /// This need authentication version 1
     /// </summary>
     public class SubscribeAccountWebSocketV1Client : WebSocketV1ClientBase<SubscribeAccountV1Response>

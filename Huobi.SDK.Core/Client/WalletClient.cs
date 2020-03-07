@@ -41,7 +41,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// GetWithdrawQuota response
+        /// Query withdraw quota for currencies
         /// </summary>
         /// <param name="request"></param>
         /// <returns>GetWithdrawQuotaResponse</returns>

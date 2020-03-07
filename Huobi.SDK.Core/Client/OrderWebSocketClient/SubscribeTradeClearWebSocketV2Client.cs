@@ -32,7 +32,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// Unsubscribe balance updates
+        /// Unsubscribe trade update
         /// </summary>
         /// <param name="symbol">Trading symbol (wildcard * is allowed)</param>
         /// <param name="clientId">Client id</param>

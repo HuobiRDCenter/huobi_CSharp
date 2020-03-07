@@ -4,7 +4,7 @@ using Huobi.SDK.Model.Response.Order;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
-    /// Responsible to handle order from WebSocket
+    /// Responsible to handle order subscription from WebSocket
     /// This need authentication version 1
     /// </summary>
     public class SubscribeOrderWebSocketV1Client : WebSocketV1ClientBase<SubscribeOrderResponse>
@@ -21,7 +21,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// Subscribe all balance updates of the current account
+        /// Subscribe all order updates of the current account
         /// </summary>
         /// <param name="symbol">Trading symbol</param>
         /// <param name="clientId">Client id</param>
@@ -31,7 +31,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// Unsubscribe balance updates
+        /// Unsubscribe order updates
         /// </summary>
         /// <param name="symbol">Trading symbol</param>
         /// <param name="clientId">Client id</param>

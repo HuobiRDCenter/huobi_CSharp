@@ -19,7 +19,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// Request full depth data
+        /// Request full Market By Price order book
         /// </summary>
         /// <param name="symbol">Trading symbol, Only support 19 currency pairs at this point of time
         /// Possible values: btcusdt, ethusdt, eosusdt, bchusdt, ltcusdt, xrpusdt, htusdt, bsvusdt,
@@ -41,7 +41,7 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
-        /// Unsubscribe market by price order book
+        /// Unsubscribe Market By Price order book
         /// </summary>
         /// <param name="symbol">Trading symbol</param>
         /// <param name="clientId">Client id</param>
