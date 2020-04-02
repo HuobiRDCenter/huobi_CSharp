@@ -53,7 +53,7 @@
             /// <summary>
             /// Change timestamp in millisecond
             /// </summary>
-            public long changeTime;
+            public long? changeTime;
         }
     }
 }
