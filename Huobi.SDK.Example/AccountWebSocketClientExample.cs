@@ -136,7 +136,14 @@ namespace Huobi.SDK.Example
                 if (response != null && response.data != null)
                 {
                     var b = response.data;
-                    Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
+                    if (b.changeTime == null)
+                    {
+                        Console.WriteLine($"Account overview, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}, time: {b.changeTime}");
+                    }
                 }
             }
 

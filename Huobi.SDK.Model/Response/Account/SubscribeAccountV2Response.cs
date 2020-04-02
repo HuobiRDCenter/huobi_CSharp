@@ -52,6 +52,7 @@
 
             /// <summary>
             /// Change timestamp in millisecond
+            /// If it is null, then this message is account overview not update
             /// </summary>
             public long? changeTime;
         }
