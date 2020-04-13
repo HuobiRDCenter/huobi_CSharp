@@ -128,7 +128,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="symbol">Trading symbol</param>
         /// <param name="subUid">Sub user ID (mandatory field while parent user querying sub user’s margin account details)</param>
         /// <returns>GetMarginAccountResponse</returns>
-        public async Task<GetIsolatedMarginAccountResponse> GetMarginAccountAsync(string symbol, int? subUid)
+        public async Task<GetIsolatedMarginAccountResponse> GetMarginAccountAsync(string symbol, string subUid)
         {
             var request = new GetRequest();
 
@@ -137,9 +137,9 @@ namespace Huobi.SDK.Core.Client
                 request.AddParam("symbol", symbol);
             }
 
-            if (subUid.HasValue)
+            if (subUid != null)
             {
-                request.AddParam("sub-uid", subUid.Value.ToString());
+                request.AddParam("sub-uid", subUid);
             }
 
             string url = _urlBuilder.Build(GET_METHOD, "/v1/margin/accounts/balance", request);

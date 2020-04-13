@@ -23,6 +23,17 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Get system status, Incidents and planned maintenance.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetSystemStatus()
+        {
+            string url = "https://status.huobigroup.com/api/v2/summary.json";
+
+            return await HttpRequest.GetStringAsync(url);
+        }
+
+        /// <summary>
         /// Get all Huobi's supported trading symbol.
         /// </summary>
         /// <returns>GetSymbolsResponse</returns>

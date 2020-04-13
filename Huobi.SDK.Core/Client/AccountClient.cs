@@ -64,6 +64,18 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Returns the amount changes of specified user's account
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>GetAccountHistoryResponse</returns>
+        public async Task<GetAccountLedgerResponse> GetAccountLedgerAsync(GetRequest request)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/ledger", request);
+
+            return await HttpRequest.GetAsync<GetAccountLedgerResponse>(url);
+        }
+
+        /// <summary>
         /// Transfer fund from spot account to futrue contract account.
         /// </summary>
         /// <param name="currency">Currency name</param>
@@ -108,7 +120,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="currency">The crypto currency to transfer</param>
         /// <param name="amount">The amount of asset to transfer</param>
         /// <returns></returns>
-        public async Task<TransferResponse> TransferCurrencyFromSubToMasterAsync(long subUserId, string currency, decimal amount)
+        public async Task<TransferResponse> TransferCurrencyFromSubToMasterAsync(string subUserId, string currency, decimal amount)
         {
             return await TransferMasterAndSubAsync(subUserId, currency, amount, "master-transfer-in");
         }
@@ -120,7 +132,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="currency">The crypto currency to transfer</param>
         /// <param name="amount">The amount of asset to transfer</param>
         /// <returns></returns>
-        public async Task<TransferResponse> TransferCurrencyFromMasterToSubAsync(long subUserId, string currency, decimal amount)
+        public async Task<TransferResponse> TransferCurrencyFromMasterToSubAsync(string subUserId, string currency, decimal amount)
         {
             return await TransferMasterAndSubAsync(subUserId, currency, amount, "master-transfer-out");
         }
@@ -132,7 +144,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="currency">The crypto currency to transfer</param>
         /// <param name="amount">The amount of asset to transfer</param>
         /// <returns></returns>
-        public async Task<TransferResponse> TransferPointFromSubToMasterAsync(long subUserId, string currency, decimal amount)
+        public async Task<TransferResponse> TransferPointFromSubToMasterAsync(string subUserId, string currency, decimal amount)
         {
             return await TransferMasterAndSubAsync(subUserId, currency, amount, "master-point-transfer-in");
         }
@@ -144,7 +156,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="currency">The crypto currency to transfer</param>
         /// <param name="amount">The amount of asset to transfer</param>
         /// <returns></returns>
-        public async Task<TransferResponse> TransferPointFromMasterToSubAsync(long subUserId, string currency, decimal amount)
+        public async Task<TransferResponse> TransferPointFromMasterToSubAsync(string subUserId, string currency, decimal amount)
         {
             return await TransferMasterAndSubAsync(subUserId, currency, amount, "master-point-transfer-out");
         }
@@ -157,11 +169,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="amount">The amount of asset to transfer</param>
         /// <param name="type">The type of transfer. Possible values: [master-transfer-in, master-transfer-out, master-point-transfer-in, master-point-transfer-out]</param>
         /// <returns></returns>
-        private async Task<TransferResponse> TransferMasterAndSubAsync(long subUserId, string currency, decimal amount, string type)
+        private async Task<TransferResponse> TransferMasterAndSubAsync(string subUserId, string currency, decimal amount, string type)
         {
             string url = _urlBuilder.Build(POST_METHOD, "/v1/subuser/transfer");
 
-            string content = $"{{ \"sub-uid\": \"{subUserId}\", \"currency\":\"{currency}\", \"amount\":\"{amount}\", \"type\":\"{type}\" }}";
+            string content = $"{{ \"sub-uid\": {subUserId}, \"currency\":\"{currency}\", \"amount\":{amount}, \"type\":\"{type}\" }}";
             
             return await HttpRequest.PostAsync<TransferResponse>(url, content);
         }
@@ -182,7 +194,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="subUserId">Sub user id</param>
         /// <returns>GetAccountBalanceResponse</returns>
-        public async Task<GetSubUserAccountBalanceResponse> GetSubUserAccountBalanceAsync(long subUserId)
+        public async Task<GetSubUserAccountBalanceResponse> GetSubUserAccountBalanceAsync(string subUserId)
         {
             string url = _urlBuilder.Build(GET_METHOD, $"/v1/account/accounts/{subUserId}");
 
@@ -194,7 +206,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="subUserId">sub user id</param>
         /// <returns>LockUnLockSubUserResponse</returns>
-        public async Task<LockUnLockSubUserResponse> LockSubUserAsync(long subUserId)
+        public async Task<LockUnLockSubUserResponse> LockSubUserAsync(string subUserId)
         {
             return await LockUnlockSubUserAsync(subUserId, "lock");
         }
@@ -204,7 +216,7 @@ namespace Huobi.SDK.Core.Client
         /// </summary>
         /// <param name="subUserId">sub user id</param>
         /// <returns>LockUnLockSubUserResponse</returns>
-        public async Task<LockUnLockSubUserResponse> UnlockSubUserAsync(long subUserId)
+        public async Task<LockUnLockSubUserResponse> UnlockSubUserAsync(string subUserId)
         {
             return await LockUnlockSubUserAsync(subUserId, "unlock");
         }
@@ -215,7 +227,7 @@ namespace Huobi.SDK.Core.Client
         /// <param name="subUserId">sub user id</param>
         /// <param name="action">lock or unlock action</param>
         /// <returns>LockUnLockSubUserResponse</returns>
-        private async Task<LockUnLockSubUserResponse> LockUnlockSubUserAsync(long subUserId, string action)
+        private async Task<LockUnLockSubUserResponse> LockUnlockSubUserAsync(string subUserId, string action)
         {
             string url = _urlBuilder.Build(POST_METHOD, "/v2/sub-user/management");
 

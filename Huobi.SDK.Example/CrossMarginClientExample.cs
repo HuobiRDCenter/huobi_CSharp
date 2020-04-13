@@ -1,14 +1,16 @@
 ﻿using System;
+using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
 
 namespace Huobi.SDK.Example
 {
     public class CrossMarginClientExample
     {
+        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
+
         public static void RunAll()
         {
-            Config.LoadConfig();
-            
             TransferIn();
 
             TransferOut();
@@ -28,7 +30,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var response = marginClient.TransferIn("eos", "0.000001").Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -51,7 +56,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var response = marginClient.TransferOut("eos", "0.000001").Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -73,7 +81,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var response = marginClient.GetLoanInfo().Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -103,7 +114,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var response = marginClient.ApplyLoan("eos", "0.001").Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -126,7 +140,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var response = marginClient.Repay("123", "0.001").Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -149,7 +166,12 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            var response = marginClient.GetLoanOrders().Result;
+            _logger.Start();
+            GetRequest request = new GetRequest()
+                .AddParam("sub-uid", Config.SubUserId);
+            var response = marginClient.GetLoanOrders(request).Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -179,7 +201,10 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            var response = marginClient.GetMarginAccount().Result;
+            _logger.Start();
+            var response = marginClient.GetMarginAccount(Config.SubUserId).Result;
+            _logger.StopAndLog();
+
             if (response != null)
             {
                 switch (response.status)
@@ -188,13 +213,15 @@ namespace Huobi.SDK.Example
                         {
                             if (response.data != null)
                             {
-                                var a = response.data;
-                                Console.WriteLine($"Account Id: {a.id}");
-                                if (a.list != null)
+                                foreach (var a in response.data)
                                 {
-                                    foreach (var c in a.list)
+                                    Console.WriteLine($"Account Id: {a.id}");
+                                    if (a.list != null)
                                     {
-                                        Console.WriteLine($"Currency: {c.currency}, balance: {c.balance}");
+                                        foreach (var c in a.list)
+                                        {
+                                            Console.WriteLine($"Currency: {c.currency}, balance: {c.balance}");
+                                        }
                                     }
                                 }
                             }

@@ -27,7 +27,7 @@
 
             /// <summary>
             /// The account type
-            /// Possible values: [spot, margin, point]
+            /// Possible values: [spot, margin, point, super-margin]
             /// </summary>
             public string type;
 

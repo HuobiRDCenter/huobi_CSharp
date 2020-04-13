@@ -1,16 +1,17 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Request;
 
 namespace Huobi.SDK.Example
 {
     public class WalletClientExample
     {
+        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
+
         public static void RunAll()
         {
-            Config.LoadConfig();
-
             GetDepoistAddress();
 
             GetWithdrawQuota();
@@ -26,17 +27,20 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var request = new GetRequest()
                 .AddParam("currency", "btc");
 
-            var getDAResult = walletClient.GetDepositAddressAsync(request).Result;
-            if (getDAResult != null && getDAResult.data != null)
+            var result = walletClient.GetDepositAddressAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var a in getDAResult.data)
+                foreach (var a in result.data)
                 {
                     Console.WriteLine($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
                 }
-                Console.WriteLine($"There are total {getDAResult.data.Length} addresses");
+                Console.WriteLine($"There are total {result.data.Length} addresses");
             }
         }
 
@@ -44,13 +48,16 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var request = new GetRequest()
                 .AddParam("currency", "btc");
 
-            var getWQResult = walletClient.GetWithdrawQuotaAsync(request).Result;
-            if (getWQResult != null && getWQResult.data != null && getWQResult.data.chains != null)
+            var result = walletClient.GetWithdrawQuotaAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null && result.data.chains != null)
             {
-                foreach (var c in getWQResult.data.chains)
+                foreach (var c in result.data.chains)
                 {
                     Console.WriteLine($"chain: {c.chain}, max withdraw amount {c.maxWithdrawAmt}, total quota {c.withdrawQuotaTotal}");
                 }
@@ -61,23 +68,26 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var request = new WithdrawRequest
             {
                 address = ""
             };
-            var withdrawCResult = walletClient.WithdrawCurrencyAsync(request).Result;
-            if (withdrawCResult != null)
+            var result = walletClient.WithdrawCurrencyAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (withdrawCResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Withdraw successfully, transfer id: {withdrawCResult.data}");
+                            Console.WriteLine($"Withdraw successfully, transfer id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Withdraw fail, error code: {withdrawCResult.errorCode}, error message: {withdrawCResult.errorMessage}");
+                            Console.WriteLine($"Withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -88,19 +98,22 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            var cancelWCResult = walletClient.CancelWithdrawCurrencyAsync(1).Result;
-            if (cancelWCResult != null)
+            _logger.Start();
+            var result = walletClient.CancelWithdrawCurrencyAsync(1).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (cancelWCResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Cancel withdraw successfully, transfer id: {cancelWCResult.data}");
+                            Console.WriteLine($"Cancel withdraw successfully, transfer id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Cancel withdraw fail, error code: {cancelWCResult.errorCode}, error message: {cancelWCResult.errorMessage}");
+                            Console.WriteLine($"Cancel withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -111,17 +124,20 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var request = new GetRequest()
                     .AddParam("type", "deposit");
-            var getDWHResult = walletClient.GetDepositWithdrawHistoryAsync(request).Result;
-            if (getDWHResult != null && getDWHResult.data != null)
+            var result = walletClient.GetDepositWithdrawHistoryAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var h in getDWHResult.data)
+                foreach (var h in result.data)
                 {
                     Console.WriteLine($"type: {h.type}, currency: {h.currency}, amount: {h.amount}, updatedAt: {h.updatedAt}");
                 }
 
-                Console.WriteLine($"There are {getDWHResult.data.Length} deposit and withdraw history");
+                Console.WriteLine($"There are {result.data.Length} deposit and withdraw history");
             }
         }
     }

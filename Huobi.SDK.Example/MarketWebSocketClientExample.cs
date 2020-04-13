@@ -13,7 +13,9 @@ namespace Huobi.SDK.Example
             ReqAndSubscribeDepth();
             
             ReqAndSubscribeMBP();
-            
+
+            SubscribeFullMBP();
+
             SubscribeBBO();
 
             ReqAndSubscribeTrade();
@@ -227,6 +229,64 @@ namespace Huobi.SDK.Example
 
             // Request full data
             client.Req("btcusdt");
+
+            Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
+            Console.ReadLine();
+
+            // Unsubscrive the specific topic
+            client.UnSubscribe("btcusdt");
+
+            // Delete handler
+            client.OnResponseReceived -= Client_OnResponseReceived;
+        }
+
+        private static void SubscribeFullMBP()
+        {
+            var client = new MarketByPriceWebSocketClient();
+
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.SubscribeFull("btcusdt", 20);
+
+                Console.WriteLine("Subscribed");
+            }
+
+            // Add the response receive handler
+            client.OnResponseReceived += Client_OnResponseReceived;
+            void Client_OnResponseReceived(SubscribeMarketByPriceResponse response)
+            {
+                if (response != null)
+                {
+                    if (response.tick != null) // Parse subscription data
+                    {
+                        Console.WriteLine($"Subscription seqNum: {response.tick.seqNum}");
+                        if (response.tick.asks != null)
+                        {
+                            var asks = response.tick.asks;
+                            for (int i = asks.Length - 1; i >= 0; i--)
+                            {
+                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                            }
+                        }
+                        Console.WriteLine("------");
+                        if (response.tick.bids != null)
+                        {
+                            var bids = response.tick.bids;
+                            for (int i = 0; i < bids.Length; i++)
+                            {
+                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                            }
+                        }
+                        Console.WriteLine();
+                    }
+                }
+            }
+
+            // Then connect to server and wait for the handler to handle the response
+            client.Connect();
 
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();

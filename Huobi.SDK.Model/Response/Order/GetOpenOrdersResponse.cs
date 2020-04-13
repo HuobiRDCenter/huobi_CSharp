@@ -77,7 +77,8 @@ namespace Huobi.SDK.Model.Response.Order
             /// The order type
             /// Possible values: [buy-market, sell-market, buy-limit, sell-limit,
             ///         buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker,
-            ///         buy-stop-limit, sell-stop-limit]
+            ///         buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok,
+            ///         buy-stop-limit-fok, sell-stop-limit-fok]
             /// </summary>
             public string type;
 

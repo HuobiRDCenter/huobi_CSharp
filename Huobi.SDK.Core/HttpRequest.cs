@@ -13,7 +13,7 @@ namespace Huobi.SDK.Core
     {
         //public static bool LogPerformanceEnabled = false;
 
-        public static PerformanceLogger logger = PerformanceLogger.GetInstance();
+        public static PerformanceLogger _logger = PerformanceLogger.GetInstance();
 
         /// <summary>
         /// Send Http GET request
@@ -22,18 +22,37 @@ namespace Huobi.SDK.Core
         /// <param name="url">Request url</param>
         /// <returns>The generic response type</returns>
         public static async Task<T> GetAsync<T>(string url)
-        {
-            logger.Start();
-            
+        {            
             var httpClient = new HttpClient();
+
+            _logger.RquestStart("GET", url);
 
             string response = await httpClient.GetStringAsync(url);
 
+            _logger.RequestEnd();
+
             T t = JsonConvert.DeserializeObject<T>(response);
 
-            logger.StopAndLog<T>("GET", url);
-
             return t;
+        }
+
+        /// <summary>
+        /// Send Http GET request
+        /// </summary>
+        /// <typeparam name="T">The response type</typeparam>
+        /// <param name="url">Request url</param>
+        /// <returns>The generic response type</returns>
+        public static async Task<string> GetStringAsync(string url)
+        {
+            var httpClient = new HttpClient();
+
+            _logger.RquestStart("GET", url);
+
+            string response = await httpClient.GetStringAsync(url);
+
+            _logger.RequestEnd();
+
+            return response;
         }
 
         /// <summary>
@@ -46,8 +65,6 @@ namespace Huobi.SDK.Core
         /// <returns>The response type</returns>
         public static async Task<T> PostAsync<T>(string url, string body = null, string mediaTyp = "application/json")
         {
-            logger.Start();
-
             StringContent httpContent;
 
             if (string.IsNullOrEmpty(body))
@@ -61,13 +78,15 @@ namespace Huobi.SDK.Core
 
             var httpClient = new HttpClient();
 
+            _logger.RquestStart("POST", url);
+
             var response = await httpClient.PostAsync(url, httpContent);
 
             string result = await response.Content.ReadAsStringAsync();
 
-            T t = JsonConvert.DeserializeObject<T>(result);
+            _logger.RequestEnd();
 
-            logger.StopAndLog<T>("POST", url);
+            T t = JsonConvert.DeserializeObject<T>(result);
 
             return t;
         }

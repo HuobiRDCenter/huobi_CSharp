@@ -1,20 +1,24 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
+using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
     public class AccountClientExample
     {
+        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
+
         public static void RunAll()
         {
-            Config.LoadConfig();
-
             GetAccountInfo();
 
             GetAccountBalance();
 
             GetAccountHistory();
+
+            GetAccountLedger();
 
             TransferFromSpotToFuture();
 
@@ -35,10 +39,13 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var getAIResult = accountClient.GetAccountInfoAsync().Result;
-            if (getAIResult != null && getAIResult.data != null)
+            _logger.Start();
+            var result = accountClient.GetAccountInfoAsync().Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var a in getAIResult.data)
+                foreach (var a in result.data)
                 {
                     Console.WriteLine($"account id: {a.id}, type: {a.type}, state: {a.state}");
                 }
@@ -49,17 +56,20 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var getABResult = accountClient.GetAccountBalanceAsync(Config.AccountId).Result;
-            if (getABResult != null)
+            _logger.Start();
+            var result = accountClient.GetAccountBalanceAsync(Config.AccountId).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (getABResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            if (getABResult.data != null && getABResult.data.list != null)
+                            if (result.data != null && result.data.list != null)
                             {
                                 int availableCount = 0;
-                                foreach (var b in getABResult.data.list)
+                                foreach (var b in result.data.list)
                                 {
                                     if (Math.Abs(float.Parse(b.balance)) > 0.00001)
                                     {
@@ -67,13 +77,13 @@ namespace Huobi.SDK.Example
                                         Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                                     }
                                 }
-                                Console.WriteLine($"There are total {getABResult.data.list.Length} currencys and available {availableCount} currencys in this account");
+                                Console.WriteLine($"There are total {result.data.list.Length} currencys and available {availableCount} currencys in this account");
                             }
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get fail, error code: {getABResult.errorCode}, error message: {getABResult.errorMessage}");
+                            Console.WriteLine($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -84,27 +94,56 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
+            _logger.Start();
             var request = new GetRequest()
                 .AddParam("account-id", Config.AccountId);
-            var getAHResult = accountClient.GetAccountHistoryAsync(request).Result;
-            if (getAHResult != null)
+            var result = accountClient.GetAccountHistoryAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (getAHResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            foreach (var h in getAHResult.data)
+                            foreach (var h in result.data)
                             {
                                 Console.WriteLine($"currency: {h.currency}, amount: {h.transactAmt}, type: {h.transactType}, time: {h.transactTime}");
                             }
-                            Console.WriteLine($"There are total {getAHResult.data.Length} transactions");
+                            Console.WriteLine($"There are total {result.data.Length} transactions");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get fail, error code: {getAHResult.errorCode}, error message: {getAHResult.errorMessage}");
+                            Console.WriteLine($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
+                }
+            }
+        }
+
+        private static void GetAccountLedger()
+        {
+            var client = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            GetRequest request = new GetRequest()
+                .AddParam("accountId", Config.AccountId);
+            var result = client.GetAccountLedgerAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
+            {
+                if (result.code == (int)ResponseCode.Success && result.data != null)
+                {
+                    foreach (var l in result.data)
+                    {
+                        Console.WriteLine($"Get account ledger, accountId: {l.accountId}, currency: {l.currency}, amount: {l.transactAmt}, transferer: {l.transferer}, transferee: {l.transferee}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Get account ledger error: {result.message}");
                 }
             }
         }
@@ -113,19 +152,22 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var transferS2FResult = accountClient.TransferFromSpotToFutureAsync("ht", 1).Result; // need further test
-            if (transferS2FResult != null)
+            _logger.Start();
+            var result = accountClient.TransferFromSpotToFutureAsync("ht", 1).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (transferS2FResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {transferS2FResult.data}");
+                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {transferS2FResult.errorCode}, error message: {transferS2FResult.errorMessage}");
+                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -136,19 +178,22 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var transferF2SResult = accountClient.TransferFromFutureToSpotAsync("ht", 1).Result; // need further test
-            if (transferF2SResult != null)
+            _logger.Start();
+            var result = accountClient.TransferFromFutureToSpotAsync("ht", 1).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (transferF2SResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {transferF2SResult.data}");
+                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {transferF2SResult.errorCode}, error message: {transferF2SResult.errorMessage}");
+                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -159,19 +204,22 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var transferCP2SResult = accountClient.TransferCurrencyFromMasterToSubAsync(1, "ht", 1).Result;
-            if (transferCP2SResult != null)
+            _logger.Start();
+            var result = accountClient.TransferCurrencyFromMasterToSubAsync(Config.SubUserId, "ht", 1).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
             {
-                switch (transferCP2SResult.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {transferCP2SResult.data}");
+                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {transferCP2SResult.errorCode}, error message: {transferCP2SResult.errorMessage}");
+                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -182,11 +230,14 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var getSUABsResult = accountClient.GetSubUserAccountBalancesAsync().Result;
-            if (getSUABsResult != null && getSUABsResult.data != null)
+            _logger.Start();
+            var result = accountClient.GetSubUserAccountBalancesAsync().Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
                 int availableCount = 0;
-                foreach (var b in getSUABsResult.data)
+                foreach (var b in result.data)
                 {
                     if (Math.Abs(float.Parse(b.balance)) > 0.00001)
                     {
@@ -194,7 +245,7 @@ namespace Huobi.SDK.Example
                         Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                     }
                 }
-                Console.WriteLine($"There are total {getSUABsResult.data.Length} currencys and available {availableCount} currencys in this account");
+                Console.WriteLine($"There are total {result.data.Length} currencys and available {availableCount} currencys in this account");
             }
         }
 
@@ -202,10 +253,13 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var getSUABResult = accountClient.GetSubUserAccountBalanceAsync(128654510).Result;
-            if (getSUABResult != null && getSUABResult.data != null)
+            _logger.Start();
+            var result = accountClient.GetSubUserAccountBalanceAsync(Config.SubUserId).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var a in getSUABResult.data)
+                foreach (var a in result.data)
                 {
                     int availableCount = 0;
                     Console.WriteLine($"account id: {a.id}, type: {a.type}");
@@ -219,7 +273,7 @@ namespace Huobi.SDK.Example
                     }
                     Console.WriteLine($"There are total {a.list.Length} accounts and available {availableCount} currencys in this account");
                 }
-                Console.WriteLine($"There are total {getSUABResult.data.Length} accounts");
+                Console.WriteLine($"There are total {result.data.Length} accounts");
             }
         }
 
@@ -227,10 +281,13 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var result = accountClient.LockSubUserAsync(128654510).Result;
+            _logger.Start();
+            var result = accountClient.LockSubUserAsync(Config.SubUserId).Result;
+            _logger.StopAndLog();
+
             if (result != null)
             {
-                if (result.code == 200 && result.data != null)
+                if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
                     Console.WriteLine($"Lock sub user ${result.data.subUid} result: {result.data.userState}");
                 }
@@ -245,10 +302,13 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            var result = accountClient.UnlockSubUserAsync(128654510).Result;
+            _logger.Start();
+            var result = accountClient.UnlockSubUserAsync(Config.SubUserId).Result;
+            _logger.StopAndLog();
+
             if (result != null)
             {
-                if (result.code == 200 && result.data != null)
+                if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
                     Console.WriteLine($"Unlock sub user ${result.data.subUid} result: {result.data.userState}");
                 }

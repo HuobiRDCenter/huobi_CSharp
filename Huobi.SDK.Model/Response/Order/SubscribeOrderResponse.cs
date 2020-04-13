@@ -104,7 +104,10 @@ namespace Huobi.SDK.Model.Response.Order
             /// <summary>
             /// Order type
             /// Possible values: [buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc,
-            /// buy-limit-maker, sell-limit-maker,buy-stop-limit,sell-stop-limit]
+            /// buy-limit-maker, sell-limit-maker,buy-stop-limit,sell-stop-limit, buy-limit-fok, sell-limit-fok]
+            ///
+            /// Note that the order type 'buy-stop-limit-fok' and 'sell-stop-limit-fok' will be converted to
+            /// 'buy-limit-fok' and 'sell-limit-fok'
             /// </summary>
             [JsonProperty("order-type")]
             public string orderType;

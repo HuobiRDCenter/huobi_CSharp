@@ -51,11 +51,11 @@ namespace Huobi.SDK.Core.Client
         /// Retrieve the latest tickers for all supported pairs.
         /// </summary>
         /// <returns>GetLast24hCandlestickResponse</returns>
-        public async Task<GetLast24hCandlesticksResponse> GetLast24hCandlesticksAsync()
+        public async Task<GetAllSymbolsLast24hCandlesticksAskBidResponse> GetAllSymbolsLast24hCandlesticksAskBidAsync()
         {
             string url = _urlBuilder.Build("/market/tickers");
 
-            return await HttpRequest.GetAsync<GetLast24hCandlesticksResponse>(url);
+            return await HttpRequest.GetAsync<GetAllSymbolsLast24hCandlesticksAskBidResponse>(url);
         }
 
         /// <summary>

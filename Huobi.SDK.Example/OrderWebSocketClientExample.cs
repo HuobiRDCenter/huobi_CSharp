@@ -3,6 +3,7 @@ using Huobi.SDK.Core.Client;
 using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
 using Huobi.SDK.Model.Response.WebSocket;
+using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
@@ -10,8 +11,6 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            Config.LoadConfig();
-
             RequestOrder();
 
             RequestOrders();
@@ -156,7 +155,7 @@ namespace Huobi.SDK.Example
             client.OnAuthenticationReceived += Client_OnAuthReceived;
             void Client_OnAuthReceived(WebSocketAuthenticationV2Response response)
             {
-                if (response.code == 200)
+                if (response.code == (int)ResponseCode.Success)
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");

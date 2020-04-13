@@ -6,40 +6,27 @@ namespace Huobi.SDK.Example
     {
         static void Main(string[] args)
         {
-            RunAll();
+            Config.LoadConfig();
+
+            RullAllExamples();
         }
 
-        static void RunAll()
+        static void RullAllExamples()
         {
-            CommonClientExample.RunAll();
+            RunAllRestExamples();
 
-            MarketClientExample.RunAll();
-
-            MarketWebSocketClientExample.RunAll();
-
-            AccountClientExample.RunAll();
-
-            AccountWebSocketClientExample.RunAll();
-
-            WalletClientExample.RunAll();
-
-            OrderClientExample.RunAll();
-
-            OrderWebSocketClientExample.RunAll();
-
-            IsolatedMarginClientExample.RunAll();
-
-            CrossMarginClientExample.RunAll();
-
-            StableCoinClientExample.RunAll();
-
-            ETFClientExample.RunAll();
+            RunAllWebSocketExamples();
         }
 
-        static void RestPerfTest()
+        static void RunPerformanceTest()
         {
             PerformanceLogger.GetInstance().Enable(true);
 
+            RunAllRestExamples();
+        }
+
+        static void RunAllRestExamples()
+        {
             CommonClientExample.RunAll();
 
             MarketClientExample.RunAll();
@@ -58,5 +45,16 @@ namespace Huobi.SDK.Example
 
             ETFClientExample.RunAll();
         }
+
+        static void RunAllWebSocketExamples()
+        {
+            MarketWebSocketClientExample.RunAll();
+
+            AccountWebSocketClientExample.RunAll();
+
+            OrderWebSocketClientExample.RunAll();
+
+        }
+
     }
 }

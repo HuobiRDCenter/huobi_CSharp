@@ -1,18 +1,21 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
 
 namespace Huobi.SDK.Example
 {
     public class MarketClientExample
     {
+        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
+
         public static void RunAll()
         {
             GetCandlestick();
 
             GetLast24hCandlestickAskBid();
 
-            GetLast24hCandlesticks();
+            GetAllSymbolsLast24hCandlesticksAskBid();
 
             GetDepth();
 
@@ -27,18 +30,21 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
+            _logger.Start();
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("period", "1min")
                 .AddParam("size", "10");
-            var getCResponse = marketClient.GetCandlestickAsync(request).Result;
-            if (getCResponse != null && getCResponse.data != null)
+            var result = marketClient.GetCandlestickAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var c in getCResponse.data)
+                foreach (var c in result.data)
                 {
                     Console.WriteLine($"local time: {Timestamp.SToLocal(c.id)}, count: {c.count}, amount: {c.amount}, volume: {c.vol}");
                 }
-                Console.WriteLine($"there are total {getCResponse.data.Length} candlesticks");
+                Console.WriteLine($"there are total {result.data.Length} candlesticks");
             }
 
         }
@@ -47,28 +53,35 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var getl24CABResponse = marketClient.GetLast24hCandlestickAskBidAsync("btcusdt").Result;
-            if (getl24CABResponse != null && getl24CABResponse.tick != null)
+            _logger.Start();
+            var result = marketClient.GetLast24hCandlestickAskBidAsync("btcusdt").Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.tick != null)
             {
-                var ts = getl24CABResponse.ts;
-                var t = getl24CABResponse.tick;
+                var ts = result.ts;
+                var t = result.tick;
 
                 Console.WriteLine($"local time: {Timestamp.MSToLocal(ts)}, ask: [{t.ask[0]}, {t.ask[1]}], bid: [{t.bid[0]} {t.bid[1]}]");
             }
         }
 
-        private static void GetLast24hCandlesticks()
+        private static void GetAllSymbolsLast24hCandlesticksAskBid()
         {
             var marketClient = new MarketClient();
 
-            var getl24CsResponse = marketClient.GetLast24hCandlesticksAsync().Result;
-            if (getl24CsResponse != null && getl24CsResponse.data != null)
+            _logger.Start();
+            var result = marketClient.GetAllSymbolsLast24hCandlesticksAskBidAsync().Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                foreach (var t in getl24CsResponse.data)
+                foreach (var t in result.data)
                 {
-                    Console.WriteLine($"symbol: {t.symbol}, count {t.count}, amount: {t.amount}, volume: {t.vol}");
+                    Console.WriteLine($"symbol: {t.symbol}, count {t.count}, amount: {t.amount}, volume: {t.vol}" +
+                        $", bid: [{t.bid}, {t.bidSize}], ask: [{t.ask}, {t.askSize}]");
                 }
-                Console.WriteLine($"There are total {getl24CsResponse.data.Length} candlesticks");
+                Console.WriteLine($"There are total {result.data.Length} candlesticks");
 
             }
         }
@@ -77,14 +90,17 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
+            _logger.Start();
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("depth", "5")
                 .AddParam("type", "step0");
-            var getDepthResponse = marketClient.GetDepthAsync(request).Result;
-            if (getDepthResponse != null && getDepthResponse.tick != null)
+            var result = marketClient.GetDepthAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.tick != null)
             {
-                var asks = getDepthResponse.tick.asks;
+                var asks = result.tick.asks;
                 if (asks != null)
                 {
                     for (int i = asks.Length - 1; i >= 0; i--)
@@ -93,7 +109,7 @@ namespace Huobi.SDK.Example
                     }
                 }
                 Console.WriteLine($"----------");
-                var bids = getDepthResponse.tick.bids;
+                var bids = result.tick.bids;
                 if (bids != null)
                 {
                     for (int i = 0; i < bids.Length; i++)
@@ -108,10 +124,13 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var getLastTradeResponse = marketClient.GetLastTradeAsync("btcusdt").Result;
-            if (getLastTradeResponse != null && getLastTradeResponse.tick != null)
+            _logger.Start();
+            var result = marketClient.GetLastTradeAsync("btcusdt").Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.tick != null)
             {
-                var data = getLastTradeResponse.tick.data;
+                var data = result.tick.data;
                 if (data != null)
                 {
                     foreach (var t in data)
@@ -128,10 +147,13 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var getLastTradesResponse = marketClient.GetLastTradesAsync("btcusdt", 3).Result;
-            if (getLastTradesResponse != null && getLastTradesResponse.data != null)
+            _logger.Start();
+            var result = marketClient.GetLastTradesAsync("btcusdt", 3).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
             {
-                var data = getLastTradesResponse.data;
+                var data = result.data;
                 foreach (var d in data)
                 {
                     if (d.data != null)
@@ -151,11 +173,14 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            var getLast24CResponse = marketClient.GetLast24hCandlestickAsync("btcusdt").Result;
-            if (getLast24CResponse != null && getLast24CResponse.tick != null)
+            _logger.Start();
+            var result = marketClient.GetLast24hCandlestickAsync("btcusdt").Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.tick != null)
             {
-                var ts = getLast24CResponse.ts;
-                var t = getLast24CResponse.tick;
+                var ts = result.ts;
+                var t = result.tick;
                 Console.WriteLine($"local time: {Timestamp.MSToLocal(ts)}, count: {t.count}, amount: {t.amount}, volume: {t.vol}");
             }
         }

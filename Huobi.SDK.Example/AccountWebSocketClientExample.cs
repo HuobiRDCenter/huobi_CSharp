@@ -1,5 +1,6 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Account;
 using Huobi.SDK.Model.Response.WebSocket;
 
@@ -9,8 +10,6 @@ namespace Huobi.SDK.Example
     {
         public static void RunAll()
         {
-            Config.LoadConfig();
-
             RequestAccount();
 
             SubscribeAccountV1();
@@ -121,7 +120,7 @@ namespace Huobi.SDK.Example
             client.OnAuthenticationReceived += Client_OnAuthReceived;
             void Client_OnAuthReceived(WebSocketAuthenticationV2Response response)
             {
-                if (response.code == 200)
+                if (response.code == (int)ResponseCode.Success)
                 {
                     // Subscribe the specific topic
                     client.Subscribe("1");

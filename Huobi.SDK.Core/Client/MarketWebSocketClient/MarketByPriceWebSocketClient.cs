@@ -21,9 +21,12 @@ namespace Huobi.SDK.Core.Client
         /// <summary>
         /// Request full Market By Price order book
         /// </summary>
-        /// <param name="symbol">Trading symbol, Only support 19 currency pairs at this point of time
+        /// <param name="symbol">Trading symbol, Only support 39 currency pairs at this point of time
         /// Possible values: btcusdt, ethusdt, eosusdt, bchusdt, ltcusdt, xrpusdt, htusdt, bsvusdt,
-        /// etcusdt, zecusdt, ethbtc, eosbtc, bchbtc, ltcbtc, xrpbtc, htbtc, bsvbtc, etcbtc, zecbtc.</param>
+        /// etcusdt, zecusdt, ethbtc, eosbtc, bchbtc, ltcbtc, xrpbtc, htbtc, bsvbtc, etcbtc, zecbtc,
+        /// idtbtc, hotbtc, xmxeth, zechusd, lxteth, ucbtc, uuubtc, gtceth, mxcbtc, datxbtc, uipbtc,
+        /// butbtc, tosbtc, musketh, ftibtc, rteeth, fairbtc, covabtc, renbtc, manbtc
+        /// </param>
         /// <param name="clientId">Client id</param>
         public void Req(string symbol, string clientId = "")
         {
@@ -40,6 +43,18 @@ namespace Huobi.SDK.Core.Client
             _WebSocket.Send($"{{\"sub\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
         }
 
+
+        /// <summary>
+        /// Subscribe full Market By Price order book
+        /// </summary>
+        /// <param name="symbol">Trading symbol</param>
+        /// <param name="level">Number of price levels: 5, 10, 20</param>
+        /// <param name="clientId">Client id</param>
+        public void SubscribeFull(string symbol, int level, string clientId = "")
+        {
+            _WebSocket.Send($"{{\"sub\": \"market.{symbol}.mbp.refresh.{level}\",\"id\": \"{clientId}\" }}");
+        }
+
         /// <summary>
         /// Unsubscribe Market By Price order book
         /// </summary>
@@ -48,6 +63,18 @@ namespace Huobi.SDK.Core.Client
         public void UnSubscribe(string symbol, string clientId = "")
         {
             _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
+        }
+
+
+        /// <summary>
+        /// Unsubscribe full Market By Price order book
+        /// </summary>
+        /// <param name="symbol">Trading symbol</param>
+        /// <param name="level">Number of price levels: 5, 10, 20</param>
+        /// <param name="clientId">Client id</param>
+        public void UnSubscribeFull(string symbol, int level, string clientId = "")
+        {
+            _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.refresh.{level}\",\"id\": \"{clientId}\" }}");
         }
     }
 }

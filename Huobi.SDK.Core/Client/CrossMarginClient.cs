@@ -103,9 +103,9 @@ namespace Huobi.SDK.Core.Client
         /// Returns margin orders based on a specific searching criteria.
         /// </summary>
         /// <returns>GetCrossLoanOrdersResponse</returns>
-        public async Task<GetCrossLoanOrdersResponse> GetLoanOrders()
+        public async Task<GetCrossLoanOrdersResponse> GetLoanOrders(GetRequest request)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/loan-orders");
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/loan-orders", request);
 
             return await HttpRequest.GetAsync<GetCrossLoanOrdersResponse>(url);
         }
@@ -114,9 +114,11 @@ namespace Huobi.SDK.Core.Client
         /// Returns the balance of the margin loan account.
         /// </summary>
         /// <returns>GetCrossMarginAccountResponse</returns>
-        public async Task<GetCrossMarginAccountResponse> GetMarginAccount()
+        public async Task<GetCrossMarginAccountResponse> GetMarginAccount(string subUserId)
         {
-            string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/accounts/balance");
+            GetRequest request = new GetRequest()
+                .AddParam("sub-uid", subUserId);
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/accounts/balance", request);
 
             return await HttpRequest.GetAsync<GetCrossMarginAccountResponse>(url);
         }

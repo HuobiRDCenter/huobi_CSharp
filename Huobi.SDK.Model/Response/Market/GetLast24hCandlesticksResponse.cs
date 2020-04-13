@@ -3,7 +3,7 @@
     /// <summary>
     /// GetLast24hCandlestick response
     /// </summary>
-    public class GetLast24hCandlesticksResponse
+    public class GetAllSymbolsLast24hCandlesticksAskBidResponse
     {
         /// <summary>
         /// Response status
@@ -64,6 +64,14 @@
             /// The trading volume in base currency of last 24h
             /// </summary>
             public float vol;
+
+            public float bid;
+
+            public float bidSize;
+
+            public float ask;
+
+            public float askSize;
         }
     }
 }
