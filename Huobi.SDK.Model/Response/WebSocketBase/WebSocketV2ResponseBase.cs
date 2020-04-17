@@ -1,9 +1,9 @@
 ﻿namespace Huobi.SDK.Model.Response.WebSocket
 {
     /// <summary>
-    /// WebSocket Authentcation v2
+    /// WebSocket v2 response base
     /// </summary>
-    public class WebSocketAuthenticationV2Response
+    public abstract class WebSocketV2ResponseBase
     {
         /// <summary>
         /// Action
@@ -21,8 +21,8 @@
         public string ch;
 
         /// <summary>
-        /// Respons body
+        /// Error message (if any)
         /// </summary>
-        public object data;
+        public string message;
     }
 }

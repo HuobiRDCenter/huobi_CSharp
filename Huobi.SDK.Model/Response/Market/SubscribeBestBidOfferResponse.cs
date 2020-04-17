@@ -5,7 +5,7 @@ namespace Huobi.SDK.Model.Response.Market
     /// <summary>
     /// SubscribeBestBidOffer response
     /// </summary>
-    public class SubscribeBestBidOfferResponse : WebSocketResponse
+    public class SubscribeBestBidOfferResponse : WebSocketResponseBase
     {
         /// <summary>
         /// Response body from sub

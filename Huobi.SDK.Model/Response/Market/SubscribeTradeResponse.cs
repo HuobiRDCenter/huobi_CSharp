@@ -5,7 +5,7 @@ namespace Huobi.SDK.Model.Response.Market
     /// <summary>
     /// SubscribeTrade response
     /// </summary>
-    public class SubscribeTradeResponse : WebSocketResponse
+    public class SubscribeTradeResponse : WebSocketResponseBase
     {
         /// <summary>
         /// Response body from req

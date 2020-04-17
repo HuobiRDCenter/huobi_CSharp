@@ -1,23 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Huobi.SDK.Model.Response.WebSocket;
+using Newtonsoft.Json;
 
 namespace Huobi.SDK.Model.Response.Account
 {
     /// <summary>
     /// RequestAccount response
     /// </summary>
-    public class RequestAccountResponse
+    public class RequestAccountResponse : WebSocketV1ResponseBase
     {
-        public long ts;
-
-        public string op;
-
-        public string topic;
-
-        [JsonProperty("err-code")]
-        public int errCode;
-
-        public string cid;
-
         /// <summary>
         /// Response body from sub
         /// </summary>

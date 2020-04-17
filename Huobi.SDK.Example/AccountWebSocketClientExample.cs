@@ -2,6 +2,7 @@
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Account;
+using Huobi.SDK.Model.Response.Auth;
 using Huobi.SDK.Model.Response.WebSocket;
 
 namespace Huobi.SDK.Example
@@ -24,7 +25,7 @@ namespace Huobi.SDK.Example
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
-            void Client_OnAuthReceived(WebSocketAuthenticationV1Response response)
+            void Client_OnAuthReceived(WebSocketV1AuthResponse response)
             {
                 if (response.errCode == 0)
                 {
@@ -71,7 +72,7 @@ namespace Huobi.SDK.Example
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
-            void Client_OnAuthReceived(WebSocketAuthenticationV1Response response)
+            void Client_OnAuthReceived(WebSocketV1AuthResponse response)
             {
                 if (response.errCode == 0)
                 {
@@ -118,7 +119,7 @@ namespace Huobi.SDK.Example
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
-            void Client_OnAuthReceived(WebSocketAuthenticationV2Response response)
+            void Client_OnAuthReceived(WebSocketV2AuthResponse response)
             {
                 if (response.code == (int)ResponseCode.Success)
                 {
@@ -132,16 +133,30 @@ namespace Huobi.SDK.Example
             client.OnDataReceived += Client_OnDataReceived;
             void Client_OnDataReceived(SubscribeAccountV2Response response)
             {
-                if (response != null && response.data != null)
+                if (response != null)
                 {
-                    var b = response.data;
-                    if (b.changeTime == null)
+                    if (response.action.Equals("sub"))
                     {
-                        Console.WriteLine($"Account overview, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
+                        if (response.code == (int)ResponseCode.Success)
+                        {
+                            Console.WriteLine($"Subscribe topic {response.ch} successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
+                        }
                     }
-                    else
+                    else if (response.action.Equals("push") && response.data != null)
                     {
-                        Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}, time: {b.changeTime}");
+                        var b = response.data;
+                        if (b.changeTime == null)
+                        {
+                            Console.WriteLine($"Account overview, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}, time: {b.changeTime}");
+                        }
                     }
                 }
             }

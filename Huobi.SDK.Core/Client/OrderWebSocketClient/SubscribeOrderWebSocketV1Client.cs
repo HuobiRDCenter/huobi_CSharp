@@ -7,7 +7,7 @@ namespace Huobi.SDK.Core.Client
     /// Responsible to handle order subscription from WebSocket
     /// This need authentication version 1
     /// </summary>
-    public class SubscribeOrderWebSocketV1Client : WebSocketV1ClientBase<SubscribeOrderResponse>
+    public class SubscribeOrderWebSocketV1Client : WebSocketV1ClientBase<SubscribeOrderV1Response>
     {
         /// <summary>
         /// Constructor

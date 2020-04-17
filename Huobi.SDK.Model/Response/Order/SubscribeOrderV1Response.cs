@@ -1,27 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Huobi.SDK.Model.Response.WebSocket;
+using Newtonsoft.Json;
 
 namespace Huobi.SDK.Model.Response.Order
 {
     /// <summary>
     /// SubscribeOrder response
     /// </summary>
-    public class SubscribeOrderResponse
+    public class SubscribeOrderV1Response : WebSocketV1ResponseBase
     {
-        /// <summary>
-        /// Operation
-        /// </summary>
-        public string op;
-
-        /// <summary>
-        /// Timestamp
-        /// </summary>
-        public long ts;
-
-        /// <summary>
-        /// Subscription topic
-        /// </summary>
-        public string topic;
-
         /// <summary>
         /// Update
         /// </summary>

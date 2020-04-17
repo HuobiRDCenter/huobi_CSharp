@@ -3,9 +3,9 @@
 namespace Huobi.SDK.Model.Response.WebSocket
 {
     /// <summary>
-    /// WebSocket Authentcation v1
+    /// WebSocket v1 response base
     /// </summary>
-    public class WebSocketAuthenticationV1Response
+    public abstract class WebSocketV1ResponseBase
     {
         /// <summary>
         /// Timestamp
@@ -24,17 +24,14 @@ namespace Huobi.SDK.Model.Response.WebSocket
         public int errCode;
 
         /// <summary>
-        /// Response body
+        /// Topic
         /// </summary>
-        public Data data;
+        public string topic;
 
-        public class Data
-        {
-            /// <summary>
-            /// User id
-            /// </summary>
-            [JsonProperty("user-id")]
-            public int userId;
-        }
+        /// <summary>
+        /// Client id
+        /// </summary>
+        public string cid;
+
     }
 }

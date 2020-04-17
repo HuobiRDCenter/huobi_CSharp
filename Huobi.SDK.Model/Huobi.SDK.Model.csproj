@@ -20,6 +20,7 @@
     <Folder Include="Response\ETF\" />
     <Folder Include="Response\Margin\" />
     <Folder Include="Response\Transfer\" />
-    <Folder Include="Response\WebSocket\" />
+    <Folder Include="Response\WebSocketBase\" />
+    <Folder Include="Response\Auth\" />
   </ItemGroup>
 </Project>

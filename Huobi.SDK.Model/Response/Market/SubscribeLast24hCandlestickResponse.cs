@@ -5,7 +5,7 @@ namespace Huobi.SDK.Model.Response.Market
     /// <summary>
     /// SubscribeCandlestick response
     /// </summary>
-    public class SubscribeLast24hCandlestickResponse : WebSocketResponse
+    public class SubscribeLast24hCandlestickResponse : WebSocketResponseBase
     {
         /// <summary>
         /// Response body from req

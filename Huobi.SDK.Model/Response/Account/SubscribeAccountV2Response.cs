@@ -1,20 +1,12 @@
-﻿namespace Huobi.SDK.Model.Response.Account
+﻿using Huobi.SDK.Model.Response.WebSocket;
+
+namespace Huobi.SDK.Model.Response.Account
 {
     /// <summary>
     /// SubscribeAccountV2 response
     /// </summary>
-    public class SubscribeAccountV2Response
+    public class SubscribeAccountV2Response : WebSocketV2ResponseBase
     {
-        /// <summary>
-        /// Action type
-        /// </summary>
-        public string action;
-
-        /// <summary>
-        /// Channel
-        /// </summary>
-        public string ch;
-
         /// <summary>
         /// Response body from sub
         /// </summary>

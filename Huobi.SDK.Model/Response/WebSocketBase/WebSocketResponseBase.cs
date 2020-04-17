@@ -1,6 +1,9 @@
 ﻿namespace Huobi.SDK.Model.Response.WebSocket
 {
-    public abstract class WebSocketResponse
+    /// <summary>
+    /// WebSocket response base
+    /// </summary>
+    public abstract class WebSocketResponseBase
     {
         /// <summary>
         /// Subscribe status

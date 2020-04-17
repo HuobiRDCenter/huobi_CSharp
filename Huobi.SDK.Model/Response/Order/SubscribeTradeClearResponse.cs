@@ -1,15 +1,12 @@
-﻿namespace Huobi.SDK.Model.Response.Order
+﻿using Huobi.SDK.Model.Response.WebSocket;
+
+namespace Huobi.SDK.Model.Response.Order
 {
     /// <summary>
     /// SubscribeTradeClear response
     /// </summary>
-    public class SubscribeTradeClearResponse
+    public class SubscribeTradeClearResponse : WebSocketV2ResponseBase
     {
-        /// <summary>
-        /// Channel
-        /// </summary>
-        public string ch;
-
         /// <summary>
         /// Response bod
         /// </summary>

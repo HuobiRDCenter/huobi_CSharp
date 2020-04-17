@@ -2,6 +2,7 @@
 using System.Timers;
 using Huobi.SDK.Core.Model;
 using Huobi.SDK.Core.RequestBuilder;
+using Huobi.SDK.Model.Response.Auth;
 using Huobi.SDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -15,7 +16,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
     /// <typeparam name="DataResponseType"></typeparam>
     public abstract class WebSocketV1ClientBase<DataResponseType>
     {
-        public delegate void OnAuthenticationReceivedHandler(WebSocketAuthenticationV1Response response);
+        public delegate void OnAuthenticationReceivedHandler(WebSocketV1AuthResponse response);
         public event OnAuthenticationReceivedHandler OnAuthenticationReceived;
         public delegate void OnDataReceivedHandler(DataResponseType response);
         public event OnDataReceivedHandler OnDataReceived;
@@ -152,7 +153,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                     string op = json.op;
                     if (String.Equals(op, "auth"))
                     {
-                        var response = JsonConvert.DeserializeObject<WebSocketAuthenticationV1Response>(data);
+                        var response = JsonConvert.DeserializeObject<WebSocketV1AuthResponse>(data);
 
                         OnAuthenticationReceived?.Invoke(response);
                     }

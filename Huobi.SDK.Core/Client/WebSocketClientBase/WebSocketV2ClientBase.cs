@@ -2,6 +2,7 @@
 using System.Timers;
 using Huobi.SDK.Core.Model;
 using Huobi.SDK.Core.RequestBuilder;
+using Huobi.SDK.Model.Response.Auth;
 using Huobi.SDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,9 +14,9 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
     /// The abstract class that responsible to get data from websocket authentication v1
     /// </summary>
     /// <typeparam name="DataResponseType"></typeparam>
-    public abstract class WebSocketV2ClientBase<DataResponseType>
+    public abstract class WebSocketV2ClientBase<DataResponseType> where DataResponseType : WebSocketV2ResponseBase
     {
-        public delegate void OnAuthenticationReceivedHandler(WebSocketAuthenticationV2Response response);
+        public delegate void OnAuthenticationReceivedHandler(WebSocketV2AuthResponse response);
         public event OnAuthenticationReceivedHandler OnAuthenticationReceived;
         public delegate void OnDataReceivedHandler(DataResponseType response);
         public event OnDataReceivedHandler OnDataReceived;
@@ -145,7 +146,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
             string ch = json.action;
             switch (ch)
             {
-                case "ping":
+                case "ping": // Receive Ping message
                     {
                         var pingMessageV2 = JsonConvert.DeserializeObject<PingMessageV2>(data);
                         if (pingMessageV2 != null && pingMessageV2.data != null && pingMessageV2.data.ts != 0)
@@ -161,15 +162,16 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                         }
                         break;
                     }
-                case "req":
+                case "req": // Receive authentication response
                     {
-                        var response = JsonConvert.DeserializeObject<WebSocketAuthenticationV2Response>(data);
+                        var response = JsonConvert.DeserializeObject<WebSocketV2AuthResponse>(data);
 
                         OnAuthenticationReceived?.Invoke(response);
 
                         break;
                     }
-                case "push":
+                case "sub": // Receive subscription response
+                case "push": // Receive data response
                     {
                         var response = JsonConvert.DeserializeObject<DataResponseType>(data);
 
@@ -178,7 +180,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                         break;
                     }
             }
-            
+
         }
 
         private void _WebSocket_OnError(object sender, ErrorEventArgs e)

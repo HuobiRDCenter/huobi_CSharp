@@ -1,38 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Huobi.SDK.Model.Response.WebSocket;
+using Newtonsoft.Json;
 
 namespace Huobi.SDK.Model.Response.Order
 {
     /// <summary>
     /// RequestOrders response
     /// </summary>
-    public class RequestOrdersResponse
+    public class RequestOrdersResponse : WebSocketV1ResponseBase
     {
-        /// <summary>
-        /// Operation
-        /// </summary>
-        public string op;
-
-        /// <summary>
-        /// Timestamp
-        /// </summary>
-        public long ts;
-
-        /// <summary>
-        /// Topic
-        /// </summary>
-        public string topic;
-
-        /// <summary>
-        /// Error code
-        /// </summary>
-        [JsonProperty("err-code", NullValueHandling = NullValueHandling.Ignore)]
-        public string errorCode;
-
-        /// <summary>
-        /// Client id
-        /// </summary>
-        public string cid;
-
         /// <summary>
         /// Response body
         /// </summary>
