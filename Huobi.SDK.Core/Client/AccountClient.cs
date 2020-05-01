@@ -2,6 +2,8 @@
 using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.Account;
 using Huobi.SDK.Model.Response.Transfer;
+using Microsoft.Extensions.Logging;
+
 
 namespace Huobi.SDK.Core.Client
 {
@@ -23,9 +25,13 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">Access Key</param>
         /// <param name="secretKey">Secret Key</param>
         /// <param name="host">the host that the client connects to</param>
-        public AccountClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public AccountClient(string accessKey, string secretKey, string host = DEFAULT_HOST, ILogger logger = null)
         {
             _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
+            if (logger != null && HttpRequest.logger != null)
+            {
+                HttpRequest.logger = logger;
+            }
         }
 
         /// <summary>
@@ -174,7 +180,7 @@ namespace Huobi.SDK.Core.Client
             string url = _urlBuilder.Build(POST_METHOD, "/v1/subuser/transfer");
 
             string content = $"{{ \"sub-uid\": {subUserId}, \"currency\":\"{currency}\", \"amount\":{amount}, \"type\":\"{type}\" }}";
-            
+
             return await HttpRequest.PostAsync<TransferResponse>(url, content);
         }
 

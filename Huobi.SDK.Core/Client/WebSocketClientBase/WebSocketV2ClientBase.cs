@@ -142,8 +142,8 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                 data = GZipDecompresser.Decompress(e.RawData);
             }
 
-            dynamic json = JToken.Parse(data);
-            string ch = json.action;
+            JToken json = JToken.Parse(data);
+            string ch = json.Value<string>("action");
             switch (ch)
             {
                 case "ping": // Receive Ping message

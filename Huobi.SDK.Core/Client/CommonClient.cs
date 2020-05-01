@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.Common;
+using Microsoft.Extensions.Logging;
 
 namespace Huobi.SDK.Core.Client
 {
@@ -8,7 +9,7 @@ namespace Huobi.SDK.Core.Client
     /// Responsible to get common information
     /// </summary>
     public class CommonClient
-    { 
+    {
         private const string DEFAULT_HOST = "api.huobi.pro";
 
         private PublicUrlBuilder _urlBuilder;
@@ -17,9 +18,14 @@ namespace Huobi.SDK.Core.Client
         /// Constructor
         /// </summary>
         /// <param name="host">the host that the client connects to</param>
-        public CommonClient(string host = DEFAULT_HOST)
+        public CommonClient(string host = DEFAULT_HOST, ILogger logger = null)
         {
+
             _urlBuilder = new PublicUrlBuilder(host);
+            if (logger != null && HttpRequest.logger != null)
+            {
+                HttpRequest.logger = logger;
+            }
         }
 
         /// <summary>

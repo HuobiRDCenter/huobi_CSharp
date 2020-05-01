@@ -1,14 +1,12 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 
 namespace Huobi.SDK.Example
 {
     public class IsolatedMarginClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             TransferIn();
@@ -30,10 +28,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+           
             var response = marginClient.TransferInAsync("eosht", "eos", "0.01").Result;
-            _logger.StopAndLog();
-
+          
             if (response != null)
             {
                 switch (response.status)
@@ -56,10 +53,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var response = marginClient.TransferOutAsync("eosht", "eos", "0.01").Result;
-            _logger.StopAndLog();
-
+            
             if (response != null)
             {
                 switch (response.status)
@@ -82,10 +78,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+       
             var response = marginClient.GetLoanInfoAsync("btcusdt").Result;
-            _logger.StopAndLog();
-
+        
             if (response != null)
             {
                 switch (response.status)
@@ -122,10 +117,8 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var response = marginClient.ApplyLoanAsync("eosht", "eos", "0.01").Result;
-            _logger.StopAndLog();
-
+       
             if (response != null)
             {
                 switch (response.status)
@@ -148,10 +141,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+         
             var response = marginClient.RepayAsync("123", "0.01").Result;
-            _logger.StopAndLog();
-
+        
             if (response != null)
             {
                 switch (response.status)
@@ -174,13 +166,12 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+       
             var request = new GetRequest()
                 .AddParam("symbols", "btcusdt");
 
             var response = marginClient.GetLoanOrdersAsync(request).Result;
-            _logger.StopAndLog();
-
+       
             if (response != null)
             {
                 switch (response.status)
@@ -210,9 +201,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+         
             var response = marginClient.GetMarginAccountAsync("btcusdt", null).Result;
-            _logger.StopAndLog();
+       
 
             if (response != null)
             {

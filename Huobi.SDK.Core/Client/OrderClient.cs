@@ -4,7 +4,7 @@ using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
 using Newtonsoft.Json;
 using System;
-
+using Microsoft.Extensions.Logging;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
@@ -25,9 +25,13 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">Access Key</param>
         /// <param name="secretKey">Secret Key</param>
         /// <param name="host">the host that the client connects to</param>
-        public OrderClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public OrderClient(string accessKey, string secretKey, string host = DEFAULT_HOST, ILogger logger = null)
         {
             _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
+            if (logger != null && HttpRequest.logger != null)
+            {
+                HttpRequest.logger = logger;
+            }
         }
 
         /// <summary>

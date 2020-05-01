@@ -1,13 +1,11 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 
 namespace Huobi.SDK.Example
 {
     public class StableCoinClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetStableCoin();
@@ -19,9 +17,9 @@ namespace Huobi.SDK.Example
         {
             var stableCoinClient = new StableCointClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = stableCoinClient.GetStableCoinAsync("usdt", "10", "sell").Result;
-            _logger.StopAndLog();
+              
 
             if (response != null)
             {
@@ -45,9 +43,9 @@ namespace Huobi.SDK.Example
         {
             var stableCoinClient = new StableCointClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = stableCoinClient.ExchangeStableCoinAsync("123").Result;
-            _logger.StopAndLog();
+              
 
             if (response != null)
             {

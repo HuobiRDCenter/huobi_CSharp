@@ -1,14 +1,12 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 
 namespace Huobi.SDK.Example
 {
     public class MarketClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetCandlestick();
@@ -30,13 +28,13 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("period", "1min")
                 .AddParam("size", "10");
             var result = marketClient.GetCandlestickAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.data != null)
             {
@@ -53,9 +51,9 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var result = marketClient.GetLast24hCandlestickAskBidAsync("btcusdt").Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.tick != null)
             {
@@ -70,9 +68,9 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var result = marketClient.GetAllSymbolsLast24hCandlesticksAskBidAsync().Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.data != null)
             {
@@ -90,13 +88,13 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("depth", "5")
                 .AddParam("type", "step0");
             var result = marketClient.GetDepthAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.tick != null)
             {
@@ -124,9 +122,9 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var result = marketClient.GetLastTradeAsync("btcusdt").Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.tick != null)
             {
@@ -147,9 +145,9 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var result = marketClient.GetLastTradesAsync("btcusdt", 3).Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.data != null)
             {
@@ -173,9 +171,9 @@ namespace Huobi.SDK.Example
         {
             var marketClient = new MarketClient();
 
-            _logger.Start();
+              
             var result = marketClient.GetLast24hCandlestickAsync("btcusdt").Result;
-            _logger.StopAndLog();
+              
 
             if (result != null && result.tick != null)
             {

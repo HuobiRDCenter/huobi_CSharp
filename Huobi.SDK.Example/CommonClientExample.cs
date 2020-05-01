@@ -1,14 +1,12 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
     public class CommonClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetSystemStatus();
@@ -26,9 +24,9 @@ namespace Huobi.SDK.Example
         {
             var client = new CommonClient();
 
-            _logger.Start();
+        
             string result = client.GetSystemStatus().Result;
-            _logger.StopAndLog();
+      
 
             Console.WriteLine($"Get system status: {result}");
         }
@@ -37,10 +35,8 @@ namespace Huobi.SDK.Example
         {
             var client = new CommonClient();
 
-            _logger.Start();
             var symbolsResponse = client.GetSymbolsAsync().Result;
-            _logger.StopAndLog();
-
+        
             if (symbolsResponse != null && symbolsResponse.status != null && symbolsResponse.status.Equals("ok"))
             {
                 foreach (var d in symbolsResponse.data)
@@ -55,9 +51,9 @@ namespace Huobi.SDK.Example
         {
             var client = new CommonClient();
 
-            _logger.Start();
+        
             var currencysResponse = client.GetCurrencysAsync().Result;
-            _logger.StopAndLog();
+        
 
             if (currencysResponse != null && currencysResponse.data != null)
             {
@@ -73,10 +69,9 @@ namespace Huobi.SDK.Example
         {
             var client = new CommonClient();
 
-            _logger.Start();
+       
             var currencyResponse = client.GetCurrencyAsync("", false).Result;
-            _logger.StopAndLog();
-
+        
             if (currencyResponse != null)
             {
                 if (currencyResponse.code == (int)ResponseCode.Success)
@@ -101,9 +96,9 @@ namespace Huobi.SDK.Example
         {
             var client = new CommonClient();
 
-            _logger.Start();
+        
             var timestampResponse = client.GetTimestampAsync().Result;
-            _logger.StopAndLog();
+          
 
             Console.WriteLine($"timestamp (ms): {timestampResponse.data}");
             Console.WriteLine($"Local time: {Timestamp.MSToLocal(timestampResponse.data)}");

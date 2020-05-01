@@ -1,8 +1,9 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Huobi.SDK.Log;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Huobi.SDK.Core
 {
@@ -11,9 +12,8 @@ namespace Huobi.SDK.Core
     /// </summary>
     public class HttpRequest
     {
-        //public static bool LogPerformanceEnabled = false;
 
-        public static PerformanceLogger _logger = PerformanceLogger.GetInstance();
+        public static ILogger logger=NullLogger.Instance;
 
         /// <summary>
         /// Send Http GET request
@@ -22,14 +22,13 @@ namespace Huobi.SDK.Core
         /// <param name="url">Request url</param>
         /// <returns>The generic response type</returns>
         public static async Task<T> GetAsync<T>(string url)
-        {            
+        {
             var httpClient = new HttpClient();
-
-            _logger.RquestStart("GET", url);
+            logger.LogInformation($"RquestStart:{url}");
 
             string response = await httpClient.GetStringAsync(url);
+            logger.LogInformation($"RequestEnd:{url}");
 
-            _logger.RequestEnd();
 
             T t = JsonConvert.DeserializeObject<T>(response);
 
@@ -45,12 +44,12 @@ namespace Huobi.SDK.Core
         public static async Task<string> GetStringAsync(string url)
         {
             var httpClient = new HttpClient();
+            logger.LogInformation($"RquestStart:{url}");
 
-            _logger.RquestStart("GET", url);
+
 
             string response = await httpClient.GetStringAsync(url);
-
-            _logger.RequestEnd();
+            logger.LogInformation($"RequestEnd:{url}");
 
             return response;
         }
@@ -78,13 +77,14 @@ namespace Huobi.SDK.Core
 
             var httpClient = new HttpClient();
 
-            _logger.RquestStart("POST", url);
+            logger.LogInformation($"RquestStart:{url}");
+
 
             var response = await httpClient.PostAsync(url, httpContent);
 
             string result = await response.Content.ReadAsStringAsync();
 
-            _logger.RequestEnd();
+            logger.LogInformation($"RequestEnd:{url}");
 
             T t = JsonConvert.DeserializeObject<T>(result);
 

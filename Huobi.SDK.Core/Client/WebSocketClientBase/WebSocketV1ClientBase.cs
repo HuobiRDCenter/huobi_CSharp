@@ -149,8 +149,8 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                 }
                 else
                 {
-                    dynamic json = JToken.Parse(data);
-                    string op = json.op;
+                    JToken json = JToken.Parse(data);
+                    string op =json.Value<string>("op");
                     if (String.Equals(op, "auth"))
                     {
                         var response = JsonConvert.DeserializeObject<WebSocketV1AuthResponse>(data);

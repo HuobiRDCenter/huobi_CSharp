@@ -1,15 +1,12 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
     public class AccountClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetAccountInfo();
@@ -39,10 +36,9 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var result = accountClient.GetAccountInfoAsync().Result;
-            _logger.StopAndLog();
-
+        
             if (result != null && result.data != null)
             {
                 foreach (var a in result.data)
@@ -56,10 +52,9 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             var result = accountClient.GetAccountBalanceAsync(Config.AccountId).Result;
-            _logger.StopAndLog();
-
+         
             if (result != null)
             {
                 switch (result.status)
@@ -94,11 +89,11 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             var request = new GetRequest()
                 .AddParam("account-id", Config.AccountId);
             var result = accountClient.GetAccountHistoryAsync(request).Result;
-            _logger.StopAndLog();
+          
 
             if (result != null)
             {
@@ -126,12 +121,11 @@ namespace Huobi.SDK.Example
         {
             var client = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             GetRequest request = new GetRequest()
                 .AddParam("accountId", Config.AccountId);
             var result = client.GetAccountLedgerAsync(request).Result;
-            _logger.StopAndLog();
-
+       
             if (result != null)
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
@@ -152,10 +146,8 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = accountClient.TransferFromSpotToFutureAsync("ht", 1).Result;
-            _logger.StopAndLog();
-
+       
             if (result != null)
             {
                 switch (result.status)
@@ -178,10 +170,9 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             var result = accountClient.TransferFromFutureToSpotAsync("ht", 1).Result;
-            _logger.StopAndLog();
-
+          
             if (result != null)
             {
                 switch (result.status)
@@ -204,9 +195,8 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = accountClient.TransferCurrencyFromMasterToSubAsync(Config.SubUserId, "ht", 1).Result;
-            _logger.StopAndLog();
+       
 
             if (result != null)
             {
@@ -230,10 +220,8 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = accountClient.GetSubUserAccountBalancesAsync().Result;
-            _logger.StopAndLog();
-
+         
             if (result != null && result.data != null)
             {
                 int availableCount = 0;
@@ -253,9 +241,8 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = accountClient.GetSubUserAccountBalanceAsync(Config.SubUserId).Result;
-            _logger.StopAndLog();
+          
 
             if (result != null && result.data != null)
             {
@@ -281,9 +268,8 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = accountClient.LockSubUserAsync(Config.SubUserId).Result;
-            _logger.StopAndLog();
+       
 
             if (result != null)
             {
@@ -302,10 +288,9 @@ namespace Huobi.SDK.Example
         {
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             var result = accountClient.UnlockSubUserAsync(Config.SubUserId).Result;
-            _logger.StopAndLog();
-
+          
             if (result != null)
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)

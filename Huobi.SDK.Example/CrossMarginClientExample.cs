@@ -1,14 +1,12 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 
 namespace Huobi.SDK.Example
 {
     public class CrossMarginClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             TransferIn();
@@ -30,9 +28,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+           
             var response = marginClient.TransferIn("eos", "0.000001").Result;
-            _logger.StopAndLog();
+        
 
             if (response != null)
             {
@@ -56,10 +54,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+      
             var response = marginClient.TransferOut("eos", "0.000001").Result;
-            _logger.StopAndLog();
-
+          
             if (response != null)
             {
                 switch (response.status)
@@ -81,10 +78,8 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var response = marginClient.GetLoanInfo().Result;
-            _logger.StopAndLog();
-
+       
             if (response != null)
             {
                 switch (response.status)
@@ -114,9 +109,8 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var response = marginClient.ApplyLoan("eos", "0.001").Result;
-            _logger.StopAndLog();
+         
 
             if (response != null)
             {
@@ -140,9 +134,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+        
             var response = marginClient.Repay("123", "0.001").Result;
-            _logger.StopAndLog();
+         
 
             if (response != null)
             {
@@ -166,11 +160,11 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+       
             GetRequest request = new GetRequest()
                 .AddParam("sub-uid", Config.SubUserId);
             var response = marginClient.GetLoanOrders(request).Result;
-            _logger.StopAndLog();
+         
 
             if (response != null)
             {
@@ -201,10 +195,9 @@ namespace Huobi.SDK.Example
         {
             var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var response = marginClient.GetMarginAccount(Config.SubUserId).Result;
-            _logger.StopAndLog();
-
+        
             if (response != null)
             {
                 switch (response.status)

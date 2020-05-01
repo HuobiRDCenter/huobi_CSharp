@@ -1,15 +1,13 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 using Huobi.SDK.Model.Request;
 
 namespace Huobi.SDK.Example
 {
     public class WalletClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetDepoistAddress();
@@ -27,13 +25,11 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var request = new GetRequest()
                 .AddParam("currency", "btc");
 
             var result = walletClient.GetDepositAddressAsync(request).Result;
-            _logger.StopAndLog();
-
+       
             if (result != null && result.data != null)
             {
                 foreach (var a in result.data)
@@ -48,13 +44,11 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var request = new GetRequest()
                 .AddParam("currency", "btc");
 
             var result = walletClient.GetWithdrawQuotaAsync(request).Result;
-            _logger.StopAndLog();
-
+          
             if (result != null && result.data != null && result.data.chains != null)
             {
                 foreach (var c in result.data.chains)
@@ -67,15 +61,12 @@ namespace Huobi.SDK.Example
         private static void WithdrawCurrency()
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
-
-            _logger.Start();
             var request = new WithdrawRequest
             {
                 address = ""
             };
             var result = walletClient.WithdrawCurrencyAsync(request).Result;
-            _logger.StopAndLog();
-
+           
             if (result != null)
             {
                 switch (result.status)
@@ -98,10 +89,8 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var result = walletClient.CancelWithdrawCurrencyAsync(1).Result;
-            _logger.StopAndLog();
-
+       
             if (result != null)
             {
                 switch (result.status)
@@ -124,12 +113,10 @@ namespace Huobi.SDK.Example
         {
             var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
             var request = new GetRequest()
                     .AddParam("type", "deposit");
             var result = walletClient.GetDepositWithdrawHistoryAsync(request).Result;
-            _logger.StopAndLog();
-
+        
             if (result != null && result.data != null)
             {
                 foreach (var h in result.data)

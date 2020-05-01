@@ -1,13 +1,11 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 
 namespace Huobi.SDK.Example
 {
     public class ETFClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             GetETFInfo();
@@ -23,10 +21,9 @@ namespace Huobi.SDK.Example
         {
             var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var response = etfClient.GetETFInfoAsync().Result;
-            _logger.StopAndLog();
-
+       
             if (response != null && response.data != null)
             {
                 Console.WriteLine($"ETF name: {response.data.etfName}, purchase min amount: {response.data.purchaseMinAmount}");
@@ -44,10 +41,9 @@ namespace Huobi.SDK.Example
         {
             var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var response = etfClient.SwapETFInAsync(100).Result;
-            _logger.StopAndLog();
-
+         
             if (response != null)
             {
                 string message = string.IsNullOrEmpty(response.message) ? "" : response.message;
@@ -67,10 +63,9 @@ namespace Huobi.SDK.Example
         {
             var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+          
             var response = etfClient.SwapETFOutAsync(100).Result;
-            _logger.StopAndLog();
-
+          
             if (response != null)
             {
                 string message = string.IsNullOrEmpty(response.message) ? "" : response.message;
@@ -90,10 +85,9 @@ namespace Huobi.SDK.Example
         {
             var etfClient = new ETFClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+         
             var response = etfClient.GetETFSwapHistory(0, 1).Result;
-            _logger.StopAndLog();
-
+           
             if (response != null)
             {
                 string message = string.IsNullOrEmpty(response.message) ? "" : response.message;

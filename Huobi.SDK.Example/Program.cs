@@ -1,4 +1,4 @@
-﻿using Huobi.SDK.Log;
+﻿ 
 
 namespace Huobi.SDK.Example
 {
@@ -20,8 +20,6 @@ namespace Huobi.SDK.Example
 
         static void RunPerformanceTest()
         {
-            PerformanceLogger.GetInstance().Enable(true);
-
             RunAllRestExamples();
         }
 

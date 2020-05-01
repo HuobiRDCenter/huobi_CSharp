@@ -1,7 +1,7 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+ 
 using Huobi.SDK.Model.Request;
 using Huobi.SDK.Model.Response;
 
@@ -9,8 +9,6 @@ namespace Huobi.SDK.Example
 {
     public class OrderClientExample
     {
-        private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
-
         public static void RunAll()
         {
             PlaceOrder();
@@ -48,7 +46,7 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new PlaceOrderRequest
             {
                 AccountId = Config.AccountId,
@@ -60,7 +58,7 @@ namespace Huobi.SDK.Example
             };
 
             var response = tradeClient.PlaceOrderAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -81,7 +79,7 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new PlaceOrderRequest
             {
                 AccountId = Config.AccountId,
@@ -93,7 +91,7 @@ namespace Huobi.SDK.Example
             };
             PlaceOrderRequest[] requests = { request, request };
             var response = tradeClient.PlaceOrdersAsync(requests).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -127,9 +125,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = tradeClient.CancelOrderByIdAsync("1").Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -150,9 +148,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = tradeClient.CancelOrderByClientOrderIdAsync("").Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -173,11 +171,11 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("account-id", Config.AccountId);
             var response = tradeClient.GetOpenOrdersAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -205,13 +203,13 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new CancelOrdersByCriteriaRequest
             {
                 AccountId = Config.AccountId
             };
             var response = tradeClient.CancelOrdersByCriteriaAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -236,14 +234,14 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             string[] orderIds = { "1", "2" };
             var request = new CancelOrdersByIdsRequest
             {
                 OrderIds = orderIds
             };
             var response = tradeClient.CancelOrdersByIdsAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -282,9 +280,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = tradeClient.GetOrderByIdAsync("1").Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -310,12 +308,12 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("clientOrderId", "cid1234");
 
             var response = tradeClient.GetOrderByClientAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -340,9 +338,9 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var response = tradeClient.GetMatchResultsByIdAsync("63403286375").Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -370,12 +368,12 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt")
                 .AddParam("states", "canceled");
             var response = tradeClient.GetHistoryOrdersAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -403,11 +401,11 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt");
             var response = tradeClient.GetLast48hOrdersAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -435,11 +433,11 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbol", "btcusdt");
             var response = tradeClient.GetMatchResultsAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             switch (response.status)
             {
@@ -467,11 +465,11 @@ namespace Huobi.SDK.Example
         {
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
-            _logger.Start();
+              
             var request = new GetRequest()
                 .AddParam("symbols", "btcusdt,eosht");
             var response = tradeClient.GetTransactFeeRateAsync(request).Result;
-            _logger.StopAndLog();
+              
 
             if (response.code == (int)ResponseCode.Success)
             {

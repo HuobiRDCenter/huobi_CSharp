@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.ETF;
-
+using Microsoft.Extensions.Logging;
 namespace Huobi.SDK.Core.Client
 {
     /// <summary>
@@ -24,9 +24,13 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">Access Key</param>
         /// <param name="secretKey">Secret Key</param>
         /// <param name="host">the host that the client connects to</param>
-        public ETFClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public ETFClient(string accessKey, string secretKey, string host = DEFAULT_HOST, ILogger logger = null)
         {
             _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
+            if (logger != null && HttpRequest.logger != null)
+            {
+                HttpRequest.logger = logger;
+            }
         }
 
         /// <summary>
