@@ -47,7 +47,7 @@ namespace Huobi.SDK.Example
             {
                 foreach (var a in result.data)
                 {
-                    Console.WriteLine($"account id: {a.id}, type: {a.type}, state: {a.state}");
+                    AppLogger.Info($"account id: {a.id}, type: {a.type}, state: {a.state}");
                 }
             }
         }
@@ -74,16 +74,16 @@ namespace Huobi.SDK.Example
                                     if (Math.Abs(float.Parse(b.balance)) > 0.00001)
                                     {
                                         availableCount++;
-                                        Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
+                                        AppLogger.Info($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                                     }
                                 }
-                                Console.WriteLine($"There are total {result.data.list.Length} currencys and available {availableCount} currencys in this account");
+                                AppLogger.Info($"There are total {result.data.list.Length} currencys and available {availableCount} currencys in this account");
                             }
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -108,14 +108,14 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var h in result.data)
                             {
-                                Console.WriteLine($"currency: {h.currency}, amount: {h.transactAmt}, type: {h.transactType}, time: {h.transactTime}");
+                                AppLogger.Info($"currency: {h.currency}, amount: {h.transactAmt}, type: {h.transactType}, time: {h.transactTime}");
                             }
-                            Console.WriteLine($"There are total {result.data.Length} transactions");
+                            AppLogger.Info($"There are total {result.data.Length} transactions");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -138,12 +138,12 @@ namespace Huobi.SDK.Example
                 {
                     foreach (var l in result.data)
                     {
-                        Console.WriteLine($"Get account ledger, accountId: {l.accountId}, currency: {l.currency}, amount: {l.transactAmt}, transferer: {l.transferer}, transferee: {l.transferee}");
+                        AppLogger.Info($"Get account ledger, accountId: {l.accountId}, currency: {l.currency}, amount: {l.transactAmt}, transferer: {l.transferer}, transferee: {l.transferee}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Get account ledger error: {result.message}");
+                    AppLogger.Info($"Get account ledger error: {result.message}");
                 }
             }
         }
@@ -162,12 +162,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
+                            AppLogger.Info($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -188,12 +188,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
+                            AppLogger.Info($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -214,12 +214,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, trade id: {result.data}");
+                            AppLogger.Info($"Transfer successfully, trade id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -242,10 +242,10 @@ namespace Huobi.SDK.Example
                     if (Math.Abs(float.Parse(b.balance)) > 0.00001)
                     {
                         availableCount++;
-                        Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
+                        AppLogger.Info($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                     }
                 }
-                Console.WriteLine($"There are total {result.data.Length} currencys and available {availableCount} currencys in this account");
+                AppLogger.Info($"There are total {result.data.Length} currencys and available {availableCount} currencys in this account");
             }
         }
 
@@ -262,18 +262,18 @@ namespace Huobi.SDK.Example
                 foreach (var a in result.data)
                 {
                     int availableCount = 0;
-                    Console.WriteLine($"account id: {a.id}, type: {a.type}");
+                    AppLogger.Info($"account id: {a.id}, type: {a.type}");
                     foreach (var b in a.list)
                     {
                         if (Math.Abs(float.Parse(b.balance)) > 0.00001)
                         {
                             availableCount++;
-                            Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
+                            AppLogger.Info($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                         }
                     }
-                    Console.WriteLine($"There are total {a.list.Length} accounts and available {availableCount} currencys in this account");
+                    AppLogger.Info($"There are total {a.list.Length} accounts and available {availableCount} currencys in this account");
                 }
-                Console.WriteLine($"There are total {result.data.Length} accounts");
+                AppLogger.Info($"There are total {result.data.Length} accounts");
             }
         }
 
@@ -289,11 +289,11 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
-                    Console.WriteLine($"Lock sub user ${result.data.subUid} result: {result.data.userState}");
+                    AppLogger.Info($"Lock sub user ${result.data.subUid} result: {result.data.userState}");
                 }
                 else
                 {
-                    Console.WriteLine($"Lock sub user error: {result.code}");
+                    AppLogger.Info($"Lock sub user error: {result.code}");
                 }
             }
         }
@@ -310,11 +310,11 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
-                    Console.WriteLine($"Unlock sub user ${result.data.subUid} result: {result.data.userState}");
+                    AppLogger.Info($"Unlock sub user ${result.data.subUid} result: {result.data.userState}");
                 }
                 else
                 {
-                    Console.WriteLine($"Unlock sub user error: {result.code}");
+                    AppLogger.Info($"Unlock sub user error: {result.code}");
                 }
             }
         }

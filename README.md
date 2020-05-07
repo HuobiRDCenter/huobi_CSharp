@@ -14,6 +14,7 @@ The SDK supports both synchronous and asynchronous RESTful API invoking, and sub
   - [Folder structure](#Folder-Structure)
   - [Client](#Client)
   - [Response](#Response)
+  - [Logging](#Logging)
 
 - [Request examples](#Request-examples)
 
@@ -95,6 +96,7 @@ This is the folder and namespace structure of SDK source code and the descriptio
 - **Huobi.SDK.Model**: The data model that user need to care about
   - **Request**: The request data model
   - **Response**: The response data model
+- **Huobi.SDK.Log**: The logging functionality for application log and performance log, it uses the NLog library with the configuration file *nlog.config*
 - **Huobi.SDK.Core.Test**: The unit test of core
 - **Huobi.SDK.Example**: The examples how to use **Core** and **Model** to access  API and read response.
 
@@ -217,6 +219,15 @@ if (symbolsResponse != null && symbolsResponse.status != null && symbolsResponse
   Console.WriteLine($"there are total {symbolsResponse.data.Length} symbols");
 }
 ```
+
+### Logging
+
+This SDK uses **NLog** and the configuration file is *nlog.config*. For basic user, you can update the configuration file to update the logging level and log file name. For advanced user, you can refer to NLog official document to implement more features.
+
+By default there are two loggers:
+
+-  **appLogger**: This is the logger for general functional purpose, the target is to *consoleTarget* and *fileTarget*. The related logging class is *Huobi.SDK.Log.AppLogger*
+- **perfLogger**: This is for internal use to measure the SDK performance, the target is to *perfFileTarget*. It is disabled by default. The related logging class is  *Huobi.SDK.Log.PerformanceLogger*
 
 ## Request Examples
 

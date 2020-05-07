@@ -1,4 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Account;
 
 namespace Huobi.SDK.Core.Client
@@ -29,7 +30,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Subscribe(string mode, string clientId = "")
         {
-            _WebSocket.Send($"{{\"action\":\"sub\", \"cid\": \"{clientId}\", \"ch\":\"accounts.update#{mode}\"}}");
+            string topic = $"accounts.update#{mode}";
+
+            _WebSocket.Send($"{{\"action\":\"sub\", \"cid\": \"{clientId}\", \"ch\":\"{topic}\"}}");
+
+            AppLogger.Info($"WebSocket subscribed, topic={topic}");
         }
 
         /// <summary>
@@ -39,7 +44,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void UnSubscribe(string mode, string clientId = "")
         {
-            _WebSocket.Send($"{{\"action\":\"unsub\", \"cid\": \"{clientId}\", \"ch\":\"accounts.update#{mode}\" }}");
+            string topic = $"accounts.update#{mode}";
+
+            _WebSocket.Send($"{{\"action\":\"unsub\", \"cid\": \"{clientId}\", \"ch\":\"{topic}\" }}");
+
+            AppLogger.Info($"WebSocket unsubscribed, topic={topic}");
         }
     }
 }

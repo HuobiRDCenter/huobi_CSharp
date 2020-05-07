@@ -1,4 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Account;
 
 namespace Huobi.SDK.Core.Client
@@ -26,7 +27,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Request(string clientId = "")
         {
-            _WebSocket.Send($"{{ \"op\":\"req\", \"cid\":\"{clientId}\", \"topic\": \"accounts.list\" }}");
+            string topic = "accounts.list";
+
+            _WebSocket.Send($"{{ \"op\":\"req\", \"cid\":\"{clientId}\", \"topic\": \"{topic}\" }}");
+
+            AppLogger.Info($"WebSocket requested, topic={topic}");
         }
     }
 }

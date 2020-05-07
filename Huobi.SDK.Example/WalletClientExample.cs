@@ -38,9 +38,9 @@ namespace Huobi.SDK.Example
             {
                 foreach (var a in result.data)
                 {
-                    Console.WriteLine($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
+                    AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
                 }
-                Console.WriteLine($"There are total {result.data.Length} addresses");
+                AppLogger.Info($"There are total {result.data.Length} addresses");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Huobi.SDK.Example
             {
                 foreach (var c in result.data.chains)
                 {
-                    Console.WriteLine($"chain: {c.chain}, max withdraw amount {c.maxWithdrawAmt}, total quota {c.withdrawQuotaTotal}");
+                    AppLogger.Info($"chain: {c.chain}, max withdraw amount {c.maxWithdrawAmt}, total quota {c.withdrawQuotaTotal}");
                 }
             }
         }
@@ -82,12 +82,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Withdraw successfully, transfer id: {result.data}");
+                            AppLogger.Info($"Withdraw successfully, transfer id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -108,12 +108,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Cancel withdraw successfully, transfer id: {result.data}");
+                            AppLogger.Info($"Cancel withdraw successfully, transfer id: {result.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Cancel withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            AppLogger.Info($"Cancel withdraw fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
@@ -134,10 +134,10 @@ namespace Huobi.SDK.Example
             {
                 foreach (var h in result.data)
                 {
-                    Console.WriteLine($"type: {h.type}, currency: {h.currency}, amount: {h.amount}, updatedAt: {h.updatedAt}");
+                    AppLogger.Info($"type: {h.type}, currency: {h.currency}, amount: {h.amount}, updatedAt: {h.updatedAt}");
                 }
 
-                Console.WriteLine($"There are {result.data.Length} deposit and withdraw history");
+                AppLogger.Info($"There are {result.data.Length} deposit and withdraw history");
             }
         }
     }

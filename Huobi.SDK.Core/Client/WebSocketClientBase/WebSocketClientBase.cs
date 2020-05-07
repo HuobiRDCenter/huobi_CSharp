@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Timers;
 using Huobi.SDK.Core.Model;
+using Huobi.SDK.Log;
 using Newtonsoft.Json;
 using WebSocketSharp;
 
@@ -46,17 +47,17 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             double elapsedSecond = (DateTime.UtcNow - _lastReceivedTime).TotalSeconds;
-            Console.WriteLine($"WebSocket received data {elapsedSecond} sec ago");
+            AppLogger.Trace($"WebSocket received data {elapsedSecond.ToString("0.00")} sec ago");
 
             if (elapsedSecond > RECONNECT_WAIT_SECOND && elapsedSecond <= RENEW_WAIT_SECOND)
             {
-                Console.WriteLine("WebSocket reconnecting...");
+                AppLogger.Info("WebSocket reconnecting...");
                 _WebSocket.Close();
                 _WebSocket.Connect();
             }
             else if (elapsedSecond > RENEW_WAIT_SECOND)
             {
-                Console.WriteLine("WebSocket re-initialize...");
+                AppLogger.Info("WebSocket re-initialize...");
                 Disconnect();
                 UninitializeWebSocket();
                 InitializeWebSocket();                
@@ -113,7 +114,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
         private void _WebSocket_OnOpen(object sender, EventArgs e)
         {
-            Console.WriteLine("WebSocket Opened");
+            AppLogger.Debug("WebSocket opened");
 
             _lastReceivedTime = DateTime.UtcNow;
 
@@ -131,10 +132,10 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                 var pingMessage = JsonConvert.DeserializeObject<PingMessage>(data);
                 if (pingMessage != null && pingMessage.ping != 0)
                 {
-                    Console.WriteLine($"received ping:{pingMessage.ping}");
+                    AppLogger.Trace($"WebSocekt received data, ping={pingMessage.ping}");
                     string pongData = $"{{\"pong\":{pingMessage.ping}}}";
                     _WebSocket.Send(pongData);
-                    Console.WriteLine($"replied pong:{pingMessage.ping}");
+                    AppLogger.Trace($"WebSocket replied data, pong={pingMessage.ping}");
                 }
                 else
                 {
@@ -147,7 +148,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
         private void _WebSocket_OnError(object sender, ErrorEventArgs e)
         {
-            Console.WriteLine($"WebSocket Error: {e.Message}");
+            AppLogger.Error($"WebSocket Error: {e.Message}");
         }
     }
 }

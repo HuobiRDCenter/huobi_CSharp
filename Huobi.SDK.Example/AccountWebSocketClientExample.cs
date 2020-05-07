@@ -1,9 +1,9 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Account;
 using Huobi.SDK.Model.Response.Auth;
-using Huobi.SDK.Model.Response.WebSocket;
 
 namespace Huobi.SDK.Example
 {
@@ -31,7 +31,10 @@ namespace Huobi.SDK.Example
                 {
                     // Request full data if authentication passed
                     client.Request();
-                    Console.WriteLine("Request sent");
+                }
+                else
+                {
+                    AppLogger.Error($"Authentication fail, errorCode={response.errCode}");
                 }
             }
 
@@ -41,14 +44,15 @@ namespace Huobi.SDK.Example
             {
                 if (response != null && response.data != null)
                 {
+                    AppLogger.Info($"WebSocket returned data, topic={response.topic}, count={response.data.Length}");
                     foreach (var a in response.data)
                     {
-                        Console.WriteLine($"account id: {a.id}, type: {a.type}, state: {a.state}");
                         if (a.list != null)
                         {
+                            AppLogger.Info($"count={a.list.Length}, accountId={a.id}, type={a.type}, state={a.state}");
                             foreach (var b in a.list)
                             {
-                                Console.WriteLine($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
+                                AppLogger.Info($"currency={b.currency}, type={b.type}, balance={b.balance}");
                             }
                         }
                     }
@@ -78,7 +82,6 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe the specific topic
                     client.Subscribe("1");
-                    Console.WriteLine("Subscription sent");
                 }
             }
 
@@ -88,12 +91,13 @@ namespace Huobi.SDK.Example
             {
                 if (response != null && response.data != null)
                 {
-                    Console.WriteLine($"Account update: {response.data.@event}");
+                    AppLogger.Info($"WebSocket received data, topic={response.topic}, event={response.data.@event}");
                     if (response.data.list != null)
                     {
+                        AppLogger.Info($"count={response.data.list.Length}");
                         foreach (var b in response.data.list)
                         {
-                            Console.WriteLine($"account id: {b.accountId}, currency: {b.currency}, type: {b.type}, balance: {b.balance}");
+                            AppLogger.Info($"account id: {b.accountId}, currency: {b.currency}, type: {b.type}, balance: {b.balance}");
                         }
                     }
                 }
@@ -125,7 +129,10 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe the specific topic
                     client.Subscribe("1");
-                    Console.WriteLine("Subscription sent");
+                }
+                else
+                {
+                    AppLogger.Error($"WebSocket authentication fail, code={response.code}, message={response.message}");
                 }
             }
 
@@ -139,11 +146,11 @@ namespace Huobi.SDK.Example
                     {
                         if (response.code == (int)ResponseCode.Success)
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} successfully");
+                            AppLogger.Info($"WebSocket subscribed successfully, topic={response.ch} ");
                         }
                         else
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
+                            AppLogger.Info($"WebSocket subscribed topic fail, topic={response.ch}, errorCode={response.code}, errorMessage={response.message}");
                         }
                     }
                     else if (response.action.Equals("push") && response.data != null)
@@ -151,11 +158,11 @@ namespace Huobi.SDK.Example
                         var b = response.data;
                         if (b.changeTime == null)
                         {
-                            Console.WriteLine($"Account overview, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}");
+                            AppLogger.Info($"WebSocket returned data, topic={response.ch}, currency={b.currency}, id={b.accountId}, balance={b.balance}, available={b.available}");
                         }
                         else
                         {
-                            Console.WriteLine($"Account update, currency: {b.currency}, id: {b.accountId}, balance: {b.balance}, time: {b.changeTime}");
+                            AppLogger.Info($"WebSocket received data, topic={response.ch}, currency={b.currency}, id={b.accountId}, balance={b.balance}, available={b.available}, time={b.changeTime}");
                         }
                     }
                 }

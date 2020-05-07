@@ -29,12 +29,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Get stable coin successfully");
+                            AppLogger.Info($"Get stable coin successfully");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get stable coin fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Get stable coin fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -55,12 +55,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Exchange successfully");
+                            AppLogger.Info($"Exchange successfully");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Exchange fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Exchange fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }

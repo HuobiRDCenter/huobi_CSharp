@@ -1,4 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Core.Client
@@ -30,7 +31,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Req(string symbol, string clientId = "")
         {
-            _WebSocket.Send($"{{\"req\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
+            string topic = $"market.{symbol}.mbp.150";
+
+            _WebSocket.Send($"{{\"req\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket request, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -40,19 +45,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Subscribe(string symbol, string clientId = "")
         {
-            _WebSocket.Send($"{{\"sub\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
-        }
+            string topic = $"market.{symbol}.mbp.150";
 
+            _WebSocket.Send($"{{\"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-        /// <summary>
-        /// Subscribe full Market By Price order book
-        /// </summary>
-        /// <param name="symbol">Trading symbol</param>
-        /// <param name="level">Number of price levels: 5, 10, 20</param>
-        /// <param name="clientId">Client id</param>
-        public void SubscribeFull(string symbol, int level, string clientId = "")
-        {
-            _WebSocket.Send($"{{\"sub\": \"market.{symbol}.mbp.refresh.{level}\",\"id\": \"{clientId}\" }}");
+            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -62,9 +59,27 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void UnSubscribe(string symbol, string clientId = "")
         {
+            string topic = $"market.{symbol}.mbp.150";
+
             _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
 
+        /// <summary>
+        /// Subscribe full Market By Price order book
+        /// </summary>
+        /// <param name="symbol">Trading symbol</param>
+        /// <param name="level">Number of price levels: 5, 10, 20</param>
+        /// <param name="clientId">Client id</param>
+        public void SubscribeFull(string symbol, int level, string clientId = "")
+        {
+            string topic = $"market.{symbol}.mbp.refresh.{level}";
+
+            _WebSocket.Send($"{{\"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
+        }
 
         /// <summary>
         /// Unsubscribe full Market By Price order book
@@ -74,7 +89,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void UnSubscribeFull(string symbol, int level, string clientId = "")
         {
+            string topic = $"market.{symbol}.mbp.refresh.{level}";
+
             _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.refresh.{level}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
     }
 }

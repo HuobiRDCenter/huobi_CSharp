@@ -1,5 +1,6 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Example
@@ -9,9 +10,9 @@ namespace Huobi.SDK.Example
         public static void RunAll()
         {
             ReqAndSubscribeCandlestick();
-            
+
             ReqAndSubscribeDepth();
-            
+
             ReqAndSubscribeMBP();
 
             SubscribeFullMBP();
@@ -34,8 +35,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt", "1min");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -46,21 +45,21 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
-                        Console.WriteLine($"id: {response.tick.id}, count: {response.tick.count}, vol: {response.tick.vol}");
+                        AppLogger.Info($"WebSocket received data, id={response.tick.id}, count={response.tick.count}, vol={response.tick.vol}");
                     }
                     else if (response.data != null) // Parse request data
                     {
+                        AppLogger.Info($"WebSocket returned data, topic={response.ch}, count={response.data.Length}");
                         foreach (var t in response.data)
                         {
-                            Console.WriteLine($"id: {t.id}, count: {t.count}, vol: {t.vol}");
+                            AppLogger.Info($"id={t.id}, count={t.count}, vol={t.vol}");
                         }
-                        Console.WriteLine($"There are total {response.data.Length} ticks");
                     }
                 }
             }
 
             // Then connect to server and wait for the handler to handle the response
-            client.Connect();            
+            client.Connect();
 
             // Request full data
             client.Req("btcusdt", "1min", 1569361140, 1569366420);
@@ -72,8 +71,7 @@ namespace Huobi.SDK.Example
             client.UnSubscribe("btcusdt", "1min");
 
             // Delete handler
-            //client.OnResponseReceived -= Client_OnResponseReceived;
-            client.Disconnect();
+            client.OnResponseReceived -= Client_OnResponseReceived;
         }
 
         private static void ReqAndSubscribeDepth()
@@ -86,8 +84,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt", "step4");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -98,45 +94,47 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
+                        AppLogger.Info($"WebSocket received data, topic={response.ch}");
                         if (response.tick.asks != null)
                         {
                             var asks = response.tick.asks;
-                            for (int i = asks.Length-1; i >= 0; i--)
+                            AppLogger.Info($"ask, count={asks.Length}");
+                            for (int i = asks.Length - 1; i >= 0; i--)
                             {
-                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
                             }
                         }
-                        Console.WriteLine("------");
                         if (response.tick.bids != null)
                         {
                             var bids = response.tick.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
                             for (int i = 0; i < bids.Length; i++)
                             {
-                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
                             }
                         }
-                        Console.WriteLine();
                     }
                     else if (response.data != null) // Parse request data
                     {
+                        AppLogger.Info($"WebSocket returned data, topic={response.ch}");
                         if (response.data.asks != null)
                         {
                             var asks = response.data.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
                             for (int i = asks.Length - 1; i >= 0; i--)
                             {
-                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
                             }
                         }
-                        Console.WriteLine("------");
                         if (response.data.bids != null)
                         {
                             var bids = response.data.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
                             for (int i = 0; i < bids.Length; i++)
                             {
-                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
                             }
                         }
-                        Console.WriteLine();
                     }
                 }
             }
@@ -167,8 +165,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -179,47 +175,47 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
-                        Console.WriteLine($"Subscription prevSeqNum:{response.tick.prevSeqNum}, seqNum: {response.tick.seqNum}");
+                        AppLogger.Info($"WebSocket received data, prevSeqNum={response.tick.prevSeqNum}, seqNum={response.tick.seqNum}");
                         if (response.tick.asks != null)
                         {
                             var asks = response.tick.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
                             for (int i = asks.Length - 1; i >= 0; i--)
                             {
-                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
                             }
                         }
-                        Console.WriteLine("------");
                         if (response.tick.bids != null)
                         {
                             var bids = response.tick.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
                             for (int i = 0; i < bids.Length; i++)
                             {
-                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
                             }
                         }
-                        Console.WriteLine();
                     }
                     else if (response.data != null) // Parse request data
                     {
-                        Console.WriteLine($"Request prevSeqNum:{response.data.prevSeqNum}, seqNum: {response.data.seqNum}");
+                        Console.WriteLine($"WebSocket returned data, prevSeqNum={response.data.prevSeqNum}, seqNum={response.data.seqNum}");
                         if (response.data.asks != null)
                         {
                             var asks = response.data.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
                             for (int i = asks.Length - 1; i >= 0; i--)
                             {
-                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
                             }
                         }
-                        Console.WriteLine("------");
                         if (response.data.bids != null)
                         {
                             var bids = response.data.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
                             for (int i = 0; i < bids.Length; i++)
                             {
-                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
                             }
                         }
-                        Console.WriteLine();
                     }
                 }
             }
@@ -250,8 +246,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.SubscribeFull("btcusdt", 20);
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -262,25 +256,25 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
-                        Console.WriteLine($"Subscription seqNum: {response.tick.seqNum}");
+                        AppLogger.Info($"WebSocket received data, seqNum={response.tick.seqNum}");
                         if (response.tick.asks != null)
                         {
                             var asks = response.tick.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
                             for (int i = asks.Length - 1; i >= 0; i--)
                             {
-                                Console.WriteLine($"[{asks[i][0]} {asks[i][1]}]");
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
                             }
                         }
-                        Console.WriteLine("------");
                         if (response.tick.bids != null)
                         {
                             var bids = response.tick.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
                             for (int i = 0; i < bids.Length; i++)
                             {
-                                Console.WriteLine($"[{bids[i][0]} {bids[i][1]}]");
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
                             }
                         }
-                        Console.WriteLine();
                     }
                 }
             }
@@ -309,8 +303,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -322,7 +314,7 @@ namespace Huobi.SDK.Example
                     if (response.tick != null) // Parse subscription data
                     {
                         var t = response.tick;
-                        Console.WriteLine($"symbol: {t.symbol}, ask: [{t.ask}, {t.askSize}], bid: [{t.bid}, {t.bidSize}]");
+                        AppLogger.Info($"WebSocket received data, symbol={t.symbol}, ask=[{t.ask}, {t.askSize}], bid=[{t.bid}, {t.bidSize}]");
                     }
                 }
             }
@@ -351,8 +343,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -363,18 +353,19 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null && response.tick.data != null) // Parse subscription data
                     {
+                        AppLogger.Info($"WebSocket returned data, count={response.tick.data.Length}");
                         foreach (var t in response.tick.data)
                         {
-                            Console.WriteLine($"tradeid: {t.tradeid}, direction: {t.direction}, [{t.price}, {t.amount}]");
+                            AppLogger.Info($"tradeid: {t.tradeid}, direction: {t.direction}, [{t.price}, {t.amount}]");
                         }
                     }
                     else if (response.data != null) // Parse request data
                     {
+                        AppLogger.Info($"WebSocket received data, count={response.data.Length}");
                         foreach (var t in response.data)
                         {
-                            Console.WriteLine($"tradeid: {t.tradeid}, direction: {t.direction}, [{t.price}, {t.amount}]");
+                            AppLogger.Info($"tradeid: {t.tradeid}, direction: {t.direction}, [{t.price}, {t.amount}]");
                         }
-                        Console.WriteLine($"There are total {response.data.Length} trades");
                     }
                 }
             }
@@ -384,7 +375,7 @@ namespace Huobi.SDK.Example
 
             // Request full data
             client.Req("btcusdt");
-            
+
             Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
             Console.ReadLine();
 
@@ -406,8 +397,6 @@ namespace Huobi.SDK.Example
             {
                 // Subscribe the specific topic
                 client.Subscribe("btcusdt");
-
-                Console.WriteLine("Subscribed");
             }
 
             // Add the response receive handler
@@ -418,11 +407,11 @@ namespace Huobi.SDK.Example
                 {
                     if (response.tick != null) // Parse subscription data
                     {
-                        Console.WriteLine($"id: {response.tick.id}, count: {response.tick.count}, vol: {response.tick.vol}");
+                        AppLogger.Info($"WebSocket received data, id={response.tick.id}, count={response.tick.count}, vol={response.tick.vol}");
                     }
                     else if (response.data != null) // Parse request data
                     {
-                        Console.WriteLine($"id: {response.data.id}, count: {response.data.count}, vol: {response.data.vol}");
+                        AppLogger.Info($"WebSocket returned data, id={response.data.id}, count={response.data.count}, vol={response.data.vol}");
                     }
                 }
             }

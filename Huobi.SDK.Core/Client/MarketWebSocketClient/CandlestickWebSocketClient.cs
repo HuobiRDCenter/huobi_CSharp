@@ -1,4 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Core.Client
@@ -28,9 +29,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Req(string symbol, string period, int from, int to, string clientId = "")
         {
-            string req = $"{{\"req\": \"market.{symbol}.kline.{period}\",\"id\": \"{clientId}\", \"from\":{from}, \"to\":{to} }}";
+            string topic = $"market.{symbol}.kline.{period}";
 
-            _WebSocket.Send(req);
+            _WebSocket.Send($"{{ \"req\": \"{topic}\",\"id\": \"{clientId}\", \"from\":{from}, \"to\":{to} }}");
+
+            AppLogger.Info($"WebSocket requested, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -41,7 +44,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Subscribe(string symbol, string period, string clientId = "")
         {
-            _WebSocket.Send($"{{\"sub\": \"market.{symbol}.kline.{period}\",\"id\": \"{clientId}\" }}");
+            string topic = $"market.{symbol}.kline.{period}";
+
+            _WebSocket.Send($"{{ \"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -52,7 +59,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void UnSubscribe(string symbol, string period, string clientId = "")
         {
-            _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.kline.{period}\",\"id\": \"{clientId}\" }}");
+            string topic = $"market.{symbol}.kline.{period}";
+
+            _WebSocket.Send($"{{ \"unsub\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
     }
 }

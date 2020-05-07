@@ -6,9 +6,13 @@ namespace Huobi.SDK.Example
     {
         static void Main(string[] args)
         {
+            AppLogger.Info("Example started");
+
             Config.LoadConfig();
 
             RullAllExamples();
+
+            AppLogger.Info("Example stopped");
         }
 
         static void RullAllExamples()

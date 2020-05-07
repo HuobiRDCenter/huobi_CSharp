@@ -2,9 +2,9 @@
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
-using Huobi.SDK.Model.Response.WebSocket;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Auth;
+using Huobi.SDK.Log;
 
 namespace Huobi.SDK.Example
 {
@@ -42,7 +42,6 @@ namespace Huobi.SDK.Example
                         states = "submitted,created"
                     };
                     client.Request(req);
-                    Console.WriteLine("Request sent");
                 }
             }
 
@@ -52,11 +51,11 @@ namespace Huobi.SDK.Example
             {
                 if (response != null && response.data != null)
                 {
+                    AppLogger.Info($"WebSocket returned data, topic={response.topic}, count={response.data.Length}");
                     foreach (var o in response.data)
                     {
-                        Console.WriteLine($"Order id {o.id}, symbol: {o.symbol}, price: {o.price}, state: {o.state}");
+                        AppLogger.Info($"Order id {o.id}, symbol: {o.symbol}, price: {o.price}, state: {o.state}");
                     }
-                    Console.WriteLine($"There are total {response.data.Length} orders");
                 }
             }
 
@@ -83,7 +82,6 @@ namespace Huobi.SDK.Example
                 {
                     // Request full data if authentication passed
                     client.Request("64318170222");
-                    Console.WriteLine("Request sent");
                 }
             }
 
@@ -94,7 +92,7 @@ namespace Huobi.SDK.Example
                 if (response != null && response.data != null)
                 {
                     var o = response.data;
-                    Console.WriteLine($"Order id {o.id}, symbol: {o.symbol}, price: {o.price}, filled amount: {o.filledAmount}");
+                    AppLogger.Info($"WebSocket received data, topic={response.topic}, orderId={o.id}, symbol={o.symbol}, price={o.price}, filledAmount={o.filledAmount}");
                 }
             }
 
@@ -121,7 +119,6 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");
-                    Console.WriteLine("Subscription sent");
                 }
             }
 
@@ -132,7 +129,7 @@ namespace Huobi.SDK.Example
                 if (response != null && response.data != null)
                 {
                     var o = response.data;
-                    Console.WriteLine($"order update, symbol: {o.symbol}, id: {o.orderId}, role: {o.role}, filled amount: {o.filledAmount}");
+                    AppLogger.Info($"WebSocket received data, topic={response.topic}, symbol={o.symbol}, id={o.orderId}, role={o.role}, filledAmount={o.filledAmount}");
                 }
             }
 
@@ -162,11 +159,10 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");
-                    Console.WriteLine("Subscription sent");
                 }
                 else
                 {
-                    Console.WriteLine($"Authentication fail, code: {response.code}, message: {response.message}");
+                    AppLogger.Error($"WebSocket authentication fail, code={response.code}, message={response.message}");
                 }
             }
 
@@ -174,23 +170,23 @@ namespace Huobi.SDK.Example
             client.OnDataReceived += Client_OnDataReceived;
             void Client_OnDataReceived(SubscribeOrderV2Response response)
             {
-                if (response != null) 
+                if (response != null)
                 {
                     if (response.action.Equals("sub"))
                     {
                         if (response.code == (int)ResponseCode.Success)
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} successfully");
+                            AppLogger.Info($"WebSocket subscribe successfully, topic={response.ch} ");
                         }
                         else
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
+                            AppLogger.Error($"WebSocket subscribed fail, topic={response.ch}, errorCode={response.code}, errorMessage={response.message}");
                         }
                     }
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var o = response.data;
-                        Console.WriteLine($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, status: {o.orderStatus}");
+                        AppLogger.Info($"WebSocket received data, topic={response.ch}, event={o.eventType}, symbol={o.symbol}, type={o.type}, status={o.orderStatus}");
                     }
                 }
             }
@@ -221,7 +217,10 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe("btcusdt");
-                    Console.WriteLine("Subscription sent");
+                }
+                else
+                {
+                    AppLogger.Error($"WebSocket authentication fail, code={response.code}, message={response.message}");
                 }
             }
 
@@ -235,17 +234,17 @@ namespace Huobi.SDK.Example
                     {
                         if (response.code == (int)ResponseCode.Success)
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} successfully");
+                            AppLogger.Info($"WebSocket subscribe successfully, topic={response.ch}");
                         }
                         else
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
+                            AppLogger.Error($"WebSocket subscribe fail, topic={response.ch}, errorCode={response.code}, errorMessage={response.message}");
                         }
                     }
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var t = response.data;
-                        Console.WriteLine($"trade clear update, symbol: {t.symbol}, id: {t.orderId}, price: {t.tradePrice}, volume: {t.tradeVolume}");
+                        AppLogger.Info($"WebSocket received data, topic={response.ch}, symbol={t.symbol}, id={t.orderId}, price={t.tradePrice}, volume={t.tradeVolume}");
                     }
                 }
             }

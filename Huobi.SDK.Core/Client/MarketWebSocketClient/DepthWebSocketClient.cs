@@ -1,4 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
+using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Core.Client
@@ -27,9 +28,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Req(string symbol, string type, string clientId = "")
         {
-            string req = $"{{\"req\": \"market.{symbol}.depth.{type}\",\"id\": \"{clientId}\" }}";
+            string topic = $"market.{symbol}.depth.{type}";
 
-            _WebSocket.Send(req);
+            _WebSocket.Send($"{{\"req\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket requested, topic={topic}, clientId={clientId}");
         }
 
 
@@ -41,7 +44,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void Subscribe(string symbol, string type, string clientId = "")
         {
-            _WebSocket.Send($"{{\"sub\": \"market.{symbol}.depth.{type}\",\"id\": \"{clientId}\" }}");
+            string topic = $"market.{symbol}.depth.{type}";
+
+            _WebSocket.Send($"{{\"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -52,7 +59,11 @@ namespace Huobi.SDK.Core.Client
         /// <param name="clientId">Client id</param>
         public void UnSubscribe(string symbol, string type, string clientId = "")
         {
-            _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.depth.{type}\",\"id\": \"{clientId}\" }}");
+            string topic = $"market.{symbol}.depth.{type}";
+
+            _WebSocket.Send($"{{\"unsub\": \"{topic}\",\"id\": \"{clientId}\" }}");
+
+            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
     }
 }

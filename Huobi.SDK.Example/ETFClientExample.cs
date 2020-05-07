@@ -29,12 +29,12 @@ namespace Huobi.SDK.Example
 
             if (response != null && response.data != null)
             {
-                Console.WriteLine($"ETF name: {response.data.etfName}, purchase min amount: {response.data.purchaseMinAmount}");
+                AppLogger.Info($"ETF name: {response.data.etfName}, purchase min amount: {response.data.purchaseMinAmount}");
                 if (response.data.unitPrice != null)
                 {
                     foreach (var p in response.data.unitPrice)
                     {
-                        Console.WriteLine($"Currency: {p.currency}, amount: {p.amount}");
+                        AppLogger.Info($"Currency: {p.currency}, amount: {p.amount}");
                     }
                 }
             }
@@ -54,11 +54,11 @@ namespace Huobi.SDK.Example
 
                 if (response.success)
                 {
-                    Console.WriteLine($"Swap in success: {message}");
+                    AppLogger.Info($"Swap in success: {message}");
                 }
                 else
                 {
-                    Console.WriteLine($"Swap in fail: {message}");
+                    AppLogger.Info($"Swap in fail: {message}");
                 }
             }
         }
@@ -77,11 +77,11 @@ namespace Huobi.SDK.Example
 
                 if (response.success)
                 {
-                    Console.WriteLine($"Swap out success: {message}");
+                    AppLogger.Info($"Swap out success: {message}");
                 }
                 else
                 {
-                    Console.WriteLine($"Swap out fail: {message}");
+                    AppLogger.Info($"Swap out fail: {message}");
                 }
             }
         }
@@ -104,14 +104,14 @@ namespace Huobi.SDK.Example
                     {
                         foreach (var h in response.data)
                         {
-                            Console.WriteLine($"Currency: {h.currency}, amount {h.amount}");
+                            AppLogger.Info($"Currency: {h.currency}, amount {h.amount}");
                         }
-                        Console.WriteLine($"There are total {response.data.Length} ETF swap history");
+                        AppLogger.Info($"There are total {response.data.Length} ETF swap history");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Get Swap history fail: {message}");
+                    AppLogger.Info($"Get Swap history fail: {message}");
                 }
             }
         }

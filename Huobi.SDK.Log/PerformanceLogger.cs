@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
 using NLog;
 using NLog.Config;
-using NLog.LayoutRenderers;
 using NLog.Targets;
 
 namespace Huobi.SDK.Log
@@ -13,6 +11,16 @@ namespace Huobi.SDK.Log
     /// </summary>
     public class PerformanceLogger
     {
+        struct LogContent
+        {
+            public int Id;
+            public string Endpoint;
+            public string Url;
+            public long TotalDuration;
+            public long NetworkDuration;
+            public long SDKDuration;
+        }
+
         private static PerformanceLogger _pLogger;
 
         private bool _enable;
@@ -33,19 +41,8 @@ namespace Huobi.SDK.Log
             // Stopwatch
             _stopwatch = new Stopwatch();
 
-            // NLog config
-            var config = new LoggingConfiguration();
-            var logfile = new FileTarget("logfile")
-            {
-                FileName = $"sdk-perf-{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.txt",
-                Layout = "${message}"
-            };
-
-            config.AddRule(LogLevel.Info, LogLevel.Info, logfile);
-
-            LogManager.Configuration = config;
-
-            _nLogger = LogManager.GetCurrentClassLogger();
+            // Performance logger
+            _nLogger = LogManager.GetLogger("perfLogger");
 
             // Log content line count
             _logContentLineCount = 1;
@@ -86,7 +83,6 @@ namespace Huobi.SDK.Log
                 _logContent.Endpoint = methodName;
 
             }
-
         }
 
         public void RquestStart(string method, string url, bool stripUrlParams = true)
@@ -130,10 +126,10 @@ namespace Huobi.SDK.Log
                 // Log header if it is the first record
                 if (_logContentLineCount == 1)
                 {
-                    _nLogger.Info($"Index, Endpoint, URL, Total Duration(ms), Request Duration(ms), SDK Duration(ms)");
+                    _nLogger.Trace($"Index|Endpoint|URL|Total Duration(ms)|Request Duration(ms)|SDK Duration(ms)");
                 }
 
-                _nLogger.Info($"{_logContent.Id}, {_logContent.Endpoint}, {_logContent.Url}, {totalDuration}, {requestDuration}, {totalDuration - requestDuration}");
+                _nLogger.Trace($"{_logContent.Id}|{_logContent.Endpoint}|{_logContent.Url}|{totalDuration}|{requestDuration}|{totalDuration - requestDuration}");
 
                 _logContentLineCount++;
             }

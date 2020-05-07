@@ -4,7 +4,7 @@ using Huobi.SDK.Model.Request;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Auth;
 using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Response.WebSocket;
+using Huobi.SDK.Log;
 
 namespace Huobi.SDK.Example
 {
@@ -41,11 +41,11 @@ namespace Huobi.SDK.Example
                 {
                     // Subscribe if authentication passed
                     client.Subscribe(symbol);
-                    Console.WriteLine($"Order update {symbol} subscription sent");
+                    AppLogger.Info($"Order update {symbol} subscription sent");
                 }
                 else
                 {
-                    Console.WriteLine($"Authentication fail, code: {response.code}, message: {response.message}");
+                    AppLogger.Info($"Authentication fail, code: {response.code}, message: {response.message}");
                 }
             }
 
@@ -59,17 +59,17 @@ namespace Huobi.SDK.Example
                     {
                         if (response.code == (int)ResponseCode.Success)
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} successfully");
+                            AppLogger.Info($"Subscribe topic {response.ch} successfully");
                         }
                         else
                         {
-                            Console.WriteLine($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
+                            AppLogger.Info($"Subscribe topic {response.ch} fail, error code: {response.code}, error message: {response.message}");
                         }
                     }
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var o = response.data;
-                        Console.WriteLine($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, status: {o.orderStatus}");
+                        AppLogger.Info($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, status: {o.orderStatus}");
                     }
                 }
             }
@@ -106,12 +106,12 @@ namespace Huobi.SDK.Example
             {
                 case "ok":
                     {
-                        Console.WriteLine($"Place order successfully, order id: {response.data}");
+                        AppLogger.Info($"Place order successfully, order id: {response.data}");
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Place order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Place order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }

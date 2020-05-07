@@ -30,7 +30,7 @@ namespace Huobi.SDK.Example
             string result = client.GetSystemStatus().Result;
             _logger.StopAndLog();
 
-            Console.WriteLine($"Get system status: {result}");
+            AppLogger.Info($"Get system status: {result}");
         }
 
         private static void GetSymbols()
@@ -45,9 +45,9 @@ namespace Huobi.SDK.Example
             {
                 foreach (var d in symbolsResponse.data)
                 {
-                    Console.WriteLine($"{d.symbol}: {d.baseCurrency} {d.quoteCurrency}");
+                    AppLogger.Info($"{d.symbol}: {d.baseCurrency} {d.quoteCurrency}");
                 }
-                Console.WriteLine($"there are total {symbolsResponse.data.Length} symbols");
+                AppLogger.Info($"there are total {symbolsResponse.data.Length} symbols");
             }
         }
 
@@ -63,9 +63,9 @@ namespace Huobi.SDK.Example
             {
                 foreach (var d in currencysResponse.data)
                 {
-                    Console.WriteLine(d);
+                    AppLogger.Info(d);
                 }
-                Console.WriteLine($"there are total {currencysResponse.data.Length} currencys");
+                AppLogger.Info($"there are total {currencysResponse.data.Length} currencys");
             }
         }
 
@@ -83,16 +83,16 @@ namespace Huobi.SDK.Example
                 {
                     foreach (var d in currencyResponse.data)
                     {
-                        Console.WriteLine($"Currency: {d.currency}");
+                        AppLogger.Info($"Currency: {d.currency}");
                         foreach (var c in d.chains)
                         {
-                            Console.WriteLine($"Chain name: {c.chain}, base chain: {c.baseChain}, base chain protocol: {c.baseChainProtocol}");
+                            AppLogger.Info($"Chain name: {c.chain}, base chain: {c.baseChain}, base chain protocol: {c.baseChainProtocol}");
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine(currencyResponse.message);
+                    AppLogger.Info(currencyResponse.message);
                 }
             }
         }
@@ -105,8 +105,8 @@ namespace Huobi.SDK.Example
             var timestampResponse = client.GetTimestampAsync().Result;
             _logger.StopAndLog();
 
-            Console.WriteLine($"timestamp (ms): {timestampResponse.data}");
-            Console.WriteLine($"Local time: {Timestamp.MSToLocal(timestampResponse.data)}");
+            AppLogger.Info($"timestamp (ms): {timestampResponse.data}");
+            AppLogger.Info($"Local time: {Timestamp.MSToLocal(timestampResponse.data)}");
         }
     }
 }

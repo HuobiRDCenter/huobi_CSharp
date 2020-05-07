@@ -66,12 +66,12 @@ namespace Huobi.SDK.Example
             {
                 case "ok":
                     {
-                        Console.WriteLine($"Place order successfully, order id: {response.data}");
+                        AppLogger.Info($"Place order successfully, order id: {response.data}");
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Place order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Place order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -105,11 +105,11 @@ namespace Huobi.SDK.Example
                             {
                                 if (r.orderId != 0)
                                 {
-                                    Console.WriteLine($"Place order successfully, order id: {r.orderId}");
+                                    AppLogger.Info($"Place order successfully, order id: {r.orderId}");
                                 }
                                 else
                                 {
-                                    Console.WriteLine($"Place order fail, error code: {r.errorCode}, error message: {r.errorMessage}");
+                                    AppLogger.Info($"Place order fail, error code: {r.errorCode}, error message: {r.errorMessage}");
                                 }
                             }
                         }
@@ -117,7 +117,7 @@ namespace Huobi.SDK.Example
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Place multiple orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Place multiple orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -135,12 +135,12 @@ namespace Huobi.SDK.Example
             {
                 case "ok":
                     {
-                        Console.WriteLine($"Cancel order successfully, order id: {response.data}");
+                        AppLogger.Info($"Cancel order successfully, order id: {response.data}");
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Cancel order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Cancel order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -158,12 +158,12 @@ namespace Huobi.SDK.Example
             {
                 case "ok":
                     {
-                        Console.WriteLine($"Cancel order successfully, order id: {response.data}");
+                        AppLogger.Info($"Cancel order successfully, order id: {response.data}");
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Cancel order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Cancel order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -187,15 +187,15 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var o in response.data)
                             {
-                                Console.WriteLine($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}");  
+                                AppLogger.Info($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}");  
                             }
-                            Console.WriteLine($"There are total {response.data.Length} open orders");
+                            AppLogger.Info($"There are total {response.data.Length} open orders");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Query open orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Query open orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -220,13 +220,13 @@ namespace Huobi.SDK.Example
                         if (response.data != null)
                         {
                             var d = response.data;
-                            Console.WriteLine($"Cancel success: {d.successCount}, fail: {d.failedCount}, next: {d.nextId}");
+                            AppLogger.Info($"Cancel success: {d.successCount}, fail: {d.failedCount}, next: {d.nextId}");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Cancel orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Cancel orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -255,7 +255,7 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (string s in response.data.success)
                                 {
-                                    Console.WriteLine($"Cancel success: {s}");
+                                    AppLogger.Info($"Cancel success: {s}");
                                 }
                             }
                             if (response.data.failed != null)
@@ -264,7 +264,7 @@ namespace Huobi.SDK.Example
                                 {
                                     string id = !string.IsNullOrWhiteSpace(f.orderId) ? f.orderId : f.clientOrderId;
 
-                                    Console.WriteLine($"Cancel fail, id: {id}, error: {f.errorMessage}");
+                                    AppLogger.Info($"Cancel fail, id: {id}, error: {f.errorMessage}");
                                 }
                             }
                         }
@@ -272,7 +272,7 @@ namespace Huobi.SDK.Example
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Cancel orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Cancel orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -293,14 +293,14 @@ namespace Huobi.SDK.Example
                         if (response.data != null)
                         {
                             var o = response.data;
-                            Console.WriteLine($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}," +
+                            AppLogger.Info($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}," +
                                 $" filled amount: {o.filledAmount}, filled cash amount: {o.filledCashAmount}, filled fees: {o.filledFees}");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -324,13 +324,13 @@ namespace Huobi.SDK.Example
                         if (response.data != null)
                         {
                             var o = response.data;
-                            Console.WriteLine($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}");
+                            AppLogger.Info($"Order symbol: {o.symbol}, price: {o.price}, amount: {o.amount}");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -352,15 +352,15 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var r in response.data)
                             {
-                                Console.WriteLine($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
+                                AppLogger.Info($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
                             }
-                            Console.WriteLine($"There are total {response.data.Length} match results");
+                            AppLogger.Info($"There are total {response.data.Length} match results");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get match result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get match result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -385,15 +385,15 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var o in response.data)
                             {
-                                Console.WriteLine($"Order symbol: {o.symbol}, amount: {o.amount}, state: {o.state}");
+                                AppLogger.Info($"Order symbol: {o.symbol}, amount: {o.amount}, state: {o.state}");
                             }
-                            Console.WriteLine($"There are total {response.data.Length} history orders");
+                            AppLogger.Info($"There are total {response.data.Length} history orders");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get history orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get history orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -417,15 +417,15 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var o in response.data)
                             {
-                                Console.WriteLine($"Order symbol: {o.symbol}, amount: {o.amount}, state: {o.state}");
+                                AppLogger.Info($"Order symbol: {o.symbol}, amount: {o.amount}, state: {o.state}");
                             }
-                            Console.WriteLine($"There are total {response.data.Length} history orders");
+                            AppLogger.Info($"There are total {response.data.Length} history orders");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get history orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get history orders fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -449,15 +449,15 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var r in response.data)
                             {
-                                Console.WriteLine($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
+                                AppLogger.Info($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
                             }
-                            Console.WriteLine($"There are total {response.data.Length} match results");
+                            AppLogger.Info($"There are total {response.data.Length} match results");
                         }
                         break;
                     }
                 case "error":
                     {
-                        Console.WriteLine($"Get mattch result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                        AppLogger.Info($"Get mattch result fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                         break;
                     }
             }
@@ -479,13 +479,13 @@ namespace Huobi.SDK.Example
                 {
                     foreach (var f in response.data)
                     {
-                        Console.WriteLine($"Symbol: {f.symbol}, maker-taker fee: {f.makerFeeRate}-{f.takerFeeRate}");
+                        AppLogger.Info($"Symbol: {f.symbol}, maker-taker fee: {f.makerFeeRate}-{f.takerFeeRate}");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Get transact fee rate error: {response.message}");
+                AppLogger.Info($"Get transact fee rate error: {response.message}");
             }
         }
     }

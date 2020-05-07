@@ -40,12 +40,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, transfer id: {response.data}");
+                            AppLogger.Info($"Transfer successfully, transfer id: {response.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Transfer fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -66,12 +66,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Transfer successfully, transfer id: {response.data}");
+                            AppLogger.Info($"Transfer successfully, transfer id: {response.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Transfer fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Transfer fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -95,7 +95,7 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var c in response.data)
                                 {
-                                    Console.WriteLine($"Currency: {c.currency}, interest: {c.interestRate}," +
+                                    AppLogger.Info($"Currency: {c.currency}, interest: {c.interestRate}," +
                                         $" min: {c.maxLoanAmt}, max: {c.maxLoanAmt}, loanable: {c.loanableAmt}");
                                 }
                             }
@@ -103,7 +103,7 @@ namespace Huobi.SDK.Example
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get loan info fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Get loan info fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -124,12 +124,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Apply successfully, margin order id: {response.data}");
+                            AppLogger.Info($"Apply successfully, margin order id: {response.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Apply fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Apply fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -150,12 +150,12 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
-                            Console.WriteLine($"Repay successfully, margin order id: {response.data}");
+                            AppLogger.Info($"Repay successfully, margin order id: {response.data}");
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Repay fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Repay fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -182,15 +182,15 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var o in response.data)
                                 {
-                                    Console.WriteLine($"Loan order id: {o.id}, currency: {o.currency}, amount: {o.loanAmount}, state: {o.state}");
+                                    AppLogger.Info($"Loan order id: {o.id}, currency: {o.currency}, amount: {o.loanAmount}, state: {o.state}");
                                 }
-                                Console.WriteLine($"There are total {response.data.Length} loan orders");
+                                AppLogger.Info($"There are total {response.data.Length} loan orders");
                             }
                             break;
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get loan order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Get loan order fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }
@@ -215,12 +215,12 @@ namespace Huobi.SDK.Example
                             {
                                 foreach (var a in response.data)
                                 {
-                                    Console.WriteLine($"Account Id: {a.id}");
+                                    AppLogger.Info($"Account Id: {a.id}");
                                     if (a.list != null)
                                     {
                                         foreach (var c in a.list)
                                         {
-                                            Console.WriteLine($"Currency: {c.currency}, balance: {c.balance}");
+                                            AppLogger.Info($"Currency: {c.currency}, balance: {c.balance}");
                                         }
                                     }
                                 }
@@ -229,7 +229,7 @@ namespace Huobi.SDK.Example
                         }
                     case "error":
                         {
-                            Console.WriteLine($"Get margin account fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Get margin account fail, error code: {response.errorCode}, error message: {response.errorMessage}");
                             break;
                         }
                 }

@@ -15,7 +15,7 @@ namespace Huobi.SDK.Example
         /// Load Accesskey and AccountId from 'appsettings.json' and SecretKey from 'key.json'.
         /// 
         /// To prevent submitting SecretKey into repository by accident, the 'key.json' file
-        /// is added in the .gitignore file
+        /// is already added in the .gitignore file
         /// 
         /// You should create the key.json file and include it into your solution with below definition
         /// 
@@ -26,15 +26,15 @@ namespace Huobi.SDK.Example
         /// </summary>
         public static void LoadConfig()
         {
+            // Read configs from 'appsettings.json'
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
             Host = config["Host"];
             AccessKey = config["AccessKey"];
             AccountId = config["AccountId"];
             SubUserId = config["SubUserId"];
 
+            // Read SecretKey from 'key.json'
             config = new ConfigurationBuilder().AddJsonFile("key.json").Build();
-
             SecretKey = config["SecretKey"];
         }
     }
