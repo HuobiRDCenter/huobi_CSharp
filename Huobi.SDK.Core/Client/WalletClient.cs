@@ -41,6 +41,23 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Parent user get sub user deposit address of corresponding chain, for a specific crypto currency (except IOTA)
+        /// </summary>
+        /// <param name="subUserId">Sub user id</param>
+        /// <param name="currency">Crytpo currency</param>
+        /// <returns>GetDepositAddressResponse</returns>
+        public async Task<GetDepositAddressResponse> GetSubUserDepositAddressAsync(string subUserId, string currency)
+        {
+            GetRequest request = new GetRequest()
+                .AddParam("subUid", subUserId)
+                .AddParam("currency", currency);
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/sub-user/deposit-address", request);
+
+            return await HttpRequest.GetAsync<GetDepositAddressResponse>(url);
+        }
+
+        /// <summary>
         /// Query withdraw quota for currencies
         /// </summary>
         /// <param name="request"></param>
@@ -86,6 +103,18 @@ namespace Huobi.SDK.Core.Client
             string url = _urlBuilder.Build(GET_METHOD, "/v1/query/deposit-withdraw", request);
 
             return await HttpRequest.GetAsync<GetDepositWithdrawHistoryResponse>(url);
+        }
+
+        /// <summary>
+        /// Parent user get sub user deposit history
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>GetDepositWithdrawHistoryResponse</returns>
+        public async Task<GetSubUserDepositHistoryResponse> GetSubUserDepositHistoryAsync(GetRequest request)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/sub-user/query-deposit", request);
+
+            return await HttpRequest.GetAsync<GetSubUserDepositHistoryResponse>(url);
         }
     }
 }

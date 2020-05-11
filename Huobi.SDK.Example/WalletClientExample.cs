@@ -14,6 +14,8 @@ namespace Huobi.SDK.Example
         {
             GetDepoistAddress();
 
+            GetSubUserDepositAddress();
+
             GetWithdrawQuota();
 
             WithdrawCurrency();
@@ -21,6 +23,8 @@ namespace Huobi.SDK.Example
             CancelWithdrawCurrency();
 
             GetDepositWithdrawHistory();
+
+            GetSubUserDepositHistory();
         }
 
         private static void GetDepoistAddress()
@@ -36,11 +40,36 @@ namespace Huobi.SDK.Example
 
             if (result != null && result.data != null)
             {
+                AppLogger.Info($"Get deposit address, id={result.data.Length}");
                 foreach (var a in result.data)
                 {
                     AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
                 }
-                AppLogger.Info($"There are total {result.data.Length} addresses");
+            }
+        }
+
+        private static void GetSubUserDepositAddress()
+        {
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var result = walletClient.GetSubUserDepositAddressAsync(Config.SubUserId, "btc").Result;
+            _logger.StopAndLog();
+
+            if (result != null)
+            {
+                if (result.data != null)
+                {
+                    AppLogger.Info($"Get sub user deposit address, id={result.data.Length}");
+                    foreach (var a in result.data)
+                    {
+                        AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
+                    }
+                }
+                else
+                {
+                    AppLogger.Error($"Get sub user deposit address error: code={result.code}, message={result.message}");
+                }
             }
         }
 
@@ -138,6 +167,27 @@ namespace Huobi.SDK.Example
                 }
 
                 AppLogger.Info($"There are {result.data.Length} deposit and withdraw history");
+            }
+        }
+
+        private static void GetSubUserDepositHistory()
+        {
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var request = new GetRequest()
+                    .AddParam("subUid", Config.SubUserId);
+
+            var result = walletClient.GetSubUserDepositHistoryAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
+            {
+                AppLogger.Info($"Get sub user deposit history, count={result.data.Length}");
+                foreach (var h in result.data)
+                {
+                    AppLogger.Info($"Deposit history, id={h.id}, currency={h.currency}, amount={h.amount}, address={h.address}, updatedAt={h.updateTime}");
+                }
             }
         }
     }

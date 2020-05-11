@@ -11,6 +11,11 @@
         public int code;
 
         /// <summary>
+        /// Error message (if any)
+        /// </summary>
+        public string message;
+
+        /// <summary>
         /// Response body
         /// </summary>
         public Address[] data;
