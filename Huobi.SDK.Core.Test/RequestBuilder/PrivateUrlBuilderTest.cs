@@ -9,16 +9,12 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Build_NoRequestParameter_Success()
         {
-            var builder = new PrivateUrlBuilder("access", "secret", "api.huobi.pro");
-            DateTime dateTime = new DateTime(2019, 11, 21, 10, 0, 0);
-
+            var builder = new PrivateUrlBuilder("abcdefg-hijklmn-opqrst-uvwxyz", "12345-67890-12345-67890", "api.huobi.pro");
+            DateTime dateTime = new DateTime(2020, 04, 01, 12, 34, 56);
 
             string result = builder.Build("GET", "/v1/account/accounts", dateTime);
 
-
-            string escapedTime = Uri.EscapeDataString(dateTime.ToString("s"));
-            string expected = string.Format(@"https://api.huobi.pro/v1/account/accounts?AccessKeyId=access&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp={0}&Signature=rWnLcMt3XBAsmXoNHtTQVpvMbH%2FcE1PXFwQAGeYwt3s%3D",
-                escapedTime);
+            string expected = @"https://api.huobi.pro/v1/account/accounts?AccessKeyId=abcdefg-hijklmn-opqrst-uvwxyz&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-04-01T12%3A34%3A56&Signature=3IUZcEak4IIRrh7%2FidFrP2Jj77MaWGXR%2FoQbe9gL4%2BI%3D";
             Assert.Equal(expected, result);
         }
 

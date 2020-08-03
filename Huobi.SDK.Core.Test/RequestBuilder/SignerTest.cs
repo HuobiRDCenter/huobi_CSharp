@@ -8,11 +8,15 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Sign_FourString_Success()
         {
-            var signer = new Signer("secret");
+            var signer = new Signer("12345-67890-12345-67890");
 
-            string result = signer.Sign("GET", "api.huobi.pro", "/v1/account/history", "account-id=1&currency=btcusdt");
+            string result = signer.Sign(
+                "GET",
+                "api.huobi.pro",
+                "/v1/account/accounts",
+                "AccessKeyId=abcdefg-hijklmn-opqrst-uvwxyz&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-04-01T12%3A34%3A56");
 
-            Assert.Equal("HUP3n78npIuTzVKyjEOrPictRKEUTRoYs7Ld5y38hmA=", result);
+            Assert.Equal("3IUZcEak4IIRrh7/idFrP2Jj77MaWGXR/oQbe9gL4+I=", result);
         }
 
         [Fact]

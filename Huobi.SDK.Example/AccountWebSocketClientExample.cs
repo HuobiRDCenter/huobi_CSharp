@@ -1,6 +1,5 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Account;
 using Huobi.SDK.Model.Response.Auth;

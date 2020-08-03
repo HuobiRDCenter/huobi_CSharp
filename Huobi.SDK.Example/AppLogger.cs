@@ -1,41 +1,41 @@
 ﻿using System;
-using NLog;
+using Huobi.SDK.Core.Log;
 
-namespace Huobi.SDK.Log
+namespace Huobi.SDK.Example
 {
     public class AppLogger
     {
-        private static readonly ILogger _nLogger = LogManager.GetLogger("appLogger");
+        private static readonly ILogger _logger = new ConsoleLogger();
 
         public static void Trace(string message)
         {
-            _nLogger.Trace(message);
+            _logger.Log(LogLevel.Trace, message);
         }
 
         public static void Debug(string message)
         {
-            _nLogger.Debug(message);
+            _logger.Log(LogLevel.Debug, message);
         }
 
         public static void Info(string message)
         {
-            _nLogger.Info(message);
+            _logger.Log(LogLevel.Info, message);
         }
 
         public static void Warn(string message)
         {
-            _nLogger.Warn(message);
+            _logger.Log(LogLevel.Warn, message);
         }
 
         public static void Error(string message, Exception exception = null)
         {
             if (exception == null)
             {
-                _nLogger.Error(message);
+                _logger.Log(LogLevel.Error, message);
             }
             else
             {
-                _nLogger.Error(exception, message);
+                _logger.Log(LogLevel.Error, message + exception.StackTrace);
             }
         }
 
@@ -43,11 +43,11 @@ namespace Huobi.SDK.Log
         {
             if (exception == null)
             {
-                _nLogger.Fatal(message);
+                _logger.Log(LogLevel.Fatal, message);
             }
             else
             {
-                _nLogger.Fatal(exception, message);
+                _logger.Log(LogLevel.Fatal, message + exception.StackTrace);
             }
         }
     }

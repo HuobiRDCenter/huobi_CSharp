@@ -1,7 +1,6 @@
-﻿using System;
-using Huobi.SDK.Core;
+﻿using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 
 namespace Huobi.SDK.Example
 {

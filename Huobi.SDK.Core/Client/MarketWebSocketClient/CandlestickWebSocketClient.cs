@@ -1,5 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Core.Client
@@ -33,7 +33,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"req\": \"{topic}\",\"id\": \"{clientId}\", \"from\":{from}, \"to\":{to} }}");
 
-            AppLogger.Info($"WebSocket requested, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket requested, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"unsub\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
     }
 }

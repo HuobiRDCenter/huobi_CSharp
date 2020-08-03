@@ -1,5 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response.Account;
 
 namespace Huobi.SDK.Core.Client
@@ -34,7 +34,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"op\":\"sub\", \"cid\": \"{clientId}\", \"topic\":\"{topic}\", \"model\": \"{model}\" }}");
 
-            AppLogger.Info($"WebSocket subscribed, topic={topic}, model={model}");
+            _logger.Log(LogLevel.Info, $"WebSocket subscribed, topic={topic}, model={model}");
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"op\":\"unsub\", \"cid\": \"{clientId}\", \"topic\":\"{topic}\", \"model\": \"{model}\" }}");
 
-            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, model={model}");
+            _logger.Log(LogLevel.Info, $"WebSocket unsubscribed, topic={topic}, model={model}");
         }
     }
 }

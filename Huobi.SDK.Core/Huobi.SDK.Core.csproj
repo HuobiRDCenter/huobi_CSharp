@@ -18,9 +18,9 @@
     <Folder Include="Client\AccountWebSocketClient\" />
     <Folder Include="Client\WebSocketClientBase\" />
     <Folder Include="Client\OrderWebSocketClient\" />
+    <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Huobi.SDK.Model\Huobi.SDK.Model.csproj" />
-    <ProjectReference Include="..\Huobi.SDK.Log\Huobi.SDK.Log.csproj" />
   </ItemGroup>
 </Project>

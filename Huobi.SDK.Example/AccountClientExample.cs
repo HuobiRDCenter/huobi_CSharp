@@ -1,7 +1,7 @@
 ﻿using System;
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
@@ -26,6 +26,8 @@ namespace Huobi.SDK.Example
 
             TransferCurrencyFromMasterToSub();
 
+            TransferCurrencyFromSubToMaster();
+
             GetSubuserAccountBalances();
 
             GetSubuserAccountBalance();
@@ -45,6 +47,7 @@ namespace Huobi.SDK.Example
 
             if (result != null && result.data != null)
             {
+                AppLogger.Info($"Get account info, count={result.data.Length}");
                 foreach (var a in result.data)
                 {
                     AppLogger.Info($"account id: {a.id}, type: {a.type}, state: {a.state}");
@@ -68,10 +71,11 @@ namespace Huobi.SDK.Example
                         {
                             if (result.data != null && result.data.list != null)
                             {
+                                AppLogger.Info($"Get account balance, count={result.data.list.Length}");
                                 int availableCount = 0;
                                 foreach (var b in result.data.list)
                                 {
-                                    if (Math.Abs(float.Parse(b.balance)) > 0.00001)
+                                    if (Math.Abs(float.Parse(b.balance)) > 0.0000001)
                                     {
                                         availableCount++;
                                         AppLogger.Info($"currency: {b.currency}, type: {b.type}, balance: {b.balance}");
@@ -106,11 +110,11 @@ namespace Huobi.SDK.Example
                 {
                     case "ok":
                         {
+                            AppLogger.Info($"Get account history, count={result.data.Length}");
                             foreach (var h in result.data)
                             {
                                 AppLogger.Info($"currency: {h.currency}, amount: {h.transactAmt}, type: {h.transactType}, time: {h.transactTime}");
                             }
-                            AppLogger.Info($"There are total {result.data.Length} transactions");
                             break;
                         }
                     case "error":
@@ -136,6 +140,7 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
+                    AppLogger.Info($"Get account ledger, count={result.data.Length}");
                     foreach (var l in result.data)
                     {
                         AppLogger.Info($"Get account ledger, accountId: {l.accountId}, currency: {l.currency}, amount: {l.transactAmt}, transferer: {l.transferer}, transferee: {l.transferee}");
@@ -205,7 +210,34 @@ namespace Huobi.SDK.Example
             var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
 
             _logger.Start();
-            var result = accountClient.TransferCurrencyFromMasterToSubAsync(Config.SubUserId, "ht", 1).Result;
+            var result = accountClient.TransferCurrencyFromMasterToSubAsync(Config.SubUserId, "ht", 0.01m).Result;
+            _logger.StopAndLog();
+
+            if (result != null)
+            {
+                switch (result.status)
+                {
+                    case "ok":
+                        {
+                            AppLogger.Info($"Transfer successfully, trade id: {result.data}");
+                            break;
+                        }
+                    case "error":
+                        {
+                            AppLogger.Info($"Transfer fail, error code: {result.errorCode}, error message: {result.errorMessage}");
+                            break;
+                        }
+                }
+            }
+        }
+
+
+        private static void TransferCurrencyFromSubToMaster()
+        {
+            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var result = accountClient.TransferCurrencyFromSubToMasterAsync(Config.SubUserId, "ht", 0.01m).Result;
             _logger.StopAndLog();
 
             if (result != null)

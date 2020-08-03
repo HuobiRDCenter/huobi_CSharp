@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Newtonsoft.Json;
 
 namespace Huobi.SDK.Core

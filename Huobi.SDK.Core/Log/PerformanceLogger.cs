@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using NLog;
-using NLog.Config;
-using NLog.Targets;
+﻿using System.Diagnostics;
 
-namespace Huobi.SDK.Log
+namespace Huobi.SDK.Core.Log
 {
     /// <summary>
     /// Responsible to measure SDK performance
@@ -25,7 +21,7 @@ namespace Huobi.SDK.Log
 
         private bool _enable;
         private Stopwatch _stopwatch;
-        private ILogger _nLogger;
+        private ILogger _logger;
         private int _logContentLineCount;
 
         private long _requestStart;
@@ -42,7 +38,7 @@ namespace Huobi.SDK.Log
             _stopwatch = new Stopwatch();
 
             // Performance logger
-            _nLogger = LogManager.GetLogger("perfLogger");
+            _logger = new ConsoleLogger();
 
             // Log content line count
             _logContentLineCount = 1;
@@ -119,17 +115,18 @@ namespace Huobi.SDK.Log
             if (_enable)
             {
                 _stopwatch.Stop();
-                long totalDuration = _stopwatch.ElapsedMilliseconds;
-                long requestDuration = _requestEnd - _requestStart;
+                _logContent.TotalDuration = _stopwatch.ElapsedMilliseconds;
+                _logContent.NetworkDuration = _requestEnd - _requestStart;
+                _logContent.SDKDuration = _logContent.TotalDuration - _logContent.NetworkDuration;
 
 
                 // Log header if it is the first record
                 if (_logContentLineCount == 1)
                 {
-                    _nLogger.Trace($"Index|Endpoint|URL|Total Duration(ms)|Request Duration(ms)|SDK Duration(ms)");
+                    _logger.Log(LogLevel.Trace, $"Index|Endpoint|URL|Total Duration(ms)|Request Duration(ms)|SDK Duration(ms)");
                 }
 
-                _nLogger.Trace($"{_logContent.Id}|{_logContent.Endpoint}|{_logContent.Url}|{totalDuration}|{requestDuration}|{totalDuration - requestDuration}");
+                _logger.Log(LogLevel.Trace, $"{_logContent.Id}|{_logContent.Endpoint}|{_logContent.Url}|{_logContent.TotalDuration}|{_logContent.NetworkDuration}|{_logContent.SDKDuration}");
 
                 _logContentLineCount++;
             }

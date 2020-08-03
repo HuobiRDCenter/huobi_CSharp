@@ -4,7 +4,6 @@ using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Auth;
-using Huobi.SDK.Log;
 
 namespace Huobi.SDK.Example
 {

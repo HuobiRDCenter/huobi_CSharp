@@ -1,5 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response.Market;
 
 namespace Huobi.SDK.Core.Client
@@ -35,7 +35,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{\"req\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket request, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket request, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{\"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.150\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{\"sub\": \"{topic}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket subscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket subscribed, topic={topic}, clientId={clientId}");
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{\"unsub\": \"market.{symbol}.mbp.refresh.{level}\",\"id\": \"{clientId}\" }}");
 
-            AppLogger.Info($"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
+            _logger.Log(LogLevel.Info, $"WebSocket unsubscribed, topic={topic}, clientId={clientId}");
         }
     }
 }

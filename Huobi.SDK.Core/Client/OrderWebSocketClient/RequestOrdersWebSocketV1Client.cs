@@ -1,7 +1,7 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
 using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 
 namespace Huobi.SDK.Core.Client
 {
@@ -30,7 +30,7 @@ namespace Huobi.SDK.Core.Client
         {
             _WebSocket.Send(request.ToJson());
 
-            AppLogger.Info($"WebSocket requested, topic={request.topic}, accountId={request.AccountId} symbol={request.symbol}");
+            _logger.Log(LogLevel.Info, $"WebSocket requested, topic={request.topic}, accountId={request.AccountId} symbol={request.symbol}");
         }
     }
 }

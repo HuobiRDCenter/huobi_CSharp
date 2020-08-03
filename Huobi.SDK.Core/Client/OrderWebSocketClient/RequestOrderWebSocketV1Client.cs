@@ -1,5 +1,5 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Log;
+using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response.Order;
 
 namespace Huobi.SDK.Core.Client
@@ -32,7 +32,7 @@ namespace Huobi.SDK.Core.Client
 
             _WebSocket.Send($"{{ \"op\":\"req\", \"cid\": \"{clientId}\", \"topic\":\"{topic}\", \"order-id\":\"{orderId}\" }}");
 
-            AppLogger.Info($"WebSocket requested, topic={topic}, orderId={orderId}");
+            _logger.Log(LogLevel.Info, $"WebSocket requested, topic={topic}, orderId={orderId}");
         }
     }
 }
