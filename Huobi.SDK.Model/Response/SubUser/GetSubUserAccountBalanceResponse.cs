@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Account
+﻿namespace Huobi.SDK.Model.Response.SubUser
 {
     /// <summary>
     /// GetSubUserAccountBalance response

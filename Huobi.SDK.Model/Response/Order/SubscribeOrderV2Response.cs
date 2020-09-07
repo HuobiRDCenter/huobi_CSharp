@@ -17,7 +17,7 @@ namespace Huobi.SDK.Model.Response.Order
         {
             /// <summary>
             /// Event type
-            /// Possible values: [creation, trade, cancellation]
+            /// Possible values: [trigger, deletion, creation, trade, cancellation]
             /// </summary>
             public string eventType;
 
@@ -38,7 +38,8 @@ namespace Huobi.SDK.Model.Response.Order
 
             /// <summary>
             /// Order type
-            /// Possible values for creation eventType: [buy-limit, sell-limit, buy-limit-maker, sell-limit-maker]
+            /// Possible values for creation eventType: [buy-market, sell-market, buy-limit, sell-limit,
+            /// buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok]
             /// </summary>
             public string type;
 

@@ -13,8 +13,6 @@ namespace Huobi.SDK.Example
         {
             GetDepoistAddress();
 
-            GetSubUserDepositAddress();
-
             GetWithdrawQuota();
 
             WithdrawCurrency();
@@ -43,31 +41,6 @@ namespace Huobi.SDK.Example
                 foreach (var a in result.data)
                 {
                     AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
-                }
-            }
-        }
-
-        private static void GetSubUserDepositAddress()
-        {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
-
-            _logger.Start();
-            var result = walletClient.GetSubUserDepositAddressAsync(Config.SubUserId, "btc").Result;
-            _logger.StopAndLog();
-
-            if (result != null)
-            {
-                if (result.data != null)
-                {
-                    AppLogger.Info($"Get sub user deposit address, id={result.data.Length}");
-                    foreach (var a in result.data)
-                    {
-                        AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
-                    }
-                }
-                else
-                {
-                    AppLogger.Error($"Get sub user deposit address error: code={result.code}, message={result.message}");
                 }
             }
         }
@@ -171,7 +144,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubUserDepositHistory()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
 
             _logger.Start();
             var request = new GetRequest()

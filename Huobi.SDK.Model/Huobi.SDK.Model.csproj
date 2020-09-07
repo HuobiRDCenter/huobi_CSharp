@@ -22,5 +22,6 @@
     <Folder Include="Response\Transfer\" />
     <Folder Include="Response\WebSocketBase\" />
     <Folder Include="Response\Auth\" />
+    <Folder Include="Response\SubUser\" />
   </ItemGroup>
 </Project>
