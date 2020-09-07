@@ -11,7 +11,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
     /// The abstract class that responsible to get data from websocket
     /// </summary>
     /// <typeparam name="DataResponseType"></typeparam>
-    public abstract class WebSocketClientBase<DataResponseType>
+    public abstract class WebSocketClientBase<DataResponseType> : AbstractWebSocketClient
     {
         public delegate void OnConnectionOpenHandler();
         public event OnConnectionOpenHandler OnConnectionOpen;
@@ -29,8 +29,6 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         private DateTime _lastReceivedTime;
         private const int RECONNECT_WAIT_SECOND = 60;
         private const int RENEW_WAIT_SECOND = 120;
-
-        protected ILogger _logger = new ConsoleLogger();
 
         /// <summary>
         /// Constructor
@@ -89,7 +87,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// Connect to websocket server
         /// </summary>
         /// <param name="autoConnect">whether auto connect to server after it is disconnected</param>
-        public void Connect(bool autoConnect = true)
+        public override void Connect(bool autoConnect = true)
         {
             _WebSocket.OnMessage += _WebSocket_OnMessage;
 
@@ -105,7 +103,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// <summary>
         /// Disconnect to websocket server
         /// </summary>
-        public void Disconnect()
+        public override void Disconnect()
         {
             _timer.Enabled = false;
 

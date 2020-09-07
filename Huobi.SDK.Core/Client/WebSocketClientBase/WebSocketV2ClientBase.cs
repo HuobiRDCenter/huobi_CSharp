@@ -15,7 +15,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
     /// The abstract class that responsible to get data from websocket authentication v1
     /// </summary>
     /// <typeparam name="DataResponseType"></typeparam>
-    public abstract class WebSocketV2ClientBase<DataResponseType> where DataResponseType : WebSocketV2ResponseBase
+    public abstract class WebSocketV2ClientBase<DataResponseType> : AbstractWebSocketClient where DataResponseType : WebSocketV2ResponseBase
     {
         public delegate void OnAuthenticationReceivedHandler(WebSocketV2AuthResponse response);
         public event OnAuthenticationReceivedHandler OnAuthenticationReceived;
@@ -36,9 +36,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         private const int RENEW_WAIT_SECOND = 120;
 
         private readonly WebSocketV2RequestBuilder _wsV2ReqBuilder;
-
-        protected ILogger _logger = new ConsoleLogger();
-
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -99,7 +97,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// Connect to websocket server
         /// </summary>
         /// <param name="autoConnect">whether auto connect to server after it is disconnected</param>
-        public void Connect(bool autoConnect = true)
+        public override void Connect(bool autoConnect = true)
         {
             _WebSocket.OnMessage += _WebSocket_OnMessage;
 
@@ -115,7 +113,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// <summary>
         /// Disconnect to websocket server
         /// </summary>
-        public void Disconnect()
+        public override void Disconnect()
         {
             _timer.Enabled = false;
 
