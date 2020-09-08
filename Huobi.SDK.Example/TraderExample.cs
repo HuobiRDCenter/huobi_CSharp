@@ -1,6 +1,6 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
-using Huobi.SDK.Model.Request;
+using Huobi.SDK.Model.Request.Order;
 using Huobi.SDK.Model.Response;
 using Huobi.SDK.Model.Response.Auth;
 using Huobi.SDK.Model.Response.Order;

@@ -1,7 +1,9 @@
 ﻿using System;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
+using Huobi.SDK.Model.Request.SubUser;
 using Huobi.SDK.Model.Response;
+using static Huobi.SDK.Model.Request.SubUser.CreateSubUserRequest;
 
 namespace Huobi.SDK.Example
 {
@@ -11,6 +13,8 @@ namespace Huobi.SDK.Example
 
         public static void RunAll()
         {
+            CreateSubUser();
+
             LockSubUser();
 
             UnLockSubUser();
@@ -26,6 +30,38 @@ namespace Huobi.SDK.Example
             GetSubUserDepositAddress();
         }
 
+        private static void CreateSubUser()
+        {
+            var client = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var user1 = new UserList
+            {
+                userName = "test",
+                note = "note"
+            };
+
+            var request = new CreateSubUserRequest();
+            request.userList = new UserList[1];
+            request.userList[0] = user1;
+
+            var result = client.CreateSubUserAsync(request).Result;
+
+            if (result != null)
+            {
+                if (result.code == (int)ResponseCode.Success && result.data != null)
+                {
+                    AppLogger.Info($"Create ${result.data.Length} sub users");
+                    foreach (var creation in result.data)
+                    {
+                        AppLogger.Info($"Create sub user success, uid: {creation.uid}, userName: {creation.userName}");
+                    }
+                }
+                else
+                {
+                    AppLogger.Error($"Create sub user error: {result.message}");
+                }
+            }
+        }
+
         private static void LockSubUser()
         {
             var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
@@ -38,7 +74,7 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
-                    AppLogger.Info($"Lock sub user ${result.data.subUid} result: {result.data.userState}");
+                    AppLogger.Info($"Lock sub user {result.data.subUid} result: {result.data.userState}");
                 }
                 else
                 {
@@ -59,7 +95,7 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
-                    AppLogger.Info($"Unlock sub user ${result.data.subUid} result: {result.data.userState}");
+                    AppLogger.Info($"Unlock sub user {result.data.subUid} result: {result.data.userState}");
                 }
                 else
                 {

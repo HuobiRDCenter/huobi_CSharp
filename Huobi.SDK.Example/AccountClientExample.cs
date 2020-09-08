@@ -2,6 +2,7 @@
 using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
+using Huobi.SDK.Model.Request.Account;
 using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
@@ -15,6 +16,8 @@ namespace Huobi.SDK.Example
             GetAccountInfo();
 
             GetAccountBalance();
+
+            TransferAccount();
 
             GetAccountHistory();
 
@@ -78,6 +81,35 @@ namespace Huobi.SDK.Example
                             AppLogger.Info($"Get fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
+                }
+            }
+        }
+
+        private static void TransferAccount()
+        {
+            var client = new AccountClient(Config.AccessKey, Config.SecretKey);
+            var request = new TransferAccountRequest
+            {
+                fromUser = 125753978,
+                fromAccountType = "spot",
+                fromAccount = 11136102,
+                toUser = 128654510,
+                toAccountType = "spot",
+                toAccount = 12825690,
+                currency = "ht",
+                amount = "0.1"
+            };
+
+            var result = client.TransferAccountAsync(request).Result;
+            if (result != null)
+            {
+                if (result.status == "ok" && result.data != null)
+                {
+                    AppLogger.Info($"Transfer account success, id: {result.data.transactId}, time: {result.data.transactTime}");
+                }
+                else
+                {
+                    AppLogger.Error($"Transfer account error, code: {result.errCode}, message: {result.errMessage}");
                 }
             }
         }

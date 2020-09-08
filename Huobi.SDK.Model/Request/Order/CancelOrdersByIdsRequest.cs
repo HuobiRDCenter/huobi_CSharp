@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Request
+namespace Huobi.SDK.Model.Request.Order
 {
     public class CancelOrdersByIdsRequest
     {

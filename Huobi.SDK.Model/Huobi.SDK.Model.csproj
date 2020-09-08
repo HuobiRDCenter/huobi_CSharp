@@ -23,5 +23,9 @@
     <Folder Include="Response\WebSocketBase\" />
     <Folder Include="Response\Auth\" />
     <Folder Include="Response\SubUser\" />
+    <Folder Include="Request\Order\" />
+    <Folder Include="Request\Wallet\" />
+    <Folder Include="Request\SubUser\" />
+    <Folder Include="Request\Account\" />
   </ItemGroup>
 </Project>

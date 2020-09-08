@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
+using Huobi.SDK.Model.Request.SubUser;
 using Huobi.SDK.Model.Response.SubUser;
 using Huobi.SDK.Model.Response.Transfer;
 using Huobi.SDK.Model.Response.Wallet;
@@ -27,6 +28,18 @@ namespace Huobi.SDK.Core.Client
         public SubUserClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
         {
             _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
+        }
+
+        /// <summary>
+        /// The parent user creates sub users
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<CreateSubUserResponse> CreateSubUserAsync(CreateSubUserRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v2/sub-user/creation");
+
+            return await HttpRequest.PostAsync<CreateSubUserResponse>(url, request.ToJson());
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Request;
+using Huobi.SDK.Model.Request.Order;
 using Newtonsoft.Json;
 using System;
 

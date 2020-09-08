@@ -1,7 +1,7 @@
 ﻿using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
-using Huobi.SDK.Model.Request;
+using Huobi.SDK.Model.Request.Wallet;
 
 namespace Huobi.SDK.Example
 {

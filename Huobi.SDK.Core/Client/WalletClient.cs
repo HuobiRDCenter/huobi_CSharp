@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
 using Huobi.SDK.Model.Response.Wallet;
-using Huobi.SDK.Model.Request;
+using Huobi.SDK.Model.Request.Wallet;
 
 namespace Huobi.SDK.Core.Client
 {

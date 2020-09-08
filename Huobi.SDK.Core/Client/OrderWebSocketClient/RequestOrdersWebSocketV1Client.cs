@@ -1,6 +1,6 @@
 ﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
 using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Request;
+using Huobi.SDK.Model.Request.Order;
 using Huobi.SDK.Core.Log;
 
 namespace Huobi.SDK.Core.Client

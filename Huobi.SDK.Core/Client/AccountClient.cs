@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
+using Huobi.SDK.Model.Request.Account;
 using Huobi.SDK.Model.Response.Account;
 using Huobi.SDK.Model.Response.Transfer;
 
@@ -49,6 +50,18 @@ namespace Huobi.SDK.Core.Client
             string url = _urlBuilder.Build(GET_METHOD, $"/v1/account/accounts/{accountId}/balance");
 
             return await HttpRequest.GetAsync<GetAccountBalanceResponse>(url);
+        }
+
+        /// <summary>
+        /// Parent user and sub user transfer asset between accounts.
+        /// </summary>
+        /// <param name="request">TransferAccountRequest</param>
+        /// <returns>TransferAccountResponse</returns>
+        public async Task<TransferAccountResponse> TransferAccountAsync(TransferAccountRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v1/account/transfer");
+
+            return await HttpRequest.PostAsync<TransferAccountResponse>(url, request.ToJson());
         }
 
         /// <summary>
