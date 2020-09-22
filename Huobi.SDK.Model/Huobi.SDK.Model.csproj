@@ -27,5 +27,7 @@
     <Folder Include="Request\Wallet\" />
     <Folder Include="Request\SubUser\" />
     <Folder Include="Request\Account\" />
+    <Folder Include="Response\AlgoOrder\" />
+    <Folder Include="Request\AlgoOrder\" />
   </ItemGroup>
 </Project>
