@@ -97,6 +97,12 @@ namespace Huobi.SDK.Model.Response.Order
             public string filledFees;
 
             /// <summary>
+            /// Currency of transaction fee or transaction fee rebate
+            /// </summary>
+            [JsonProperty("fee-currency")]
+            public string feeCurrency;
+
+            /// <summary>
             /// The source where the order was triggered
             /// Possible values: [sys, web, api, app]
             /// </summary>

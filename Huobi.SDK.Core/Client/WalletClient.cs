@@ -53,6 +53,19 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Get withdraw address
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>GetDepositAddressResponse</returns>
+        public async Task<GetDepositAddressResponse> GetWithdrawAddressAsync(GetRequest request)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/withdraw/address", request);
+
+            return await HttpRequest.GetAsync<GetDepositAddressResponse>(url);
+        }
+
+
+        /// <summary>
         /// Withdraw from spot trading account to an external address.
         /// </summary>
         /// <param name="request"></param>

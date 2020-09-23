@@ -17,6 +17,8 @@ namespace Huobi.SDK.Example
 
             SubscribeFullMBP();
 
+            ReqAndSubScribeMBPTick();
+
             SubscribeBBO();
 
             ReqAndSubscribeTrade();
@@ -287,6 +289,87 @@ namespace Huobi.SDK.Example
 
             // Unsubscrive the specific topic
             client.UnSubscribe("btcusdt");
+
+            // Delete handler
+            client.OnResponseReceived -= Client_OnResponseReceived;
+        }
+
+        private static void ReqAndSubScribeMBPTick()
+        {
+            var client = new MarketByPriceTickWebSocketClient();
+
+            // Add connection open handler
+            client.OnConnectionOpen += Client_OnConnectionOpen;
+            void Client_OnConnectionOpen()
+            {
+                // Subscribe the specific topic
+                client.Subscribe("btcusdt", 5);
+            }
+
+            // Add the response receive handler
+            client.OnResponseReceived += Client_OnResponseReceived;
+            void Client_OnResponseReceived(SubscribeMarketByPriceResponse response)
+            {
+                if (response != null)
+                {
+                    if (response.tick != null) // Parse subscription data
+                    {
+                        AppLogger.Info($"WebSocket received data, prevSeqNum={response.tick.prevSeqNum}, seqNum={response.tick.seqNum}");
+                        if (response.tick.asks != null)
+                        {
+                            var asks = response.tick.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
+                            for (int i = asks.Length - 1; i >= 0; i--)
+                            {
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
+                            }
+                        }
+                        if (response.tick.bids != null)
+                        {
+                            var bids = response.tick.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
+                            for (int i = 0; i < bids.Length; i++)
+                            {
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
+                            }
+                        }
+                    }
+                    else if (response.data != null) // Parse request data
+                    {
+                        Console.WriteLine($"WebSocket returned data, prevSeqNum={response.data.prevSeqNum}, seqNum={response.data.seqNum}");
+                        if (response.data.asks != null)
+                        {
+                            var asks = response.data.asks;
+                            AppLogger.Info($"ask, count={asks.Length}");
+                            for (int i = asks.Length - 1; i >= 0; i--)
+                            {
+                                AppLogger.Info($"[{asks[i][0]} {asks[i][1]}]");
+                            }
+                        }
+                        if (response.data.bids != null)
+                        {
+                            var bids = response.data.bids;
+                            AppLogger.Info($"bids, count={bids.Length}");
+                            for (int i = 0; i < bids.Length; i++)
+                            {
+                                AppLogger.Info($"[{bids[i][0]} {bids[i][1]}]");
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Then connect to server and wait for the handler to handle the response
+            client.Connect();
+
+            // Request full data
+            client.Req("btcusdt", 5);
+
+            Console.WriteLine("Press ENTER to unsubscribe and stop...\n");
+            Console.ReadLine();
+
+            // Unsubscrive the specific topic
+            client.UnSubscribe("btcusdt", 5);
 
             // Delete handler
             client.OnResponseReceived -= Client_OnResponseReceived;

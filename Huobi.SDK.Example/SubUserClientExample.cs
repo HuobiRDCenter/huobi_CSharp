@@ -1,4 +1,5 @@
 ﻿using System;
+using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Request.SubUser;
@@ -28,6 +29,8 @@ namespace Huobi.SDK.Example
             GetSubuserAccountBalance();
 
             GetSubUserDepositAddress();
+
+            GetSubUserDepositHistory();
         }
 
         private static void CreateSubUser()
@@ -229,6 +232,27 @@ namespace Huobi.SDK.Example
                 else
                 {
                     AppLogger.Error($"Get sub user deposit address error: code={result.code}, message={result.message}");
+                }
+            }
+        }
+
+        private static void GetSubUserDepositHistory()
+        {
+            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var request = new GetRequest()
+                    .AddParam("subUid", Config.SubUserId);
+
+            var result = walletClient.GetSubUserDepositHistoryAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
+            {
+                AppLogger.Info($"Get sub user deposit history, count={result.data.Length}");
+                foreach (var h in result.data)
+                {
+                    AppLogger.Info($"Deposit history, id={h.id}, currency={h.currency}, amount={h.amount}, address={h.address}, updatedAt={h.updateTime}");
                 }
             }
         }

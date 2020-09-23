@@ -1,4 +1,5 @@
-﻿using Huobi.SDK.Core;
+﻿using System;
+using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Request.Wallet;
@@ -15,13 +16,13 @@ namespace Huobi.SDK.Example
 
             GetWithdrawQuota();
 
+            GetWithdrawAddress();
+
             WithdrawCurrency();
 
             CancelWithdrawCurrency();
 
             GetDepositWithdrawHistory();
-
-            GetSubUserDepositHistory();
         }
 
         private static void GetDepoistAddress()
@@ -37,7 +38,7 @@ namespace Huobi.SDK.Example
 
             if (result != null && result.data != null)
             {
-                AppLogger.Info($"Get deposit address, id={result.data.Length}");
+                AppLogger.Info($"Get deposit address, count={result.data.Length}");
                 foreach (var a in result.data)
                 {
                     AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
@@ -61,6 +62,28 @@ namespace Huobi.SDK.Example
                 foreach (var c in result.data.chains)
                 {
                     AppLogger.Info($"chain: {c.chain}, max withdraw amount {c.maxWithdrawAmt}, total quota {c.withdrawQuotaTotal}");
+                }
+            }
+        }
+
+
+        private static void GetWithdrawAddress()
+        {
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var request = new GetRequest()
+                .AddParam("currency", "btc");
+
+            var result = walletClient.GetWithdrawAddressAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.data != null)
+            {
+                AppLogger.Info($"Get withdraw address, count={result.data.Length}");
+                foreach (var a in result.data)
+                {
+                    AppLogger.Info($"currency: {a.currency}, addr: {a.address}, chain: {a.chain}");
                 }
             }
         }
@@ -139,27 +162,6 @@ namespace Huobi.SDK.Example
                 }
 
                 AppLogger.Info($"There are {result.data.Length} deposit and withdraw history");
-            }
-        }
-
-        private static void GetSubUserDepositHistory()
-        {
-            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
-
-            _logger.Start();
-            var request = new GetRequest()
-                    .AddParam("subUid", Config.SubUserId);
-
-            var result = walletClient.GetSubUserDepositHistoryAsync(request).Result;
-            _logger.StopAndLog();
-
-            if (result != null && result.data != null)
-            {
-                AppLogger.Info($"Get sub user deposit history, count={result.data.Length}");
-                foreach (var h in result.data)
-                {
-                    AppLogger.Info($"Deposit history, id={h.id}, currency={h.currency}, amount={h.amount}, address={h.address}, updatedAt={h.updateTime}");
-                }
             }
         }
     }

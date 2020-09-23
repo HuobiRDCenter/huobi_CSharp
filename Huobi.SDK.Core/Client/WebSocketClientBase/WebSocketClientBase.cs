@@ -18,7 +18,9 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         public delegate void OnResponseReceivedHandler(DataResponseType response);
         public event OnResponseReceivedHandler OnResponseReceived;
 
-        protected const string DEFAULT_HOST = "api.huobi.pro/ws";
+        protected const string DEFAULT_HOST = "api.huobi.pro";
+        protected const string WS_PATH = "ws";
+        protected const string FEED_PATH = "feed";
         private string _host;
 
         protected WebSocket _WebSocket;
@@ -34,9 +36,9 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// Constructor
         /// </summary>
         /// <param name="host">websocket host</param>
-        public WebSocketClientBase(string host = DEFAULT_HOST)
+        public WebSocketClientBase(string host = DEFAULT_HOST, string path = WS_PATH)
         {
-            _host = host;
+            _host = $"{host}/{path}";
 
             _timer = new Timer(TIMER_INTERVAL_SECOND * 1000);
             _timer.Elapsed += _timer_Elapsed;

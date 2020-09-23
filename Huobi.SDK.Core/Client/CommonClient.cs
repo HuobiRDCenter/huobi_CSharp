@@ -34,6 +34,17 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Returns current market status
+        /// </summary>
+        /// <returns>GetMarketStatusResponse</returns>
+        public async Task<GetMarketStatusResponse> GetMarketStatusAsync()
+        {
+            string url = _urlBuilder.Build("/v2/market-status");
+
+            return await HttpRequest.GetAsync<GetMarketStatusResponse>(url);
+        }
+
+        /// <summary>
         /// Get all Huobi's supported trading symbol.
         /// </summary>
         /// <returns>GetSymbolsResponse</returns>

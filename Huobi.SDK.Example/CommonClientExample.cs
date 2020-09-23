@@ -1,4 +1,5 @@
-﻿using Huobi.SDK.Core.Client;
+﻿using System;
+using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
 using Huobi.SDK.Model.Response;
 
@@ -11,6 +12,8 @@ namespace Huobi.SDK.Example
         public static void RunAll()
         {
             GetSystemStatus();
+
+            GetMarketStatus();
 
             GetSymbols();
 
@@ -30,6 +33,17 @@ namespace Huobi.SDK.Example
             _logger.StopAndLog();
 
             AppLogger.Info($"Get system status: {result}");
+        }
+
+        private static void GetMarketStatus()
+        {
+            var client = new CommonClient();
+
+            _logger.Start();
+            var result = client.GetMarketStatusAsync().Result;
+            _logger.StopAndLog();
+
+            AppLogger.Info($"Get market status: {result.data.marketStatus}");
         }
 
         private static void GetSymbols()

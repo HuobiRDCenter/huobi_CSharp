@@ -72,10 +72,24 @@ namespace Huobi.SDK.Model.Response.Wallet
 
             /// <summary>
             /// The state of this transfer
-            /// Possible values: [submitted, reexamine, canceled, pass, reject,
+            /// Possible values: [verifying, failed, submitted, reexamine, canceled, pass, reject,
             ///     pre-transfer, wallet-transfer, wallet-reject, confirmed, confirm-error, repealed]
             /// </summary>
             public string state;
+
+            /// <summary>
+            /// Error code for withdrawal failure, only returned when the type is "withdraw" and
+            /// the state is "reject", "wallet-reject" and "failed".
+            /// </summary>
+            [JsonProperty("error-code")]
+            public string errorCode;
+
+            /// <summary>
+            /// Error description of withdrawal failure, only returned when the type is "withdraw" and
+            /// the state is "reject", "wallet-reject" and "failed".
+            /// </summary>
+            [JsonProperty("error-msg")]
+            public string errorMessage;
 
             /// <summary>
             /// The timestamp in milliseconds for the transfer creation
