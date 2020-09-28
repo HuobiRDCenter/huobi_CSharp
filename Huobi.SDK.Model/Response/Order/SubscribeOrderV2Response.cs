@@ -37,6 +37,21 @@ namespace Huobi.SDK.Model.Response.Order
             public string clientOrderId;
 
             /// <summary>
+            /// Order side, buy or sell
+            /// </summary>
+            public string orderSide;
+
+            /// <summary>
+            /// Error code for triggering failure
+            /// </summary>
+            public int errCode;
+
+            /// <summary>
+            /// Error message for triggering failure
+            /// </summary>
+            public string errMessage;
+
+            /// <summary>
             /// Order type
             /// Possible values for creation eventType: [buy-market, sell-market, buy-limit, sell-limit,
             /// buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok]
@@ -55,9 +70,14 @@ namespace Huobi.SDK.Model.Response.Order
             public string orderPrice;
 
             /// <summary>
-            /// Order size
+            /// Order size (inapplicable for market buy order)
             /// </summary>
             public string orderSize;
+
+            /// <summary>
+            /// Order value (only applicable for market buy order)
+            /// </summary>
+            public string orderValue;
 
             /// <summary>
             /// Order create time, unix time in millisecond

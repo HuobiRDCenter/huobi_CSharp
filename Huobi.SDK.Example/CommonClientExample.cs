@@ -56,11 +56,11 @@ namespace Huobi.SDK.Example
 
             if (symbolsResponse != null && symbolsResponse.status != null && symbolsResponse.status.Equals("ok"))
             {
+                AppLogger.Info($"Get symbols, count={symbolsResponse.data.Length}");
                 foreach (var d in symbolsResponse.data)
                 {
-                    AppLogger.Info($"{d.symbol}: {d.baseCurrency} {d.quoteCurrency}");
+                    AppLogger.Info($"{d.symbol}: {d.baseCurrency} {d.quoteCurrency} {d.maxOrderValue} {d.minOrderValue}");
                 }
-                AppLogger.Info($"there are total {symbolsResponse.data.Length} symbols");
             }
         }
 

@@ -75,28 +75,93 @@ namespace Huobi.SDK.Model.Response.Common
             public int valuePrecision;
 
             /// <summary>
-            /// Minimum order amount (order amount is the ‘amount’ defined in ‘v1/order/orders/place’ when it’s a limit order or sell-market order)
+            /// Minimum order amount of limit order in base currency
             /// </summary>
-            [JsonProperty(PropertyName = "min-order-amt")]
-            public float minOrderAmt;
+            [JsonProperty("limit-order-min-order-amt")]
+            public double limitOrderMinOrderAmt;
 
             /// <summary>
-            /// Max order amount
+            /// Max order amount of limit order in base currency
             /// </summary>
-            [JsonProperty(PropertyName = "max-order-amt")]
-            public float maxOrderAmt;
+            [JsonProperty("limit-order-max-order-amt")]
+            public double limitOrderMaxOrderAmt;
 
             /// <summary>
-            /// Minimum order value (order value refers to ‘amount’ * ‘price’ defined in ‘v1/order/orders/place’ when it’s a limit order or ‘amount’ when it’s a buy-market order)
+            /// Minimum order amount of sell-market order in base currency 
+            /// </summary>
+            [JsonProperty("sell-market-min-order-amt")]
+            public double sellMarketMinOrderAmt;
+
+            /// <summary>
+            /// Max order amount of sell-market order in base currency 
+            /// </summary>
+            [JsonProperty("sell-market-max-order-amt")]
+            public double sellMarketMaxOrderAmt;
+
+            /// <summary>
+            /// Max order value of buy-market order in quote currency
+            /// </summary>
+            [JsonProperty("buy-market-max-order-value")]
+            public double buyMarketMaxOrderValue;
+
+            /// <summary>
+            /// Minimum order value of limit order and buy-market order in quote currency
             /// </summary>
             [JsonProperty(PropertyName = "min-order-value")]
-            public float minOrderValue;
+            public double minOrderValue;
+
+            /// <summary>
+            /// Max order value of limit order and buy-market order in USDT
+            /// </summary>
+            [JsonProperty(PropertyName = "max-order-value")]
+            public double maxOrderValue;
 
             /// <summary>
             /// The applicable leverage ratio
             /// </summary>
             [JsonProperty(PropertyName = "leverage-ratio")]
-            public float leverageRatio;
+            public double leverageRatio;
+
+            /// <summary>
+            /// Underlying ETP code (only valid for ETP symbols)
+            /// </summary>
+            public string underlying;
+
+            /// <summary>
+            /// Position charge rate (only valid for ETP symbols)
+            /// </summary>
+            [JsonProperty("mgmt-fee-rate")]
+            public double mgmtFeeRate;
+
+            /// <summary>
+            /// Position charging time (in GMT+8, in format HH:MM:SS, only valid for ETP symbols)
+            /// </summary>
+            [JsonProperty("charge-time")]
+            public string chargeTime;
+
+            /// <summary>
+            /// Regular position rebalance time (in GMT+8, in format HH:MM:SS, only valid for ETP symbols)
+            /// </summary>
+            [JsonProperty("rebal-time")]
+            public string rebalTime;
+
+            /// <summary>
+            /// The threshold which triggers adhoc position rebalance (evaluated by actual leverage ratio, only valid for ETP symbols)
+            /// </summary>
+            [JsonProperty("rebal-threshold")]
+            public double rebalThreshold;
+
+            /// <summary>
+            /// Initial NAV (only valid for ETP symbols)
+            /// </summary>
+            [JsonProperty("init-nav")]
+            public double initNav;
+
+            /// <summary>
+            /// API trading enabled or not (possible value: enabled, disabled)
+            /// </summary>
+            [JsonProperty("api-trading")]
+            public string apiTrading;
         }
     }
 }

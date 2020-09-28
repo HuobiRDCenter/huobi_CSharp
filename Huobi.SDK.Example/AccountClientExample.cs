@@ -17,6 +17,8 @@ namespace Huobi.SDK.Example
 
             GetAccountBalance();
 
+            GetAccountAssetValuation();
+
             TransferAccount();
 
             GetAccountHistory();
@@ -26,6 +28,10 @@ namespace Huobi.SDK.Example
             TransferFromSpotToFuture();
 
             TransferFromFutureToSpot();
+
+            GetPointBalance();
+
+            TransferPoint();
         }
 
         private static void GetAccountInfo()
@@ -82,6 +88,24 @@ namespace Huobi.SDK.Example
                             break;
                         }
                 }
+            }
+        }
+
+        private static void GetAccountAssetValuation()
+        {
+            var client = new AccountClient(Config.AccessKey, Config.SecretKey);
+            string currency = "USD";
+            _logger.Start();
+            var result = client.GetAccountAssetValuationAsync("spot", currency).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.code == 200 && result.data != null)
+            {
+                AppLogger.Info($"Get account asset valuation, balance: {result.data.balance} {currency}, time: {result.data.timestamp}");
+            }
+            else
+            {
+                AppLogger.Error($"Get account asset valuation error, code: {result.code}, message: {result.message}");
             }
         }
 
@@ -225,5 +249,52 @@ namespace Huobi.SDK.Example
             }
         }
 
+        private static void GetPointBalance()
+        {
+            var client = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            _logger.Start();
+            var result = client.GetPointBalanceAsync().Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.code == 200)
+            {
+                AppLogger.Info($"Get point balance, account id: {result.data.accountId}, status: {result.data.accountStatus}, balance: {result.data.acctBalance}");
+                if (result.data.groupIds != null)
+                {
+                    AppLogger.Info($"Get point balance group, count={result.data.groupIds.Length}");
+                    foreach (var a in result.data.groupIds)
+                    {
+                        AppLogger.Info($"group id: {a.groupId}, expiry: {a.expiryDate}, remainAmt: {a.remainAmt}");
+                    }
+                }
+            }
+        }
+
+        private static void TransferPoint()
+        {
+            var client = new AccountClient(Config.AccessKey, Config.SecretKey);
+
+            var request = new TransferPointRequest
+            {
+                fromUid = "125753978",
+                toUid = "128654685",
+                groupId = 0,
+                amount = "0"
+            };
+
+            _logger.Start();
+            var result = client.TransferPointAsync(request).Result;
+            _logger.StopAndLog();
+
+            if (result != null && result.code == 200 && result.data != null)
+            {
+                AppLogger.Info($"Transfer point success, transact Id: {result.data.transactId}, time: {result.data.transactTime}");
+            }
+            else
+            {
+                AppLogger.Error($"Transfer point error, code: {result.code}, message: {result.message}");
+            }
+        }
     }
 }

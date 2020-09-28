@@ -15,6 +15,11 @@ namespace Huobi.SDK.Model.Response.Order
         public class Trade
         {
             /// <summary>
+            /// Event type
+            /// </summary>
+            public string eventType;
+
+            /// <summary>
             /// Trading symbol
             /// </summary>
             public string symbol;
@@ -69,6 +74,11 @@ namespace Huobi.SDK.Model.Response.Order
             public string trasactFee;
 
             /// <summary>
+            /// Currency of transaction fee or transaction fee rebate
+            /// </summary>
+            public string feeCurrency;
+
+            /// <summary>
             /// Transaction fee deduction
             /// </summary>
             public string feeDeduct;
@@ -78,6 +88,61 @@ namespace Huobi.SDK.Model.Response.Order
             /// Possible values: [ht,point]
             /// </summary>
             public string feeDeductType;
+
+            /// <summary>
+            /// Account ID
+            /// </summary>
+            public long accountId;
+
+            /// <summary>
+            /// Order source
+            /// </summary>
+            public string source;
+
+            /// <summary>
+            /// Order price (invalid for market order)
+            /// </summary>
+            public string orderPrice;
+
+            /// <summary>
+            /// Order size (invalid for market buy order)
+            /// </summary>
+            public string orderSize;
+
+            /// <summary>
+            /// Order value (only valid for market buy order)
+            /// </summary>
+            public string orderValue;
+
+            /// <summary>
+            /// Client order ID
+            /// </summary>
+            public string clientOrderId;
+
+            /// <summary>
+            /// Stop price (only valid for stop limit order)
+            /// </summary>
+            public string stopPrice;
+
+            /// <summary>
+            /// Operation character (only valid for stop limit order)
+            /// </summary>
+            public string @operator;
+
+            /// <summary>
+            /// Order creation time
+            /// </summary>
+            public long orderCreateTime;
+
+            /// <summary>
+            /// Order status, valid value: filled, partial-filled
+            /// </summary>
+            public string orderStatus;
+
+            /// <summary>
+            /// Remaining order amount (if market buy order, it implicates remaining order value)
+            /// </summary>
+            public string remainAmt;
         }
     }
 }

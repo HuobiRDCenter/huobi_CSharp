@@ -53,6 +53,32 @@ namespace Huobi.SDK.Core.Client
         }
 
         /// <summary>
+        /// Returns the balance of an account specified by account id
+        /// </summary>
+        /// <param name="accountType">The type of this account</param>
+        /// <param name="valuationCurrency">The valuation according to the certain fiat currency</param>
+        /// <param name="subUid">Sub User's UID.</param>
+        /// <returns>GetAccountAssetValuationResponse</returns>
+        public async Task<GetAccountAssetValuationResponse> GetAccountAssetValuationAsync(string accountType, string valuationCurrency = "BTC", long subUid = 0)
+        {
+            var request = new GetRequest()
+                .AddParam("accountType", accountType);
+
+            if (!string.IsNullOrEmpty(valuationCurrency))
+            {
+                request.AddParam("valuationCurrency", valuationCurrency);
+            }
+            if (subUid != 0)
+            {
+                request.AddParam("subUid", subUid.ToString());
+            }
+
+            string url = _urlBuilder.Build(GET_METHOD, $"/v2/account/asset-valuation", request);
+
+            return await HttpRequest.GetAsync<GetAccountAssetValuationResponse>(url);
+        }
+
+        /// <summary>
         /// Parent user and sub user transfer asset between accounts.
         /// </summary>
         /// <param name="request">TransferAccountRequest</param>
@@ -124,6 +150,38 @@ namespace Huobi.SDK.Core.Client
             string content = $"{{ \"currency\": \"{currency}\", \"amount\":\"{amount}\", \"type\":\"{type}\" }}";
 
             return await HttpRequest.PostAsync<TransferResponse>(url, content);
+        }
+
+        /// <summary>
+        /// Returns the point balance of specified user
+        /// </summary>
+        /// <param name="subUid"></param>
+        /// <returns>GetPointBalanceResponse</returns>
+        public async Task<GetPointBalanceResponse> GetPointBalanceAsync(string subUid = null)
+        {
+            GetRequest request = null;
+
+            if (!string.IsNullOrEmpty(subUid))
+            {
+                request = new GetRequest();
+                request.AddParam("subUid", subUid);
+            }
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/point/account", request);
+
+            return await HttpRequest.GetAsync<GetPointBalanceResponse>(url);
+        }
+
+        /// <summary>
+        /// transfer point between parent user and sub user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>TransferResponse</returns>
+        public async Task<TransferPointResponse> TransferPointAsync(TransferPointRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v2/point/transfer");
+
+            return await HttpRequest.PostAsync<TransferPointResponse>(url, request.ToJson());
         }
     }
 }
