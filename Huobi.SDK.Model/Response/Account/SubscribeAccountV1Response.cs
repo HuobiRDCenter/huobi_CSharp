@@ -17,7 +17,7 @@ namespace Huobi.SDK.Model.Response.Account
         {
             /// <summary>
             /// The event type which triggers this balance updates,
-            /// Possible values: [oder.place, order.match, order.refund, order.cancel, order.fee-refund,
+            /// Possible values: [oder.place, order.match, order.refund, order.cancel, order.fee-refund, deposit, withdraw
             /// (other balance transfer event types)]
             /// </summary>
             public string @event;

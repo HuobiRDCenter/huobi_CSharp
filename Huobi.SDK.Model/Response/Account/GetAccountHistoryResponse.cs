@@ -84,5 +84,11 @@ namespace Huobi.SDK.Model.Response.Account
             [JsonProperty(PropertyName = "record-id")]
             public string recordId;
         }
+
+        /// <summary>
+        /// First record ID in next page (only valid if exceeded page size)
+        /// </summary>
+        [JsonProperty("next-id")]
+        public long nextId;
     }
 }

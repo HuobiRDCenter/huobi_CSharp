@@ -37,7 +37,7 @@ namespace Huobi.SDK.Model.Response.Account
             /// <summary>
             /// Change type
             /// Possible values: [order-place,order-match,order-refund,order-cancel,order-fee-refund,
-            /// margin-transfer,margin-loan,margin-interest,margin-repay,other]
+            /// margin-transfer,margin-loan,margin-interest,margin-repay,deposit, withdraw, other]
             /// </summary>
             public string changeType;
 

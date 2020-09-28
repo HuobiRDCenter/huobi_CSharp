@@ -19,21 +19,22 @@ namespace Huobi.SDK.Example
             var stableCoinClient = new StableCointClient(Config.AccessKey, Config.SecretKey);
 
             _logger.Start();
-            var response = stableCoinClient.GetStableCoinAsync("usdt", "10", "sell").Result;
+            var result = stableCoinClient.GetStableCoinAsync("tusd", "1000", "sell").Result;
             _logger.StopAndLog();
 
-            if (response != null)
+            if (result != null)
             {
-                switch (response.status)
+                switch (result.status)
                 {
                     case "ok":
                         {
-                            AppLogger.Info($"Get stable coin successfully");
+                            var d = result.data;
+                            AppLogger.Info($"Get stable coin successfully, quoteId: {d.quoteId}, currency: {d.currency}, amount: {d.amount}, fee: {d.exchangeFee}");
                             break;
                         }
                     case "error":
                         {
-                            AppLogger.Info($"Get stable coin fail, error code: {response.errorCode}, error message: {response.errorMessage}");
+                            AppLogger.Info($"Get stable coin fail, error code: {result.errorCode}, error message: {result.errorMessage}");
                             break;
                         }
                 }
