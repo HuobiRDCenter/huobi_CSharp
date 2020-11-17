@@ -1,6 +1,8 @@
 ﻿using Huobi.SDK.Core;
 using Huobi.SDK.Core.Client;
 using Huobi.SDK.Core.Log;
+using Huobi.SDK.Model.Request.Margin;
+using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
@@ -23,6 +25,10 @@ namespace Huobi.SDK.Example
             GetLoanOrders();
 
             GetMarginAccount();
+
+            GeneralRepay();
+
+            GetRepayment();
         }
 
         private static void TransferIn()
@@ -235,5 +241,55 @@ namespace Huobi.SDK.Example
             }
         }
 
+        private static void GeneralRepay()
+        {
+            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+
+            var request = new GeneralRepayRequest
+            {
+                accountId = Config.AccountId,
+                amount = "10",
+                currency = "htusdt"
+            };
+
+            var result = client.GeneralRepay(request).Result;
+            if ((result.code == (int)ResponseCode.Success) && result.data != null)
+            {
+                AppLogger.Info($"General repay success, count: {result.data.Length}");
+                foreach (var r in result.data)
+                {
+                    AppLogger.Info($"Repay id: {r.repayId}, time: {r.repayTime}");
+                }
+            }
+            else
+            {
+                AppLogger.Error($"General repay error, code: {result.code}, message: {result.message}");
+            }
+        }
+
+        private static void GetRepayment()
+        {
+            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+
+            var request = new GetRepaymentRequest
+            {
+                accountId = Config.AccountId,
+                currency = "htusdt"
+            };
+
+            var result = client.GetRepayment(request).Result;
+            if ((result.code == (int)ResponseCode.Success) && result.data != null)
+            {
+                AppLogger.Info($"Get repayment success, count: {result.data.Length}");
+                foreach (var r in result.data)
+                {
+                    AppLogger.Info($"Repay id: {r.repayId}, time: {r.repayTime}, currency: {r.currency}, amount: {r.repaidAmount}");
+                }
+            }
+            else
+            {
+                AppLogger.Error($"Get repayment error, code: {result.code}, message: {result.message}");
+            }
+        }
     }
 }

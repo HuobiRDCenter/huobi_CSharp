@@ -18,7 +18,7 @@ namespace Huobi.SDK.Example
             Console.WriteLine("Press ENTER to place an order...\n");
             Console.ReadLine();
 
-            PlaceAnOrder(symbol, "1", "10");
+            PlaceAnOrder(symbol, "5", "10");
 
             Console.WriteLine("Press ENTER to unsubscribe and exit...\n");
             Console.ReadLine();
@@ -68,7 +68,7 @@ namespace Huobi.SDK.Example
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var o = response.data;
-                        AppLogger.Info($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, status: {o.orderStatus}");
+                        AppLogger.Info($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, account id: {o.accountId}, status: {o.orderStatus}");
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace Huobi.SDK.Example
             var request = new PlaceOrderRequest
             {
                 AccountId = Config.AccountId,
-                type = "buy-limit",
+                type = "sell-limit",
                 symbol = symbol,
                 source = "spot-api",
                 amount = amount,

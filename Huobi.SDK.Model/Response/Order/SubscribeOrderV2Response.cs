@@ -27,6 +27,11 @@ namespace Huobi.SDK.Model.Response.Order
             public string symbol;
 
             /// <summary>
+            /// Account Id
+            /// </summary>
+            public long accountId;
+
+            /// <summary>
             /// Order id
             /// </summary>
             public long orderId;

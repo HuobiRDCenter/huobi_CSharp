@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Huobi.SDK.Core.RequestBuilder;
+using Huobi.SDK.Model.Request.Margin;
 using Huobi.SDK.Model.Response.Margin;
 using Huobi.SDK.Model.Response.Transfer;
 
@@ -121,6 +122,39 @@ namespace Huobi.SDK.Core.Client
             string url = _urlBuilder.Build(GET_METHOD, "/v1/cross-margin/accounts/balance", request);
 
             return await HttpRequest.GetAsync<GetCrossMarginAccountResponse>(url);
+        }
+
+        /// <summary>
+        /// General repays margin loan.
+        /// </summary>
+        /// <param name="request">GeneralRepayRequest</param>
+        /// <returns>TransferResponse</returns>
+        public async Task<GeneralRepayResponse> GeneralRepay(GeneralRepayRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, $"/v2/account/repayment");
+
+            return await HttpRequest.PostAsync<GeneralRepayResponse>(url, request.ToJson());
+        }
+
+        /// <summary>
+        /// Returns the repayment records
+        /// </summary>
+        /// <returns>GetCrossMarginAccountResponse</returns>
+        public async Task<GetRepaymentResponse> GetRepayment(GetRepaymentRequest request)
+        {
+            GetRequest getRequest = new GetRequest()
+                .AddParam("repayId", request.repayId)
+                .AddParam("accountId", request.accountId)
+                .AddParam("currency", request.currency)
+                .AddParam("startTime", request.startTime.ToString())
+                .AddParam("endTime", request.endTime.ToString())
+                .AddParam("sort", request.sort)
+                .AddParam("limit", request.limit.ToString())
+                .AddParam("fromId", request.fromId.ToString());
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/repayment", getRequest);
+
+            return await HttpRequest.GetAsync<GetRepaymentResponse>(url);
         }
     }
 }

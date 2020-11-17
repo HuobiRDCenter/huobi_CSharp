@@ -29,5 +29,6 @@
     <Folder Include="Request\Account\" />
     <Folder Include="Response\AlgoOrder\" />
     <Folder Include="Request\AlgoOrder\" />
+    <Folder Include="Request\Margin\" />
   </ItemGroup>
 </Project>
