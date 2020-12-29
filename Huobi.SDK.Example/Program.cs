@@ -39,6 +39,8 @@ namespace Huobi.SDK.Example
 
             WalletClientExample.RunAll();
 
+            SubUserClientExample.RunAll();
+
             OrderClientExample.RunAll();
 
             IsolatedMarginClientExample.RunAll();

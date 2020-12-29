@@ -30,6 +30,18 @@ namespace Huobi.SDK.Core.Client
             _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
         }
 
+
+        /// <summary>
+        /// The user get the UID
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GetUIDResponse> GetUIDAsync()
+        {
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/user/uid");
+
+            return await HttpRequest.GetAsync<GetUIDResponse>(url);
+        }
+
         /// <summary>
         /// The parent user creates sub users
         /// </summary>

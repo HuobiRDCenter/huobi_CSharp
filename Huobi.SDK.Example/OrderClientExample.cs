@@ -340,7 +340,7 @@ namespace Huobi.SDK.Example
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             _logger.Start();
-            var response = tradeClient.GetMatchResultsByIdAsync("63403286375").Result;
+            var response = tradeClient.GetMatchResultsByIdAsync("137534048832590").Result;
             _logger.StopAndLog();
 
             switch (response.status)
@@ -351,7 +351,7 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var r in response.data)
                             {
-                                AppLogger.Info($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
+                                AppLogger.Info($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}, state: {r.feeDeductState}");
                             }
                             AppLogger.Info($"There are total {response.data.Length} match results");
                         }
@@ -436,7 +436,8 @@ namespace Huobi.SDK.Example
 
             _logger.Start();
             var request = new GetRequest()
-                .AddParam("symbol", "btcusdt");
+                .AddParam("symbol", "htusdt")
+                .AddParam("start-date", "2020-11-02");
             var response = tradeClient.GetMatchResultsAsync(request).Result;
             _logger.StopAndLog();
 
@@ -448,7 +449,7 @@ namespace Huobi.SDK.Example
                         {
                             foreach (var r in response.data)
                             {
-                                AppLogger.Info($"Match result symbol: {r.symbol}, amount: {r.filledAmount}, fee: {r.filledFees}");
+                                AppLogger.Info($"Match result order id: {r.orderId}, symbol: {r.symbol}, price: {r.price}, amount: {r.filledAmount}, fee: {r.filledFees}, state: {r.feeDeductState}");
                             }
                             AppLogger.Info($"There are total {response.data.Length} match results");
                         }

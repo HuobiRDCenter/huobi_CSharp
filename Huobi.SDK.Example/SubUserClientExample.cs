@@ -14,6 +14,8 @@ namespace Huobi.SDK.Example
 
         public static void RunAll()
         {
+            GetUID();
+
             CreateSubUser();
 
             LockSubUser();
@@ -31,6 +33,25 @@ namespace Huobi.SDK.Example
             GetSubUserDepositAddress();
 
             GetSubUserDepositHistory();
+        }
+
+        private static void GetUID()
+        {
+            var client = new SubUserClient(Config.AccessKey, Config.SecretKey);
+
+            var result = client.GetUIDAsync().Result;
+
+            if (result != null)
+            {
+                if (result.code == (int)ResponseCode.Success)
+                {
+                    AppLogger.Info($"Get UID: {result.data}");
+                }
+                else
+                {
+                    AppLogger.Error($"Get UID error, code: {result.code}, message: {result.message}");
+                }
+            }
         }
 
         private static void CreateSubUser()
@@ -52,7 +73,7 @@ namespace Huobi.SDK.Example
             {
                 if (result.code == (int)ResponseCode.Success && result.data != null)
                 {
-                    AppLogger.Info($"Create ${result.data.Length} sub users");
+                    AppLogger.Info($"Create {result.data.Length} sub users");
                     foreach (var creation in result.data)
                     {
                         AppLogger.Info($"Create sub user success, uid: {creation.uid}, userName: {creation.userName}");

@@ -125,6 +125,13 @@ namespace Huobi.SDK.Model.Response.Order
             /// </summary>
             [JsonProperty("fee-deduct-currency")]
             public string feeDeductCurrency;
+
+
+            /// <summary>
+            /// Fee deduction status，In deduction：ongoing，Deduction completed：done
+            /// </summary>
+            [JsonProperty("fee-deduct-state")]
+            public string feeDeductState;
         }
     }
 }
