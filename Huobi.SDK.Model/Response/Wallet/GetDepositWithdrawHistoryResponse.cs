@@ -94,11 +94,14 @@ namespace Huobi.SDK.Model.Response.Wallet
             /// <summary>
             /// The timestamp in milliseconds for the transfer creation
             /// </summary>
+
+            [JsonProperty("created-at")]
             public long createdAt;
 
             /// <summary>
             /// The timestamp in milliseconds for the transfer latest update
             /// </summary>
+            [JsonProperty("updated-at")]
             public long updatedAt;
         }
     }
