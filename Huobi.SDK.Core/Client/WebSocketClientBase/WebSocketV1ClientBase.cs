@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Timers;
-using Huobi.SDK.Core.Log;
-using Huobi.SDK.Core.Model;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.Auth;
+using HuobiSDK.Core.Log;
+using HuobiSDK.Core.Model;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.Auth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 
-namespace Huobi.SDK.Core.Client.WebSocketClientBase
+namespace HuobiSDK.Core.Client.WebSocketClientBase
 {
     /// <summary>
     /// The abstract class that responsible to get data from websocket authentication v1

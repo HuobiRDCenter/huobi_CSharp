@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Huobi.SDK.Model.Response.Common
+namespace HuobiSDK.Model.Response.Common
 {
     public class GetTimestampResponse
     {

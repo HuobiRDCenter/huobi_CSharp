@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Account
+﻿namespace HuobiSDK.Model.Response.Account
 {
     /// <summary>
     /// GetAccountInfo response

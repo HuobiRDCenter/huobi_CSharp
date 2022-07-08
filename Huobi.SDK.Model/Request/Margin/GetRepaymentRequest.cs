@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Request.Margin
+﻿namespace HuobiSDK.Model.Request.Margin
 {
     public class GetRepaymentRequest
     {

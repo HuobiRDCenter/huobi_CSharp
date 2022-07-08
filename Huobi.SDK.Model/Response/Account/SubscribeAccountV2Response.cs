@@ -1,6 +1,6 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 
-namespace Huobi.SDK.Model.Response.Account
+namespace HuobiSDK.Model.Response.Account
 {
     /// <summary>
     /// SubscribeAccountV2 response

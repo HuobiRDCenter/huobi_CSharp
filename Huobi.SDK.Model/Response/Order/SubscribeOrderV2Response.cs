@@ -1,7 +1,7 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Order
+namespace HuobiSDK.Model.Response.Order
 {
     /// <summary>
     /// SubscribeOrder response

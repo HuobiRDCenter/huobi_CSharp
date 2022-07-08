@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Request.Order
+namespace HuobiSDK.Model.Request.Order
 {
     public class PlaceOrderRequest
     {

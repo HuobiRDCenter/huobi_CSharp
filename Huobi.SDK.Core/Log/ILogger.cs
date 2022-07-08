@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Core.Log
+﻿namespace HuobiSDK.Core.Log
 {
     public interface ILogger
     {

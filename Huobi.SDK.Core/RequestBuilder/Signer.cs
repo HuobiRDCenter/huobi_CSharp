@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Huobi.SDK.Core.RequestBuilder
+namespace HuobiSDK.Core.RequestBuilder
 {
     /// <summary>
     /// Responsible to generate signature

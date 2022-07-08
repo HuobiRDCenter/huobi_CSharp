@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.Wallet;
-using Huobi.SDK.Model.Request.Wallet;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.Wallet;
+using HuobiSDK.Model.Request.Wallet;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate wallet

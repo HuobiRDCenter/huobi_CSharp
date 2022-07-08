@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Request.Margin;
-using Huobi.SDK.Model.Response.Margin;
-using Huobi.SDK.Model.Response.Transfer;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Request.Margin;
+using HuobiSDK.Model.Response.Margin;
+using HuobiSDK.Model.Response.Transfer;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate cross margin

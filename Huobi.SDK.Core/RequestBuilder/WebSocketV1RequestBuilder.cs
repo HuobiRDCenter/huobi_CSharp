@@ -1,7 +1,7 @@
 ﻿using System;
-using Huobi.SDK.Core.Model;
+using HuobiSDK.Core.Model;
 
-namespace Huobi.SDK.Core.RequestBuilder
+namespace HuobiSDK.Core.RequestBuilder
 {
     public class WebSocketV1RequestBuilder
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Huobi.SDK.Model.Response.Margin
+namespace HuobiSDK.Model.Response.Margin
 {
     /// <summary>
     /// GetCrossMarginAccount response

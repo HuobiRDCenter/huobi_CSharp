@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Request.Account
+namespace HuobiSDK.Model.Request.Account
 {
     public class TransferAccountRequest
     {

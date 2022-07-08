@@ -1,6 +1,6 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 
-namespace Huobi.SDK.Model.Response.Order
+namespace HuobiSDK.Model.Response.Order
 {
     /// <summary>
     /// SubscribeTradeClear response

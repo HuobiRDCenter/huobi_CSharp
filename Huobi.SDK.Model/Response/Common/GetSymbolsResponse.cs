@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Common
+namespace HuobiSDK.Model.Response.Common
 {
     /// <summary>
     /// GetSymbols response

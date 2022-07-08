@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.SubUser
+﻿namespace HuobiSDK.Model.Response.SubUser
 {
     /// <summary>
     /// Create SubUser Response

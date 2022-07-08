@@ -1,6 +1,6 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 
-namespace Huobi.SDK.Model.Response.Market
+namespace HuobiSDK.Model.Response.Market
 {
     /// <summary>
     /// SubscribeBestBidOffer response

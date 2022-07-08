@@ -1,6 +1,6 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 
-namespace Huobi.SDK.Model.Response.Auth
+namespace HuobiSDK.Model.Response.Auth
 {
     public class WebSocketV1AuthResponse : WebSocketV1ResponseBase
     {

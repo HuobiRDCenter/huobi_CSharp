@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Market
+﻿namespace HuobiSDK.Model.Response.Market
 {
     /// <summary>
     /// GetDepth response

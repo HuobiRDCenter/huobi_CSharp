@@ -1,7 +1,7 @@
 ﻿using System;
-using Huobi.SDK.Core.Log;
+using HuobiSDK.Core.Log;
 
-namespace Huobi.SDK.Core.Client.WebSocketClientBase
+namespace HuobiSDK.Core.Client.WebSocketClientBase
 {
     public abstract class AbstractWebSocketClient
     {

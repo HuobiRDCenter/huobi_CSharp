@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Request.AlgoOrder
+﻿namespace HuobiSDK.Model.Request.AlgoOrder
 {
     public class CancelOrdersRequest : PostRequestBase
     {

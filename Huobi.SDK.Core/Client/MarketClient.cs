@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Response.Market;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.Order;
+using HuobiSDK.Model.Response.Market;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to get market information

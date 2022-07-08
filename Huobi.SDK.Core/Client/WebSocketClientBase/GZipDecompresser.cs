@@ -2,7 +2,7 @@
 using System.IO.Compression;
 using System.Text;
 
-namespace Huobi.SDK.Core.Client.WebSocketClientBase
+namespace HuobiSDK.Core.Client.WebSocketClientBase
 {
     /// <summary>
     /// Responsible to GZIP decompress

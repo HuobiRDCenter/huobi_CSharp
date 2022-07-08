@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Core.Model
+﻿namespace HuobiSDK.Core.Model
 {
     public class PingMessageV1
     {

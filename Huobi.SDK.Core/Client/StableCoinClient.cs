@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.StableCoin;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.StableCoin;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate stable coin

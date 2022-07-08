@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Request
+namespace HuobiSDK.Model.Request
 {
     public class PostRequestBase
     {
