@@ -186,7 +186,7 @@ namespace HuobiSDK.Core.Client.WebSocketClientBase
 
         private void _WebSocket_OnError(object sender, ErrorEventArgs e)
         {
-            _logger.Log(Log.LogLevel.Error, $"WebSocket error: {e.Message}");
+            _logger.Log(Log.LogLevel.Error, $"WebSocket error: {e.Message} | {e.Exception}");
         }
     }
 }
