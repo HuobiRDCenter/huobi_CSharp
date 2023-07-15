@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.AlgoOrder;
-using Huobi.SDK.Model.Request.AlgoOrder;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.AlgoOrder;
+using HuobiSDK.Model.Request.AlgoOrder;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate on order

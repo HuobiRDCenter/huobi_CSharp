@@ -1,15 +1,14 @@
-﻿using System;
-using System.Timers;
-using Huobi.SDK.Core.Log;
-using Huobi.SDK.Core.Model;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.Auth;
-using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Core.Model;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.Auth;
+using HuobiSDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Timers;
 using WebSocketSharp;
 
-namespace Huobi.SDK.Core.Client.WebSocketClientBase
+namespace HuobiSDK.Core.Client.WebSocketClientBase
 {
     /// <summary>
     /// The abstract class that responsible to get data from websocket authentication v1
@@ -36,7 +35,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         private const int RENEW_WAIT_SECOND = 120;
 
         private readonly WebSocketV2RequestBuilder _wsV2ReqBuilder;
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -79,6 +78,8 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         {
             _WebSocket = new WebSocket($"wss://{_host}{PATH}");
             _WebSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.None;
+            _WebSocket.Log.Output = (d, m) =>
+            { /* Disable logger */ };
 
             _WebSocket.OnError += _WebSocket_OnError;
             _WebSocket.OnOpen += _WebSocket_OnOpen;
@@ -186,7 +187,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
         private void _WebSocket_OnError(object sender, ErrorEventArgs e)
         {
-            _logger.Log(Log.LogLevel.Error, $"WebSocket error: {e.Message}");
+            _logger.Log(Log.LogLevel.Error, $"WebSocket error: {e.Message} | {e.Exception}");
         }
     }
 }

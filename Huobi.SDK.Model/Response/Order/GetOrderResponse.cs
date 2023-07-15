@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Order
+namespace HuobiSDK.Model.Response.Order
 {
     /// <summary>
     /// The response for GetOrderById and GetOrderByClient

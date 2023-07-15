@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Transfer
+namespace HuobiSDK.Model.Response.Transfer
 {
     /// <summary>
     /// Transfer response

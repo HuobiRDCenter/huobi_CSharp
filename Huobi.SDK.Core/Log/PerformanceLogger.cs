@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Huobi.SDK.Core.Log
+namespace HuobiSDK.Core.Log
 {
     /// <summary>
     /// Responsible to measure SDK performance

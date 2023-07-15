@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Wallet
+﻿namespace HuobiSDK.Model.Response.Wallet
 {
     /// <summary>
     /// GetDepositAddress response

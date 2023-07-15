@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Order
+namespace HuobiSDK.Model.Response.Order
 {
     /// <summary>
     /// GetHistoryOrders and GetLast48hOrders response
@@ -103,19 +103,19 @@ namespace Huobi.SDK.Model.Response.Order
             /// <summary>
             /// The amount which has been filled
             /// </summary>
-            [JsonProperty("filled-amount")]
+            [JsonProperty("field-amount")]
             public string filledAmount;
 
             /// <summary>
             /// The filled total in quote currency
             /// </summary>
-            [JsonProperty("filled-cash-amount")]
+            [JsonProperty("field-cash-amount")]
             public string filledCashAmount;
 
             /// <summary>
             /// Transaction fee paid so far
             /// </summary>
-            [JsonProperty("filled-fees")]
+            [JsonProperty("field-fees")]
             public string filledFees;
 
             /// <summary>

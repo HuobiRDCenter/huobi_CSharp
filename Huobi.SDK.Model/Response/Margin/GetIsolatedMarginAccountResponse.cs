@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Margin
+namespace HuobiSDK.Model.Response.Margin
 {
     /// <summary>
     /// GetIsolatedMarginAccount response

@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Margin
+﻿namespace HuobiSDK.Model.Response.Margin
 {
     public class GetRepaymentResponse
     {

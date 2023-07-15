@@ -1,7 +1,7 @@
-﻿using Huobi.SDK.Model.Response.WebSocket;
+﻿using HuobiSDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Account
+namespace HuobiSDK.Model.Response.Account
 {
     /// <summary>
     /// RequestAccount response

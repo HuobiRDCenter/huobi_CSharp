@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.StableCoin
+namespace HuobiSDK.Model.Response.StableCoin
 {
     /// <summary>
     /// ExchangeStableCoin response

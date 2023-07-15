@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.WebSocket
+﻿namespace HuobiSDK.Model.Response.WebSocket
 {
     /// <summary>
     /// WebSocket v2 response base

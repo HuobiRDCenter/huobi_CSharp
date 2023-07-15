@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.WebSocket
+namespace HuobiSDK.Model.Response.WebSocket
 {
     /// <summary>
     /// WebSocket v1 response base

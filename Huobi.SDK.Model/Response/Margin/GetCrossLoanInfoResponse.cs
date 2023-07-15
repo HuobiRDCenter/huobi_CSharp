@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Margin
+namespace HuobiSDK.Model.Response.Margin
 {
     /// <summary>
     /// GetCrossLoanInfo response

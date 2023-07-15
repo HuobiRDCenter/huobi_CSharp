@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.Common
+﻿namespace HuobiSDK.Model.Response.Common
 {
     /// <summary>
     /// GetCurrencys response

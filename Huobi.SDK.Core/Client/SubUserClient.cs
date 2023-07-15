@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Request.SubUser;
-using Huobi.SDK.Model.Response.SubUser;
-using Huobi.SDK.Model.Response.Transfer;
-using Huobi.SDK.Model.Response.Wallet;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Request.SubUser;
+using HuobiSDK.Model.Response.SubUser;
+using HuobiSDK.Model.Response.Transfer;
+using HuobiSDK.Model.Response.Wallet;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate sub user

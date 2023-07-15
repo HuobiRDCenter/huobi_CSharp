@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Huobi.SDK.Model.Response
+namespace HuobiSDK.Model.Response
 {
     public enum ResponseCode
     {

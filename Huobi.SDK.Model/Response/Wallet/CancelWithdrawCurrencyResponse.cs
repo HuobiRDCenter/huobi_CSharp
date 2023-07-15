@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.Wallet
+namespace HuobiSDK.Model.Response.Wallet
 {
     /// <summary>
     /// WithdrawCurrency response

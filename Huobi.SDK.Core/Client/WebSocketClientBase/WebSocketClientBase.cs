@@ -1,11 +1,10 @@
-﻿using System;
-using System.Timers;
-using Huobi.SDK.Core.Log;
-using Huobi.SDK.Core.Model;
+﻿using HuobiSDK.Core.Model;
 using Newtonsoft.Json;
+using System;
+using System.Timers;
 using WebSocketSharp;
 
-namespace Huobi.SDK.Core.Client.WebSocketClientBase
+namespace HuobiSDK.Core.Client.WebSocketClientBase
 {
     /// <summary>
     /// The abstract class that responsible to get data from websocket
@@ -62,7 +61,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
                 _logger.Log(Log.LogLevel.Info, "WebSocket re-initialize...");
                 Disconnect();
                 UninitializeWebSocket();
-                InitializeWebSocket();                
+                InitializeWebSocket();
                 Connect();
             }
         }
@@ -70,6 +69,9 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         private void InitializeWebSocket()
         {
             _WebSocket = new WebSocket($"wss://{_host}");
+            _WebSocket.Log.Output = (d, m) =>
+            { /* Disable logger */ };
+
             _WebSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.None;
 
             _WebSocket.OnError += _WebSocket_OnError;
@@ -149,7 +151,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
         private void _WebSocket_OnError(object sender, ErrorEventArgs e)
         {
-            _logger.Log(Log.LogLevel.Error, $"WebSocket Error: {e.Message}");
+            _logger.Log(Log.LogLevel.Error, $"WebSocket Error: {e.Message} | {e.Exception}");
         }
     }
 }

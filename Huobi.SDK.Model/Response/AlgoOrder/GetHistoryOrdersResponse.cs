@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Model.Response.AlgoOrder
+﻿namespace HuobiSDK.Model.Response.AlgoOrder
 {
     public class GetHistoryOrdersResponse
     {

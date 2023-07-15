@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Huobi.SDK.Core
+namespace HuobiSDK.Core
 {
     /// <summary>
     /// Manage the HTTP GET request parameters

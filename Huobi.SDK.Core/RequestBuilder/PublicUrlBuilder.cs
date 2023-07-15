@@ -1,4 +1,4 @@
-﻿namespace Huobi.SDK.Core.RequestBuilder
+﻿namespace HuobiSDK.Core.RequestBuilder
 {
     public class PublicUrlBuilder
     {

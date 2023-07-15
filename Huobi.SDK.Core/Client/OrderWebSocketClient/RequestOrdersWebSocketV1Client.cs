@@ -1,9 +1,9 @@
-﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Request.Order;
-using Huobi.SDK.Core.Log;
+﻿using HuobiSDK.Core.Client.WebSocketClientBase;
+using HuobiSDK.Model.Response.Order;
+using HuobiSDK.Model.Request.Order;
+using HuobiSDK.Core.Log;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to handle orders request from WebSocket

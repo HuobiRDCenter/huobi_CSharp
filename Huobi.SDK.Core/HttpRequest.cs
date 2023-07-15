@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Huobi.SDK.Core.Log;
+using HuobiSDK.Core.Log;
 using Newtonsoft.Json;
 
-namespace Huobi.SDK.Core
+namespace HuobiSDK.Core
 {
     /// <summary>
     /// The staic class that wrap the GET and POST Http request

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Request.SubUser
+namespace HuobiSDK.Model.Request.SubUser
 {
     /// <summary>
     /// Create SubUser request

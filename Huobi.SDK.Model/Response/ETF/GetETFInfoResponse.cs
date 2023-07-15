@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Huobi.SDK.Model.Response.ETF
+namespace HuobiSDK.Model.Response.ETF
 {
     /// <summary>
     /// GetETFInfo response

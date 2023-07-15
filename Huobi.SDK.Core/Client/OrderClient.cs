@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Huobi.SDK.Core.RequestBuilder;
-using Huobi.SDK.Model.Response.Order;
-using Huobi.SDK.Model.Request.Order;
+using HuobiSDK.Core.RequestBuilder;
+using HuobiSDK.Model.Response.Order;
+using HuobiSDK.Model.Request.Order;
 using Newtonsoft.Json;
 using System;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to operate on order

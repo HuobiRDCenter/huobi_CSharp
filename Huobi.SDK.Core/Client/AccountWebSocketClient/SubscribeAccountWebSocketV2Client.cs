@@ -1,8 +1,8 @@
-﻿using Huobi.SDK.Core.Client.WebSocketClientBase;
-using Huobi.SDK.Core.Log;
-using Huobi.SDK.Model.Response.Account;
+﻿using HuobiSDK.Core.Client.WebSocketClientBase;
+using HuobiSDK.Core.Log;
+using HuobiSDK.Model.Response.Account;
 
-namespace Huobi.SDK.Core.Client
+namespace HuobiSDK.Core.Client
 {
     /// <summary>
     /// Responsible to handle account asset subscription from WebSocket

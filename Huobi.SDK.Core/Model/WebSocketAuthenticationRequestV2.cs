@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Huobi.SDK.Core.Model
+namespace HuobiSDK.Core.Model
 {
     public class WebSocketAuthenticationRequestV2
     {
