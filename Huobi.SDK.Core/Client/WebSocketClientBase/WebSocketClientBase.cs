@@ -1,8 +1,7 @@
-﻿using System;
-using System.Timers;
-using HuobiSDK.Core.Log;
-using HuobiSDK.Core.Model;
+﻿using HuobiSDK.Core.Model;
 using Newtonsoft.Json;
+using System;
+using System.Timers;
 using WebSocketSharp;
 
 namespace HuobiSDK.Core.Client.WebSocketClientBase
@@ -62,7 +61,7 @@ namespace HuobiSDK.Core.Client.WebSocketClientBase
                 _logger.Log(Log.LogLevel.Info, "WebSocket re-initialize...");
                 Disconnect();
                 UninitializeWebSocket();
-                InitializeWebSocket();                
+                InitializeWebSocket();
                 Connect();
             }
         }
@@ -70,6 +69,9 @@ namespace HuobiSDK.Core.Client.WebSocketClientBase
         private void InitializeWebSocket()
         {
             _WebSocket = new WebSocket($"wss://{_host}");
+            _WebSocket.Log.Output = (d, m) =>
+            { /* Disable logger */ };
+
             _WebSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.None;
 
             _WebSocket.OnError += _WebSocket_OnError;

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Timers;
-using HuobiSDK.Core.Log;
-using HuobiSDK.Core.Model;
+﻿using HuobiSDK.Core.Model;
 using HuobiSDK.Core.RequestBuilder;
 using HuobiSDK.Model.Response.Auth;
 using HuobiSDK.Model.Response.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Timers;
 using WebSocketSharp;
 
 namespace HuobiSDK.Core.Client.WebSocketClientBase
@@ -36,7 +35,7 @@ namespace HuobiSDK.Core.Client.WebSocketClientBase
         private const int RENEW_WAIT_SECOND = 120;
 
         private readonly WebSocketV2RequestBuilder _wsV2ReqBuilder;
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -79,6 +78,8 @@ namespace HuobiSDK.Core.Client.WebSocketClientBase
         {
             _WebSocket = new WebSocket($"wss://{_host}{PATH}");
             _WebSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.None;
+            _WebSocket.Log.Output = (d, m) =>
+            { /* Disable logger */ };
 
             _WebSocket.OnError += _WebSocket_OnError;
             _WebSocket.OnOpen += _WebSocket_OnOpen;
