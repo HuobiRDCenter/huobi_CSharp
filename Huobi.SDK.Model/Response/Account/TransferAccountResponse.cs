@@ -6,10 +6,10 @@ namespace Huobi.SDK.Model.Response.Account
     {
         public string status;
 
-        [JsonProperty("err-code")]
+        [JsonProperty("err-code", NullValueHandling = NullValueHandling.Ignore)]
         public string errCode;
 
-        [JsonProperty("err-msg")]
+        [JsonProperty("err-msg", NullValueHandling = NullValueHandling.Ignore)]
         public string errMessage;
 
         public TransferResponse data;

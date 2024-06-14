@@ -19,6 +19,9 @@ namespace Huobi.SDK.Model.Request.Order
 
         [JsonProperty(PropertyName="client-order-id")]
         public string ClientOrderId;
+        
+        [JsonProperty(PropertyName="self-match-prevent")]
+        public int SelfMatchPrevent;
 
         [JsonProperty(PropertyName = "stop-price")]
         public string StopPrice;

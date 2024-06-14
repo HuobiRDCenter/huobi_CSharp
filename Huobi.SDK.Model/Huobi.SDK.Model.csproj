@@ -11,22 +11,12 @@
   <ItemGroup>
     <Folder Include="Request\" />
     <Folder Include="Response\" />
-    <Folder Include="Response\Common\" />
-    <Folder Include="Response\Market\" />
-    <Folder Include="Response\Account\" />
-    <Folder Include="Response\Wallet\" />
-    <Folder Include="Response\Order\" />
     <Folder Include="Response\StableCoin\" />
     <Folder Include="Response\ETF\" />
-    <Folder Include="Response\Margin\" />
     <Folder Include="Response\Transfer\" />
     <Folder Include="Response\WebSocketBase\" />
     <Folder Include="Response\Auth\" />
-    <Folder Include="Response\SubUser\" />
-    <Folder Include="Request\Order\" />
     <Folder Include="Request\Wallet\" />
-    <Folder Include="Request\SubUser\" />
-    <Folder Include="Request\Account\" />
     <Folder Include="Response\AlgoOrder\" />
     <Folder Include="Request\AlgoOrder\" />
     <Folder Include="Request\Margin\" />

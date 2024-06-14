@@ -100,5 +100,17 @@ namespace Huobi.SDK.Core.Client
 
             return await HttpRequest.GetAsync<GetDepositWithdrawHistoryResponse>(url);
         }
+        
+        /// <summary>
+        /// 通过clientOrderId查询提币订单
+        /// </summary>
+        /// <param name="clientOrderId"></param>
+        /// <returns>GetDepositWithdrawHistoryResponse</returns>
+        public async Task<GetWithdrawByClientOrderIdResponse> GetWithdrawByClientOrderIdAsync(string clientOrderId)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, $"/v1/query/withdraw/client-order-id?clientOrderId={clientOrderId}");
+
+            return await HttpRequest.GetAsync<GetWithdrawByClientOrderIdResponse>(url);
+        }
     }
 }

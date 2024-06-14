@@ -152,6 +152,15 @@ namespace Huobi.SDK.Model.Response.Order
             /// </summary>
             /// <returns></returns>
             public string @operator;
+            
+            [JsonProperty("field-amount", NullValueHandling = NullValueHandling.Ignore)]
+            public string FieldAmount;
+            
+            [JsonProperty("field-cash-amount", NullValueHandling = NullValueHandling.Ignore)]
+            public string FieldCashAmount;
+            
+            [JsonProperty("field-fees", NullValueHandling = NullValueHandling.Ignore)]
+            public string FieldFees;
         }
     }
 }

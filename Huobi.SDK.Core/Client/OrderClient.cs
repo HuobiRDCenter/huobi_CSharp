@@ -4,6 +4,8 @@ using Huobi.SDK.Model.Response.Order;
 using Huobi.SDK.Model.Request.Order;
 using Newtonsoft.Json;
 using System;
+using Huobi.SDK.Model.Request.SubUser;
+using Huobi.SDK.Model.Response.SubUser;
 
 namespace Huobi.SDK.Core.Client
 {
@@ -58,12 +60,15 @@ namespace Huobi.SDK.Core.Client
         /// Cancel an order by order id
         /// </summary>
         /// <param name="orderId"></param>
+        /// <param name="symbol"></param>
         /// <returns>CancelOrderByIdResponse</returns>
-        public async Task<CancelOrderByIdResponse> CancelOrderByIdAsync(string orderId)
+        public async Task<CancelOrderByIdResponse> CancelOrderByIdAsync(string orderId, string symbol)
         {
-            string url = _urlBuilder.Build(POST_METHOD, $"/v1/order/orders/{orderId}/submitcancel");            
+            string url = _urlBuilder.Build(POST_METHOD, $"/v1/order/orders/{orderId}/submitcancel");
+            
+            string body = $"{{ \"symbol\":\"{symbol}\" }}";
 
-            return await HttpRequest.PostAsync<CancelOrderByIdResponse>(url);
+            return await HttpRequest.PostAsync<CancelOrderByIdResponse>(url, body);
         }
 
         /// <summary>
@@ -213,6 +218,32 @@ namespace Huobi.SDK.Core.Client
             string url = _urlBuilder.Build(GET_METHOD, $"/v2/reference/transact-fee-rate", request);
 
             return await HttpRequest.GetAsync<GetTransactFeeRateResponse>(url);
+        }
+        
+        /// <summary>
+        /// 杠杆下单
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>AutoPlaceResponse</returns>
+        private async Task<AutoPlaceResponse> AutoPlaceAsync(AutoPlaceRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v1/order/auto/place");
+            
+            return await HttpRequest.PostAsync<AutoPlaceResponse>(url, request.ToJson());
+        }
+        
+        /// <summary>
+        /// 自动撤销订单
+        /// </summary>
+        /// <param name="timeout">timeout</param>
+        /// <returns>CancelAllAfterResponse</returns>
+        private async Task<CancelAllAfterResponse> CancelAllAfterAsync(int timeout)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v2/algo-orders/cancel-all-after");
+
+            string content = $"{{ \"timeout\": {timeout}}}";
+
+            return await HttpRequest.PostAsync<CancelAllAfterResponse>(url, content);
         }
     }
 }

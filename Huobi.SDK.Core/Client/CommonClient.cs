@@ -89,5 +89,80 @@ namespace Huobi.SDK.Core.Client
 
             return await HttpRequest.GetAsync<GetTimestampResponse>(url);
         }
+        
+        /// <summary>
+        /// 获取所有交易对(V2)
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <returns>GetSymbolsAsync</returns>
+        public async Task<GetSymbolsV2Response> GetSymbolsV2Async(long ts)
+        {
+            string url = _urlBuilder.Build($"/v2/settings/common/symbols?ts={ts}");
+
+            return await HttpRequest.GetAsync<GetSymbolsV2Response>(url);
+        }
+        
+        /// <summary>
+        /// 获取所有币种(V2)
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <returns>GetCurrenciesV2Async</returns>
+        public async Task<GetCurrenciesV2Response> GetCurrenciesV2Async(long ts)
+        {
+            string url = _urlBuilder.Build($"/v2/settings/common/currencies?ts={ts}");
+
+            return await HttpRequest.GetAsync<GetCurrenciesV2Response>(url);
+        }
+        
+        /// <summary>
+        /// 获取币种配置
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <returns>GetCurrencysV1Async</returns>
+        public async Task<GetCurrencysv1Response> GetCurrencysV1Async(long ts)
+        {
+            string url = _urlBuilder.Build($"/v1/settings/common/currencys?ts={ts}");
+
+            return await HttpRequest.GetAsync<GetCurrencysv1Response>(url);
+        }
+        
+        /// <summary>
+        /// 获取交易对配置
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <returns>GetSymbolsV1Async</returns>
+        public async Task<GetSymbolsV1Response> GetSymbolsV1Async(long ts)
+        {
+            string url = _urlBuilder.Build($"/v1/settings/common/symbols?ts={ts}");
+
+            return await HttpRequest.GetAsync<GetSymbolsV1Response>(url);
+        }
+        
+        /// <summary>
+        /// 获取市场交易对配置
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <param name="symbols">symbols</param>
+        /// <returns>GetMarketSymbolsAsync</returns>
+        public async Task<GetMarketSymbolsResponse> GetMarketSymbolsAsync(string symbols, long ts)
+        {
+            string url = _urlBuilder.Build($"/v1/settings/common/market-symbols?symbols={symbols}&ts={ts}");
+
+            return await HttpRequest.GetAsync<GetMarketSymbolsResponse>(url);
+        }
+        
+        /// <summary>
+        /// 获取市场交易对配置
+        /// </summary>
+        /// <param name="ts">ts</param>
+        /// <param name="showDesc">showDesc</param>
+        /// <param name="currency">currency</param>
+        /// <returns>GetMarketSymbolsAsync</returns>
+        public async Task<GetChainsResponse> GetChainsAsync(string showDesc, string currency, long ts)
+        {
+            string url = _urlBuilder.Build($"/v1/settings/common/chains?show-desc={showDesc}&currency={currency}&ts={ts}");
+
+            return await HttpRequest.GetAsync<GetChainsResponse>(url);
+        }
     }
 }

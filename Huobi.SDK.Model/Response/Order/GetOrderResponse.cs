@@ -45,6 +45,9 @@ namespace Huobi.SDK.Model.Response.Order
             /// The order size
             /// </summary>
             public string amount;
+            
+            [JsonProperty("canceled-at", NullValueHandling = NullValueHandling.Ignore)]
+            public long CanceledAt;
 
             /// <summary>
             /// Order id
@@ -99,6 +102,9 @@ namespace Huobi.SDK.Model.Response.Order
             /// </summary>
             [JsonProperty("field-fees")]
             public string filledFees;
+            
+            [JsonProperty("finished-at", NullValueHandling = NullValueHandling.Ignore)]
+            public long FinishedAt;
 
             /// <summary>
             /// The source where the order was triggered
@@ -111,6 +117,12 @@ namespace Huobi.SDK.Model.Response.Order
             /// Possible values: [submitted, partial-filled, cancelling, created]
             /// </summary>
             public string state;
+            
+            [JsonProperty("stop-price", NullValueHandling = NullValueHandling.Ignore)]
+            public string StopPrice;
+            
+            [JsonProperty("operator", NullValueHandling = NullValueHandling.Ignore)]
+            public string @operator;
         }
     }
 }

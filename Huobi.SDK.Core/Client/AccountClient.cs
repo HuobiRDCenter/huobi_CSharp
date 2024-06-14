@@ -183,5 +183,81 @@ namespace Huobi.SDK.Core.Client
 
             return await HttpRequest.PostAsync<TransferPointResponse>(url, request.ToJson());
         }
+        
+        /// <summary>
+        /// 获取平台资产总估值
+        /// </summary>
+        /// <param name="accountType"></param>
+        /// <param name="valuationCurrency"></param>
+        /// <returns>GetPointBalanceResponse</returns>
+        public async Task<GetAccountValuationResponse> GetAccountValuationAsync(string accountType = null, string valuationCurrency = null)
+        {
+            GetRequest request = new GetRequest();
+            if (!string.IsNullOrEmpty(accountType))
+            {
+                request.AddParam("accountType", accountType);
+            }
+            if (!string.IsNullOrEmpty(valuationCurrency))
+            {
+                request.AddParam("valuationCurrency", valuationCurrency);
+            }
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v2/account/valuation", request);
+
+            return await HttpRequest.GetAsync<GetAccountValuationResponse>(url);
+        }
+        
+        /// <summary>
+        /// 【通用】现货-合约账户和OTC账户间进行资金的划转
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>AccountTransferResponse</returns>
+        public async Task<AccountTransferResponse> AccountTransferAsync(AccountTransferRequest request)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v2/account/transfer");
+
+            return await HttpRequest.PostAsync<AccountTransferResponse>(url, request.ToJson());
+        }
+        
+        /// <summary>
+        /// 用户抵扣信息查询
+        /// </summary>
+        /// <returns>GetPointBalanceResponse</returns>
+        public async Task<GetAccountSwitchUserInfoResponse> GetAccountSwitchUserInfoAsync()
+        {
+            GetRequest request = new GetRequest();
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/account/switch/user/info", request);
+
+            return await HttpRequest.GetAsync<GetAccountSwitchUserInfoResponse>(url);
+        }
+        
+        /// <summary>
+        /// 可抵扣币种查询信息
+        /// </summary>
+        /// <returns>GetPointBalanceResponse</returns>
+        public async Task<GetAccountOverviewInfoResponse> GetAccountOverviewInfoAsync()
+        {
+            GetRequest request = new GetRequest();
+
+            string url = _urlBuilder.Build(GET_METHOD, "/v1/account/overview/info", request);
+
+            return await HttpRequest.GetAsync<GetAccountOverviewInfoResponse>(url);
+        }
+        
+        /// <summary>
+        /// 设置现货/杠杆抵扣手续费方式
+        /// </summary>
+        /// <param name="switchType">Currency name</param>
+        /// <param name="deductionCurrency">Amount of fund to transfer</param>
+        /// <returns>TransferResponse</returns>
+        private async Task<AccountFeeSwitchResponse> AccountFeeSwitchAsync(int switchType, string deductionCurrency = null)
+        {
+            string url = _urlBuilder.Build(POST_METHOD, "/v1/account/fee/switch");
+
+            string content = $"{{ \"switchType\": {switchType}, \"deductionCurrency\": \"{deductionCurrency}\"}}";
+
+            return await HttpRequest.PostAsync<AccountFeeSwitchResponse>(url, content);
+        }
     }
 }

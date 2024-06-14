@@ -1,4 +1,6 @@
-﻿namespace Huobi.SDK.Model.Response.Account
+﻿using Newtonsoft.Json;
+
+namespace Huobi.SDK.Model.Response.Account
 {
     public class GetAccountAssetValuationResponse
     {
@@ -11,6 +13,9 @@
         /// Error message (if any)
         /// </summary>
         public string message;
+        
+        [JsonProperty("ok", NullValueHandling = NullValueHandling.Ignore)]
+        public string ok;
 
         /// <summary>
         /// Response body

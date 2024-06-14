@@ -74,6 +74,13 @@ namespace Huobi.SDK.Model.Response.Account
                 /// The balance in the main currency unit
                 /// </summary>
                 public string balance;
+                
+                public string debt;
+
+                public string available;
+                
+                [JsonProperty("seq-num", NullValueHandling = NullValueHandling.Ignore)]
+                public string seqNum;
             }
         }
     }

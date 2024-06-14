@@ -54,6 +54,9 @@ namespace Huobi.SDK.Model.Response.Margin
             /// </summary>
             public string state;
             
+            [JsonProperty("risk-rate")]
+            public string RiskRate;
+            
             /// <summary>
             /// Sum of all account balance
             /// </summary>

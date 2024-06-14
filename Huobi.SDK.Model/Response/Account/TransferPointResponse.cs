@@ -1,4 +1,6 @@
-﻿namespace Huobi.SDK.Model.Response.Account
+﻿using Newtonsoft.Json;
+
+namespace Huobi.SDK.Model.Response.Account
 {
     public class TransferPointResponse
     {
@@ -11,6 +13,9 @@
         /// Error message (if any)
         /// </summary>
         public string message;
+        
+        [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
+        public string success;
 
         public Data data;
 

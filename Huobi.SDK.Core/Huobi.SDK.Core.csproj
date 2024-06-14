@@ -14,7 +14,6 @@
     <Folder Include="Client\" />
     <Folder Include="RequestBuilder\" />
     <Folder Include="Model\" />
-    <Folder Include="Client\MarketWebSocketClient\" />
     <Folder Include="Client\AccountWebSocketClient\" />
     <Folder Include="Client\WebSocketClientBase\" />
     <Folder Include="Client\OrderWebSocketClient\" />

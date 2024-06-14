@@ -13,6 +13,8 @@ namespace Huobi.SDK.Model.Request.Order
 
         public int size;
 
+        public string types;
+
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

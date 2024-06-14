@@ -127,7 +127,7 @@ namespace Huobi.SDK.Example
             var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
 
             _logger.Start();
-            var response = tradeClient.CancelOrderByIdAsync("1").Result;
+            var response = tradeClient.CancelOrderByIdAsync("1", "BTC").Result;
             _logger.StopAndLog();
 
             switch (response.status)

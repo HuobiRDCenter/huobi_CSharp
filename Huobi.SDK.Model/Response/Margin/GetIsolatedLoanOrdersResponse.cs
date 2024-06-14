@@ -110,6 +110,30 @@ namespace Huobi.SDK.Model.Response.Margin
             /// </summary>
             [JsonProperty("state")]
             public string state;
+            
+            [JsonProperty("paid-point")]
+            public string PaidPoint;
+            
+            [JsonProperty("paid-coin")]
+            public string PaidCoin;
+            
+            [JsonProperty("deduct-rate")]
+            public string DeductRate;
+            
+            [JsonProperty("deduct-currency")]
+            public string DeductCurrency;
+            
+            [JsonProperty("deduct-amount")]
+            public string DeductAmount;
+            
+            [JsonProperty("updated-at")]
+            public long UpdatedAt;
+            
+            [JsonProperty("hour-interest-rate")]
+            public string HourInterestRate;
+            
+            [JsonProperty("day-interest-rate")]
+            public string DayInterestRate;
         }
     }
 }

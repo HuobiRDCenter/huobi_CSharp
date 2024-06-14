@@ -1,8 +1,8 @@
-# Huobi C# SDK
+# Huobi C# SDK For Spot v3
 
-This is Huobi C# SDK, This is a lightweight .NET library, you can use import to your C# project and use this SDK to query all market data, trading and manage your account.
+This is Huobi C# SDK v3, this is a lightweight .NET library, you can import to your project and use this SDK to query all market data, trading and manage your account. The SDK supports RESTful API invoking, and subscribing the market, account and order update from the WebSocket connection.The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market, account and order update from the websocket connection.
 
-The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market, account and order update from the websocket connection.
+If you already use SDK v1 or v2, it is strongly suggested migrate to v3 as we refactor the implementation to make it simpler and easy to maintain. The SDK v3 is completely consistent with the API documentation of the new HTX open platform. Compared to SDK versions v1 and v2, due to changes in parameters of many interfaces, in order to match the latest interface parameter situation, v3 version has made adjustments to parameters of more than 80 interfaces to ensure that requests can be correctly initiated and accurate response data can be obtained. Meanwhile, the v3 version has added over 130 new interfaces available for use, greatly expanding the number of available interfaces. We will stop the maintenance of v2 in the near future.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ The SDK supports both synchronous and asynchronous RESTful API invoking, and sub
   - [Folder structure](#Folder-Structure)
   - [Client](#Client)
   - [Response](#Response)
-  
+
 - [Request examples](#Request-examples)
 
   - [Common data](#Common-data)
@@ -32,7 +32,7 @@ The SDK supports both synchronous and asynchronous RESTful API invoking, and sub
   - [Subscribe account change](#subscribe-account-change)
 - [Unsubscribe](#unsubscribe)
 
-  
+
 
 ## Quick Start
 
@@ -70,7 +70,7 @@ if (getAIResult != null && getAIResult.data != null)
 
 ### Configuration
 
-If you need to access private data, you need to add **key.json** into your solution. The purpose of this file is to prevent submitting SecretKey into repository by accident, so this file is added in the .gitignore file. 
+If you need to access private data, you need to add **key.json** into your solution. The purpose of this file is to prevent submitting SecretKey into repository by accident, so this file is added in the .gitignore file.
 
 Just create a **key.json** file and include it into your solution with below definition
 
@@ -103,7 +103,7 @@ As the example indicates, there are two important namespaces: **Huobi.SDK.Core.C
 
 ### Client
 
-In this SDK, the client is the object to access the Huobi API. In order to isolate the private data with public data, and isolated different kind of data, the client category is designated to match the API category. 
+In this SDK, the client is the object to access the Huobi API. In order to isolate the private data with public data, and isolated different kind of data, the client category is designated to match the API category.
 
 All the client is listed in below table. Each client is very small and simple, it is only responsible to operate its related data, you can pick up multiple clients to create your own application based on your business.
 
@@ -117,6 +117,7 @@ All the client is listed in below table. Each client is very small and simple, i
 |                 | BestBidOfferWebSocketClient          | Public  | WebSocket v1 |
 |                 | TradeWebSocketClient                 | Public  | WebSocket v1 |
 |                 | Last24hCandlestickWebSocketClient    | Public  | WebSocket v1 |
+|                 | MarketTickerWebSocketClient    | Public  | WebSocket v1 |
 | Account         | AccountClient                        | Private | Rest         |
 |                 | RequestAccountWebSocketClient        | Private | WebSocket v1 |
 |                 | SubscribeAccountWebSocketV1Client    | Private | WebSocket v1 |
@@ -131,6 +132,8 @@ All the client is listed in below table. Each client is very small and simple, i
 | Cross Margin    | CrossMarginClient                    | Private | Rest         |
 | Stable Coin     | StableCoinClient                     | Private | Rest         |
 | ETF             | ETFClient                            | Private | Rest         |
+| Algo Order| AlgoOrderClient                            | Private | Rest         |
+| Sub User| SubUserClient                            | Private | Rest         |
 
 #### Public vs. Private
 
@@ -186,7 +189,7 @@ You can refer to C# programming guide [Asynchronous programming with async and a
 
 #### Custom host
 
-Each client constructor support an optional host parameter, by default it is "api.huobi.pro". If you need to use different host, you can specify the custom host. 
+Each client constructor support an optional host parameter, by default it is "api.huobi.pro". If you need to use different host, you can specify the custom host.
 
 ```csharp
 // Use "xxx.yyy.zzz" as custom host to create a public client

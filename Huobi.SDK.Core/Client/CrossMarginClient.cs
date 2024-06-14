@@ -156,5 +156,17 @@ namespace Huobi.SDK.Core.Client
 
             return await HttpRequest.GetAsync<GetRepaymentResponse>(url);
         }
+        
+        /// <summary>
+        /// 获取杠杆持仓限额（全仓）
+        /// </summary>
+        /// <param name="currency">currency</param>
+        /// <returns>GetSubMarginLimitResponse</returns>
+        public async Task<GetSubMarginLimitResponse> GetSubMarginLimitAsync(string currency)
+        {
+            string url = _urlBuilder.Build(GET_METHOD, $"/v2/margin/limit?currency={currency}");
+
+            return await HttpRequest.GetAsync<GetSubMarginLimitResponse>(url);
+        }
     }
 }

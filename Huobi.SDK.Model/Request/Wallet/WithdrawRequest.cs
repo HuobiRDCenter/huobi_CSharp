@@ -15,6 +15,8 @@ namespace Huobi.SDK.Model.Request.Wallet
         public string chain;
 
         public string addrTag;
+        
+        public string clientOrderId;
 
         public string ToJson()
         {

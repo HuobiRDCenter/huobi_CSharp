@@ -13,6 +13,9 @@ namespace Huobi.SDK.Model.Response.Account
         /// Error message (if any)
         /// </summary>
         public string message;
+        
+        [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
+        public string success;
 
         /// <summary>
         /// Response body

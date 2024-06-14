@@ -44,6 +44,8 @@
             /// Blockchain name
             /// </summary>
             public string chain;
+
+            public string note;
         }
     }
 }

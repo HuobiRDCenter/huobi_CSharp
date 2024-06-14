@@ -1,4 +1,6 @@
-﻿namespace Huobi.SDK.Model.Response.SubUser
+﻿using Newtonsoft.Json;
+
+namespace Huobi.SDK.Model.Response.SubUser
 {
     /// <summary>
     /// GetSubUserAccountBalance response
@@ -59,6 +61,12 @@
                 /// The balance in the main currency unit
                 /// </summary>
                 public string balance;
+                
+                [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+                public string debt;
+                
+                [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+                public string available;
             }
         }
     }
