@@ -123,6 +123,9 @@ namespace Huobi.SDK.Model.Response.Order
             /// Possible values: [sys, web, api, app]
             /// </summary>
             public string source;
+            
+            [JsonProperty("canceled-source", NullValueHandling = NullValueHandling.Ignore)]
+            public string canceledSource;
 
             /// <summary>
             /// The orders state
