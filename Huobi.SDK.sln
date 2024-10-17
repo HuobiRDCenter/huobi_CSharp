@@ -1,0 +1,38 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huobi.SDK.Core", "Huobi.SDK.Core\Huobi.SDK.Core.csproj", "{81118376-9EF7-49E6-94DC-5B0CF91499DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huobi.SDK.Core.Test", "Huobi.SDK.Core.Test\Huobi.SDK.Core.Test.csproj", "{0ECB2FAB-04BE-4040-B868-B0FA0B068DA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huobi.SDK.Model", "Huobi.SDK.Model\Huobi.SDK.Model.csproj", "{F78D398D-C926-45C7-B338-1F5CFEF3B396}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huobi.SDK.Example", "Huobi.SDK.Example\Huobi.SDK.Example.csproj", "{AAD2DD07-E5CF-4518-81F3-675D14658639}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81118376-9EF7-49E6-94DC-5B0CF91499DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81118376-9EF7-49E6-94DC-5B0CF91499DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81118376-9EF7-49E6-94DC-5B0CF91499DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81118376-9EF7-49E6-94DC-5B0CF91499DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECB2FAB-04BE-4040-B868-B0FA0B068DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECB2FAB-04BE-4040-B868-B0FA0B068DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECB2FAB-04BE-4040-B868-B0FA0B068DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECB2FAB-04BE-4040-B868-B0FA0B068DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78D398D-C926-45C7-B338-1F5CFEF3B396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78D398D-C926-45C7-B338-1F5CFEF3B396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78D398D-C926-45C7-B338-1F5CFEF3B396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78D398D-C926-45C7-B338-1F5CFEF3B396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD2DD07-E5CF-4518-81F3-675D14658639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD2DD07-E5CF-4518-81F3-675D14658639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD2DD07-E5CF-4518-81F3-675D14658639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD2DD07-E5CF-4518-81F3-675D14658639}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		version = 2.2.0
+	EndGlobalSection
+EndGlobal
