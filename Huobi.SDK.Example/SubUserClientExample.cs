@@ -37,7 +37,7 @@ namespace Huobi.SDK.Example
 
         private static void GetUID()
         {
-            var client = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var client = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             var result = client.GetUIDAsync().Result;
 
@@ -56,7 +56,7 @@ namespace Huobi.SDK.Example
 
         private static void CreateSubUser()
         {
-            var client = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var client = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
             var user1 = new UserList
             {
                 userName = "test",
@@ -88,7 +88,7 @@ namespace Huobi.SDK.Example
 
         private static void LockSubUser()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.LockSubUserAsync(Config.SubUserId).Result;
@@ -109,7 +109,7 @@ namespace Huobi.SDK.Example
 
         private static void UnLockSubUser()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.UnlockSubUserAsync(Config.SubUserId).Result;
@@ -130,7 +130,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferCurrencyFromMasterToSub()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.TransferCurrencyFromMasterToSubAsync(Config.SubUserId, "ht", 0.01m).Result;
@@ -157,7 +157,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferCurrencyFromSubToMaster()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.TransferCurrencyFromSubToMasterAsync(Config.SubUserId, "ht", 0.01m).Result;
@@ -183,7 +183,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubuserAccountBalances()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.GetSubUserAccountBalancesAsync().Result;
@@ -206,7 +206,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubuserAccountBalance()
         {
-            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var accountClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.GetSubUserAccountBalanceAsync(Config.SubUserId).Result;
@@ -234,7 +234,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubUserDepositAddress()
         {
-            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = walletClient.GetSubUserDepositAddressAsync(Config.SubUserId, "btc").Result;
@@ -259,7 +259,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSubUserDepositHistory()
         {
-            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new SubUserClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()

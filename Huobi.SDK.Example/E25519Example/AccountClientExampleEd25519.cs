@@ -7,7 +7,7 @@ using Huobi.SDK.Model.Response;
 
 namespace Huobi.SDK.Example
 {
-    public class AccountClientExample
+    public class AccountClientExampleEd25519
     {
         private static PerformanceLogger _logger = PerformanceLogger.GetInstance();
 
@@ -36,7 +36,7 @@ namespace Huobi.SDK.Example
 
         private static void GetAccountInfo()
         {
-            var accountClient = new AccountClient(Config.AccessKey, Config.SecretKey,Config.Sign);
+            var accountClient = new AccountClient(Config.PublicKey, Config.PrivateKey,Config.Sign);
 
             _logger.Start();
             var result = accountClient.GetAccountInfoAsync().Result;

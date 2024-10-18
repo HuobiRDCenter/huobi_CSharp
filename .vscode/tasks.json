@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Huobi.SDK.Example/Huobi.SDK.Example.csproj" // 替换为你的项目文件
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

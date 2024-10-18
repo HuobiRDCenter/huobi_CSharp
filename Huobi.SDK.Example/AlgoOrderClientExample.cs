@@ -25,7 +25,7 @@ namespace Huobi.SDK.Example
 
         private static void PlaceOrder()
         {
-            var tradeClient = new AlgoOrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new AlgoOrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new PlaceOrderRequest
@@ -55,7 +55,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrders()
         {
-            var tradeClient = new AlgoOrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new AlgoOrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new CancelOrdersRequest
@@ -85,7 +85,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOpenOrders()
         {
-            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey);
+            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -112,7 +112,7 @@ namespace Huobi.SDK.Example
 
         private static void GetHistoryOrders()
         {
-            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey);
+            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -140,7 +140,7 @@ namespace Huobi.SDK.Example
 
         private static void GetSpecificOrder()
         {
-            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey);
+            var client = new AlgoOrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = client.GetSpecificOrderAsync("0922T1653").Result;

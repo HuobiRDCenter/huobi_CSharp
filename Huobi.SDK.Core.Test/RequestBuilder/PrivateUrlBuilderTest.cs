@@ -9,7 +9,7 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Build_NoRequestParameter_Success()
         {
-            var builder = new PrivateUrlBuilder("abcdefg-hijklmn-opqrst-uvwxyz", "12345-67890-12345-67890", "api.huobi.pro");
+            var builder = new PrivateUrlBuilder("abcdefg-hijklmn-opqrst-uvwxyz", "12345-67890-12345-67890", "api.huobi.pro","256");
             DateTime dateTime = new DateTime(2020, 04, 01, 12, 34, 56);
 
             string result = builder.Build("GET", "/v1/account/accounts", dateTime);
@@ -21,7 +21,7 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Build_RequestParameter_Success()
         {
-            var builder = new PrivateUrlBuilder("access", "secret", "api.huobi.pro");
+            var builder = new PrivateUrlBuilder("access", "secret", "api.huobi.pro","256");
             DateTime dateTime = new DateTime(2019, 11, 21, 10, 0, 0);
             var request = new GetRequest()
                 .AddParam("account-id", "123")

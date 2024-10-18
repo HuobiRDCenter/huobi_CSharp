@@ -7,9 +7,12 @@ namespace Huobi.SDK.Example
         // The shared keys and ids that used for all the examples
         public static string Host { get; private set; }
         public static string AccessKey { get; private set; }
+        public static string PublicKey { get; private set; }
+        public static string PrivateKey { get; private set; }
         public static string SecretKey { get; private set; }
         public static string AccountId { get; private set; }
         public static string SubUserId { get; private set; }
+        public static string Sign { get; private set; }
 
         /// <summary>
         /// Load Accesskey and AccountId from 'appsettings.json' and SecretKey from 'key.json'.
@@ -32,9 +35,12 @@ namespace Huobi.SDK.Example
             AccessKey = config["AccessKey"];
             AccountId = config["AccountId"];
             SubUserId = config["SubUserId"];
+            Sign=config["Sign"];
+            PrivateKey=config["PrivateKey"];
+            PublicKey=config["PublicKey"];
 
             // Read SecretKey from 'key.json'
-            config = new ConfigurationBuilder().AddJsonFile("key.json").Build();
+            config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             SecretKey = config["SecretKey"];
         }
     }

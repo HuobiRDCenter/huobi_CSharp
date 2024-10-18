@@ -1,3 +1,12 @@
+# 在appsetings.json文件中，是Hmac256签名方式的变量，SIGN是“256”代表Hmac256签名方式，“25519”代表Ed25519签名方式。
+# * API_KEY和SECRET_KEY是Hmac256方式需要的公钥和私钥。PUBLIC_KEY和PRIVATE_KEY是Ed25519的公钥和私钥。
+# *
+# * In the appsetings.json file，The following is the variable of the Hmac256 signature mode.
+# * SIGN indicates the Hmac256 signature mode and 25519 indicates the Ed25519 signature mode.
+# * API_KEY and SECRET_KEY are the public and private keys required for Hmac256 mode.
+# * PUBLIC_KEY and PRIVATE_KEY are the public and private keys of Ed25519.
+
+
 # Huobi C# SDK For Spot v3
 
 This is Huobi C# SDK v3, this is a lightweight .NET library, you can import to your project and use this SDK to query all market data, trading and manage your account. The SDK supports RESTful API invoking, and subscribing the market, account and order update from the WebSocket connection.The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market, account and order update from the websocket connection.
