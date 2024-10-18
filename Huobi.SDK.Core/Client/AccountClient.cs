@@ -14,7 +14,7 @@ namespace Huobi.SDK.Core.Client
         private const string GET_METHOD = "GET";
         private const string POST_METHOD = "POST";
 
-        private const string DEFAULT_HOST = "dawn-broker-pro.global-base.tc-jp1.huobiapps.com";
+        private const string DEFAULT_HOST = "api.huobi.pro";
 
         private readonly PrivateUrlBuilder _urlBuilder;
 
