@@ -16,8 +16,8 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">API Access Key</param>
         /// <param name="secretKey">API Secret Key</param>
         /// <param name="host">API Host</param>
-        public SubscribeAccountWebSocketV2Client(string accessKey, string secretKey, string host = DEFAULT_HOST)
-            :base(accessKey, secretKey, host)
+        public SubscribeAccountWebSocketV2Client(string accessKey, string secretKey,string sign, string host = DEFAULT_HOST)
+            :base(accessKey, secretKey,sign, host)
         {
         }
 

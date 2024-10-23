@@ -27,7 +27,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferIn()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.TransferInAsync("eosht", "eos", "0.01").Result;
@@ -53,7 +53,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferOut()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.TransferOutAsync("eosht", "eos", "0.01").Result;
@@ -79,7 +79,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLoanInfo()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.GetLoanInfoAsync("btcusdt").Result;
@@ -119,7 +119,7 @@ namespace Huobi.SDK.Example
 
         private static void ApplyLoan()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.ApplyLoanAsync("eosht", "eos", "0.01").Result;
@@ -145,7 +145,7 @@ namespace Huobi.SDK.Example
 
         private static void Repay()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.RepayAsync("123", "0.01").Result;
@@ -171,7 +171,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLoanOrders()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -207,7 +207,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLoanAccount()
         {
-            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new IsolatedMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.GetMarginAccountAsync("btcusdt", null).Result;

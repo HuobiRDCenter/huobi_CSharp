@@ -30,7 +30,7 @@ namespace Huobi.SDK.Example
         private static SubscribeOrderWebSocketV2Client SubscribeOrderV2(string symbol)
         {
             // Initialize a new instance
-            var client = new SubscribeOrderWebSocketV2Client(Config.AccessKey, Config.SecretKey);
+            var client = new SubscribeOrderWebSocketV2Client(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             // Add the auth receive handler
             client.OnAuthenticationReceived += Client_OnAuthReceived;
@@ -87,7 +87,7 @@ namespace Huobi.SDK.Example
 
         private static void PlaceAnOrder(string symbol, string price, string amount)
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             var request = new PlaceOrderRequest
             {

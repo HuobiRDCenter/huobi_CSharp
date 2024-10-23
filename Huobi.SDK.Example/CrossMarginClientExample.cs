@@ -33,7 +33,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferIn()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.TransferIn("eos", "0.000001").Result;
@@ -59,7 +59,7 @@ namespace Huobi.SDK.Example
 
         private static void TransferOut()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.TransferOut("eos", "0.000001").Result;
@@ -84,7 +84,7 @@ namespace Huobi.SDK.Example
         }
         private static void GetLoanInfo()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.GetLoanInfo().Result;
@@ -117,7 +117,7 @@ namespace Huobi.SDK.Example
 
         private static void ApplyLoan()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.ApplyLoan("eos", "0.001").Result;
@@ -143,7 +143,7 @@ namespace Huobi.SDK.Example
 
         private static void RepayLoan()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.Repay("123", "0.001").Result;
@@ -169,7 +169,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLoanOrders()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             GetRequest request = new GetRequest()
@@ -204,7 +204,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMarginAccount()
         {
-            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var marginClient = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = marginClient.GetMarginAccount(Config.SubUserId).Result;
@@ -243,7 +243,7 @@ namespace Huobi.SDK.Example
 
         private static void GeneralRepay()
         {
-            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             var request = new GeneralRepayRequest
             {
@@ -269,7 +269,7 @@ namespace Huobi.SDK.Example
 
         private static void GetRepayment()
         {
-            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey);
+            var client = new CrossMarginClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             var request = new GetRepaymentRequest
             {

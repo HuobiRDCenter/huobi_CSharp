@@ -40,7 +40,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
         /// Constructor
         /// </summary>
         /// <param name="host">websocket host</param>
-        public WebSocketV1ClientBase(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public WebSocketV1ClientBase(string accessKey, string secretKey,string sign, string host = DEFAULT_HOST)
         {
             _host = host;
 
@@ -49,7 +49,7 @@ namespace Huobi.SDK.Core.Client.WebSocketClientBase
 
             InitializeWebSocket();
 
-            _wsV1ReqBuilder = new WebSocketV1RequestBuilder(accessKey, secretKey, host, PATH);
+            _wsV1ReqBuilder = new WebSocketV1RequestBuilder(accessKey, secretKey, host, PATH,sign);
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
