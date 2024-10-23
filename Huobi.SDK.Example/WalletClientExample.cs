@@ -27,7 +27,7 @@ namespace Huobi.SDK.Example
 
         private static void GetDepoistAddress()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -48,7 +48,7 @@ namespace Huobi.SDK.Example
 
         private static void GetWithdrawQuota()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -69,7 +69,7 @@ namespace Huobi.SDK.Example
 
         private static void GetWithdrawAddress()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -90,7 +90,7 @@ namespace Huobi.SDK.Example
 
         private static void WithdrawCurrency()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new WithdrawRequest
@@ -120,7 +120,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelWithdrawCurrency()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var result = walletClient.CancelWithdrawCurrencyAsync(1).Result;
@@ -146,7 +146,7 @@ namespace Huobi.SDK.Example
 
         private static void GetDepositWithdrawHistory()
         {
-            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey);
+            var walletClient = new WalletClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
