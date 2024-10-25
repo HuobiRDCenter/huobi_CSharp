@@ -23,9 +23,9 @@ namespace Huobi.SDK.Core.Client
         /// <param name="accessKey">Access Key</param>
         /// <param name="secretKey">Secret Key</param>
         /// <param name="host">the host that the client connects to</param>
-        public AlgoOrderClient(string accessKey, string secretKey, string host = DEFAULT_HOST)
+        public AlgoOrderClient(string accessKey, string secretKey,string sign, string host = DEFAULT_HOST)
         {
-            _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host);
+            _urlBuilder = new PrivateUrlBuilder(accessKey, secretKey, host,sign);
         }
 
         /// <summary>

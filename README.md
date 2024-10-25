@@ -1,8 +1,31 @@
+# 在appsetings.json文件中，是Hmac256签名方式的变量，SIGN是“256”代表Hmac256签名方式，“25519”代表Ed25519签名方式。
+
+#  * API_KEY和SECRET_KEY是Hmac256方式需要的公钥和私钥。PUBLIC_KEY和PRIVATE_KEY是Ed25519的公钥和私钥。
+
+# *
+
+#  * In the appsetings.json file，The following is the variable of the Hmac256 signature mode.
+
+#  * SIGN indicates the Hmac256 signature mode and 25519 indicates the Ed25519 signature mode.
+
+#  * API_KEY and SECRET_KEY are the public and private keys required for Hmac256 mode.
+
+#  * PUBLIC_KEY and PRIVATE_KEY are the public and private keys of Ed25519.
+
 # Huobi C# SDK For Spot v3
 
-This is Huobi C# SDK v3, this is a lightweight .NET library, you can import to your project and use this SDK to query all market data, trading and manage your account. The SDK supports RESTful API invoking, and subscribing the market, account and order update from the WebSocket connection.The SDK supports both synchronous and asynchronous RESTful API invoking, and subscribe the market, account and order update from the websocket connection.
+This is Huobi C# SDK v3, this is a lightweight .NET library, you can import to your project and use this SDK to query
+all market data, trading and manage your account. The SDK supports RESTful API invoking, and subscribing the market,
+account and order update from the WebSocket connection.The SDK supports both synchronous and asynchronous RESTful API
+invoking, and subscribe the market, account and order update from the websocket connection.
 
-If you already use SDK v1 or v2, it is strongly suggested migrate to v3 as we refactor the implementation to make it simpler and easy to maintain. The SDK v3 is completely consistent with the API documentation of the new HTX open platform. Compared to SDK versions v1 and v2, due to changes in parameters of many interfaces, in order to match the latest interface parameter situation, v3 version has made adjustments to parameters of more than 80 interfaces to ensure that requests can be correctly initiated and accurate response data can be obtained. Meanwhile, the v3 version has added over 130 new interfaces available for use, greatly expanding the number of available interfaces. We will stop the maintenance of v2 in the near future.
+If you already use SDK v1 or v2, it is strongly suggested migrate to v3 as we refactor the implementation to make it
+simpler and easy to maintain. The SDK v3 is completely consistent with the API documentation of the new HTX open
+platform. Compared to SDK versions v1 and v2, due to changes in parameters of many interfaces, in order to match the
+latest interface parameter situation, v3 version has made adjustments to parameters of more than 80 interfaces to ensure
+that requests can be correctly initiated and accurate response data can be obtained. Meanwhile, the v3 version has added
+over 130 new interfaces available for use, greatly expanding the number of available interfaces. We will stop the
+maintenance of v2 in the near future.
 
 ## Table of Contents
 
@@ -10,29 +33,27 @@ If you already use SDK v1 or v2, it is strongly suggested migrate to v3 as we re
 
 - [Usage](#Usage)
 
-  - [Configuration](#Configuration)
-  - [Folder structure](#Folder-Structure)
-  - [Client](#Client)
-  - [Response](#Response)
+    - [Configuration](#Configuration)
+    - [Folder structure](#Folder-Structure)
+    - [Client](#Client)
+    - [Response](#Response)
 
 - [Request examples](#Request-examples)
 
-  - [Common data](#Common-data)
-  - [Market data](#Market-data)
-  - [Account](#account)
-  - [Wallet](#wallet)
-  - [Trading](#trading)
-  - [Margin Loan](#margin-loan)
+    - [Common data](#Common-data)
+    - [Market data](#Market-data)
+    - [Account](#account)
+    - [Wallet](#wallet)
+    - [Trading](#trading)
+    - [Margin Loan](#margin-loan)
 
 - [Subscription examples](#Subscription-examples)
 
-  - [Subscribe trade update](#Subscribe-trade-update)
-  - [Subscribe candlestick update](#Subscribe-candlestick-update)
-  - [Subscribe order update](#subscribe-order-update)
-  - [Subscribe account change](#subscribe-account-change)
+    - [Subscribe trade update](#Subscribe-trade-update)
+    - [Subscribe candlestick update](#Subscribe-candlestick-update)
+    - [Subscribe order update](#subscribe-order-update)
+    - [Subscribe account change](#subscribe-account-change)
 - [Unsubscribe](#unsubscribe)
-
-
 
 ## Quick Start
 
@@ -89,13 +110,13 @@ If you don't need to access private data, you can ignore this.
 This is the folder and namespace structure of SDK source code and the description
 
 - **Huobi.SDK.Core**: The core of the SDK
-  - **Client**: The client classes that are responsible to access data
-  - **Log**: The internal logger interface and implementations
-  - **Model**: The internal data model used in core
-  - **RequestBuilder**: Responsible to build the request with the signature
+    - **Client**: The client classes that are responsible to access data
+    - **Log**: The internal logger interface and implementations
+    - **Model**: The internal data model used in core
+    - **RequestBuilder**: Responsible to build the request with the signature
 - **Huobi.SDK.Model**: The data model that user need to care about
-  - **Request**: The request data model
-  - **Response**: The response data model
+    - **Request**: The request data model
+    - **Response**: The response data model
 - **Huobi.SDK.Core.Test**: The unit test of core
 - **Huobi.SDK.Example**: The examples how to use **Core** and **Model** to access  API and read response.
 

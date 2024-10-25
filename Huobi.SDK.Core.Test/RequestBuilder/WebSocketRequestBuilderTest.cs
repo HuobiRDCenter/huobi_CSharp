@@ -11,7 +11,7 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Build_NullParam_Success()
         {
-            var builder = new WebSocketV1RequestBuilder("access", "secret", "api.huobi.pro", "/ws/v1");
+            var builder = new WebSocketV1RequestBuilder("access", "secret", "api.huobi.pro","256" ,"/ws/v1");
 
             string auth = builder.Build();
 
@@ -26,7 +26,7 @@ namespace Huobi.SDK.Core.Test.RequestBuilder
         [Fact]
         public void Build_Time_Success()
         {
-            var builder = new WebSocketV1RequestBuilder("access", "secret", "api.huobi.pro", "/ws/v1");
+            var builder = new WebSocketV1RequestBuilder("access", "secret", "api.huobi.pro", "256","/ws/v1");
 
             var utcTime = new DateTime(2019, 11, 21, 10, 0, 0);
             string auth = builder.Build(utcTime);

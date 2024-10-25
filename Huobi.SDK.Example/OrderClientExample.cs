@@ -45,7 +45,7 @@ namespace Huobi.SDK.Example
 
         private static void PlaceOrder()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new PlaceOrderRequest
@@ -78,7 +78,7 @@ namespace Huobi.SDK.Example
 
         private static void PlaceOrders()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new PlaceOrderRequest
@@ -124,7 +124,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrderById()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = tradeClient.CancelOrderByIdAsync("1", "BTC").Result;
@@ -147,7 +147,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrderByClient()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = tradeClient.CancelOrderByClientOrderIdAsync("").Result;
@@ -170,7 +170,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOpenOrders()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -202,7 +202,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrdersByCriteria()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new CancelOrdersByCriteriaRequest
@@ -233,7 +233,7 @@ namespace Huobi.SDK.Example
 
         private static void CancelOrdersByIds()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             string[] orderIds = { "1", "2" };
@@ -279,7 +279,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOrderById()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = tradeClient.GetOrderByIdAsync("1").Result;
@@ -307,7 +307,7 @@ namespace Huobi.SDK.Example
 
         private static void GetOrderByClient()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -337,7 +337,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMatchResultsById()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var response = tradeClient.GetMatchResultsByIdAsync("137534048832590").Result;
@@ -367,7 +367,7 @@ namespace Huobi.SDK.Example
 
         private static void GetHistoryOrders()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -400,7 +400,7 @@ namespace Huobi.SDK.Example
 
         private static void GetLast48hOrders()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -432,7 +432,7 @@ namespace Huobi.SDK.Example
 
         private static void GetMatchResults()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
@@ -465,7 +465,7 @@ namespace Huobi.SDK.Example
 
         private static void GetTransactFeeRate()
         {
-            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey);
+            var tradeClient = new OrderClient(Config.AccessKey, Config.SecretKey,Config.Sign);
 
             _logger.Start();
             var request = new GetRequest()
