@@ -68,7 +68,7 @@ namespace Huobi.SDK.Example
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var o = response.data;
-                        AppLogger.Info($"order update, event: {o.eventType}, symbol: {o.symbol}, type: {o.type}, account id: {o.accountId}, status: {o.orderStatus}");
+                        AppLogger.Info($"order update, event: {o.event}, symbol: {o.symbol}, type: {o.type}, account id: {o.accountId}, status: {o.orderStatus}");
                     }
                 }
             }

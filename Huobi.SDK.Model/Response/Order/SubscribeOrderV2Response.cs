@@ -19,7 +19,7 @@ namespace Huobi.SDK.Model.Response.Order
             /// Event type
             /// Possible values: [trigger, deletion, creation, trade, cancellation]
             /// </summary>
-            public string eventType;
+            public string event;
 
             /// <summary>
             /// Trading symbol
@@ -58,14 +58,14 @@ namespace Huobi.SDK.Model.Response.Order
 
             /// <summary>
             /// Order type
-            /// Possible values for creation eventType: [buy-market, sell-market, buy-limit, sell-limit,
+            /// Possible values for creation event: [buy-market, sell-market, buy-limit, sell-limit,
             /// buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok]
             /// </summary>
             public string type;
 
             /// <summary>
             /// Order status
-            /// Possible values for creation eventType: submitted
+            /// Possible values for creation event: submitted
             /// </summary>
             public string orderStatus;
 
@@ -120,7 +120,7 @@ namespace Huobi.SDK.Model.Response.Order
             public string remainAmt;
 
             /// <summary>
-            /// Last activity time, available for cancellation eventType
+            /// Last activity time, available for cancellation event
             /// </summary>
             public long lastActTime;
         }

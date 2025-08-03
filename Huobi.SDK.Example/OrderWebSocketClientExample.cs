@@ -185,7 +185,7 @@ namespace Huobi.SDK.Example
                     else if (response.action.Equals("push") && response.data != null)
                     {
                         var o = response.data;
-                        AppLogger.Info($"WebSocket received data, topic={response.ch}, event={o.eventType}, symbol={o.symbol}, type={o.type}, status={o.orderStatus}");
+                        AppLogger.Info($"WebSocket received data, topic={response.ch}, event={o.event}, symbol={o.symbol}, type={o.type}, status={o.orderStatus}");
                     }
                 }
             }
