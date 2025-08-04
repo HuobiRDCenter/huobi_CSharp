@@ -17,7 +17,7 @@ namespace Huobi.SDK.Model.Response.Order
             /// <summary>
             /// Event type
             /// </summary>
-            public string eventType;
+            public string event;
 
             /// <summary>
             /// Trading symbol
