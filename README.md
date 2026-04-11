@@ -578,4 +578,3 @@ client.Connect();
 ## Unsubscribe
 
 Since each websocket client manage the subscription separately, therefore you can cancel each individual subscription.
-
